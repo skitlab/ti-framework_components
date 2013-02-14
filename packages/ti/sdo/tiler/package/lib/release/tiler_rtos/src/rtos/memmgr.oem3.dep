@@ -1,0 +1,14 @@
+package/lib/release/tiler_rtos/src/rtos/memmgr.oem3: src/rtos/memmgr.c /proj/productization/tools/cgt470/cgt470_4_9_2/include/stdio.h src/memmgr/list_utils.h src/memmgr/memmgr.h src/memmgr/tiler.h src/memmgr/tilermem.h src/memmgr/tilermem_utils.h src/memmgr/tilermgr.h src/memmgr/utils.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/linkage.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stdarg.h src/memmgr/mem_types.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stdint.h 
+src/rtos/memmgr.c:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stdio.h:
+src/memmgr/list_utils.h:
+src/memmgr/memmgr.h:
+src/memmgr/tiler.h:
+src/memmgr/tilermem.h:
+src/memmgr/tilermem_utils.h:
+src/memmgr/tilermgr.h:
+src/memmgr/utils.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/linkage.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stdarg.h:
+src/memmgr/mem_types.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stdint.h:

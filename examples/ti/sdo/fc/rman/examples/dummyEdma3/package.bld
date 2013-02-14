@@ -1,0 +1,137 @@
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ */
+/*
+ *  ======== package.bld ========
+ *  Build script for an example app that services requests from an alg 
+ *  requesting IRES EDMA3CHAN resources. 
+ *
+ */
+
+/* explicit references to global objects */
+var Build = xdc.useModule('xdc.bld.BuildEnvironment');
+var Pkg = xdc.useModule('xdc.bld.PackageContents');
+var Common = xdc.loadCapsule("../common.xs");
+
+/* use common package build support */
+var BuildHelp = xdc.useModule('ti.sdo.tools.build.PackageBuildHelp');
+BuildHelp.usePlatformInstanceName = true;
+
+/* don't build for some of these targets */
+BuildHelp.skipTarget = function(target)
+{
+    if (target.name.match(/v5T/)) {
+        return (true);  // TEMP!
+    }
+
+    /* No EDMA3 LLD support for ELF targets, so not building for elf/DSP-BIOS */
+    if ((target.os == undefined) && (target.$name.match(/^ti.targets.elf/))) { 
+        return true; 
+    } 
+    return false;
+}
+
+/*
+BuildHelp.skipPlatform = function (platform, target)
+{
+    if ((platform.match(/816X/) || platform.match(/sdp4430/))) {
+        return true;
+    }
+    if ((platform.match(/6472/) || platform.match(/6474/))) {
+        return true;
+    }
+}
+*/
+
+
+/* add appropriate main.c source file */
+BuildHelp.skipExec = function(prog, targ, platName, execAttrs)
+{
+    if (targ.os == undefined) {
+        prog.sources.$add("main_BIOS.c");
+    }
+    else {
+        prog.sources.$add("main_native.c");
+    }
+
+    /* don't skip executable */
+    return (false);
+}
+
+/* clean bin folder */
+Pkg.generatedFiles.$add("bin/");
+
+/* add custom files to all releases */
+Pkg.attrs.exportCfg = true;
+Pkg.attrs.exportDoc = true;
+Pkg.attrs.exportSrc = false;
+Pkg.attrs.exportExe = false;
+Pkg.attrs.exportAll = true;
+Pkg.otherFiles = [
+    "package.bld",
+    "makefile"
+];
+
+var progArray = new Array();
+
+var platlist = Common.getDMAPlatforms("64P"); //Array of all platforms that
+                                            //DMA platforms support.
+/* This program builds for 64P + BIOS targets */
+progArray.push(
+    new BuildHelp.ProgAttrs({
+        name: "dummyEdma3",
+        isas: ["64P"],
+        platforms: platlist, 
+        sources: ["ires_algorithm", "app", "mySem"],
+        execAttrs: { cfgScript: "ires_algorithm.cfg" }
+    })
+);
+
+/* This program builds for 355 and 365 devices, v5T isas */ 
+progArray.push(
+    new BuildHelp.ProgAttrs({
+        name: "dummyEdma3",
+        platforms: ["ti.platforms.evmDM355", "ti.platforms.evmDM365"],
+        isas: ["v5T"],
+        sources: ["ires_algorithm", "app", "mySem"],
+        execAttrs: { cfgScript: "ires_algorithm.cfg" }
+    })
+);
+
+
+/* generate the package executables */
+BuildHelp.makeExecutables(progArray, arguments, ["release"]);
+/*
+ *  @(#) ti.sdo.fc.rman.examples.dummyEdma3; 1, 0, 0,4; 2-22-2012 18:07:44; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+

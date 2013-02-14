@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$struct_rcm_server___thread_pool_desc_ary.html" title="Worker pool descriptor array." alt="" coords="124,221,321,311" />
+<area shape="rect" href="$struct_rcm_server___thread_pool_desc.html" title="Worker pool descriptor." alt="" coords="8,7,184,157" />
+<area shape="rect" href="$struct_rcm_server___fxn_desc_ary.html" title="Function descriptor array." alt="" coords="345,221,500,311" />
+<area shape="rect" href="$struct_rcm_server___fxn_desc.html" title="Function descriptor." alt="" coords="354,37,490,127" />
+</map>

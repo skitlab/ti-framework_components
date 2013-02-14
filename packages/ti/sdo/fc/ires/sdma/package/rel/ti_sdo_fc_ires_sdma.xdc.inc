@@ -1,0 +1,17 @@
+package/package.bld.xml
+package/package.ext.xml
+package/package.rel.dot
+package/build.cfg
+package/package.xdc.inc
+iresman_sdma.h
+ires_sdma.h
+iresman_protocol_sdma.h
+_sdma.h
+package.bld
+simple_GCArmv5T.mak
+package/package.cfg.xdc.inc
+lib/debug/sdma.av5T
+package/package_ti.sdo.fc.ires.sdma.c
+iresman_sdma.c
+ires_sdma.c
+lib/release/sdma.av5T

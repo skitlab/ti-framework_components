@@ -1,0 +1,14 @@
+package.xdc
+package.xs
+Settings.xdc
+Settings.xdt
+package/ti.sdo.fc.global.sch
+package/.vers_g180
+package/.vers_r170
+package/.vers_b150
+package/.xdc-y25
+package/ti_sdo_fc_global.java
+package/ti_sdo_fc_global.class
+package/package_ti.sdo.fc.global.c
+package/package.defs.h
+package/ti.sdo.fc.global.ccs

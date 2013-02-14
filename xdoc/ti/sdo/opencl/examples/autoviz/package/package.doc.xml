@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package kind='package' name='ti.sdo.opencl.examples.autoviz' nodoc='0' root='../../../../../' summary='OpenCL+launch+pad+example+for+the+arctic+device'>
+    <line tab='0' content='%3Cspan+class%3D%22xdoc-kw1%22%3Epackage%3C%2Fspan%3E+%3Cgo%3E%3Cspan+class%3D%22xdoc-id%22%3Eti.sdo.opencl.examples.autoviz%3C%2Fspan%3E%3C%2Fgo%3E+%5B1%2C+0%2C+0%5D+%7B'/>
+    <line tab='0' content='%7D'/>
+    <docSect name='details'>
+        <docPara content='This+example+is+intended+to+be+a+launch+pad+for+developing+OpenCL+%0A++applications+on+the+arctic+devices.+This+example+uses+several+packages%0A++to+reflect+the+application+architecture.+The+%27prog%27+package+is+used%0A++for+building+the+actual+executables.'/>
+        <docPara content='%3Cbr%3E%0A++%3Cimg+src%3D%22.%2Fdoc-files%2FAutoViz.png%22+%2F%3E%0A++%3Cbr%3E'/>
+    </docSect>
+</package>

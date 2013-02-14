@@ -1,0 +1,16 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.fc.dman3"
+ProjectType=External
+CPUFamily=TMS320C67XX
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.fc.dman3.c"
+Source="../dman3.c"
+Source="../dman3_initImpl.c"
+Source="../dman3_init.c"
+Source="../dman3_api.c"
+Source="../rmm.c"
+Source="../dman3_externalRM_initImpl.c"
+Source="../dman3_externalRM_api.c"

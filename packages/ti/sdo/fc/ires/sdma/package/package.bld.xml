@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sdo.fc.ires.sdma" version="1, 0, 0" producerId="undefined">
+    <units>
+        <module name="SDMA"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sdo.fc.ires.sdma.c"/>
+        <srcFile name="iresman_sdma.c"/>
+        <srcFile name="ires_sdma.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/debug/sdma.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/sdma/package/package_ti.sdo.fc.ires.sdma.ov5T.dep" src="package/package_ti.sdo.fc.ires.sdma.c"/>
+        <srcFile name="package/lib/lib/debug/sdma/iresman_sdma.ov5T.dep" src="iresman_sdma.c"/>
+        <srcFile name="package/lib/lib/debug/sdma/ires_sdma.ov5T.dep" src="ires_sdma.c"/>
+        <srcFile name="lib/release/sdma.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/sdma/package/package_ti.sdo.fc.ires.sdma.ov5T.dep" src="package/package_ti.sdo.fc.ires.sdma.c"/>
+        <srcFile name="package/lib/lib/release/sdma/iresman_sdma.ov5T.dep" src="iresman_sdma.c"/>
+        <srcFile name="package/lib/lib/release/sdma/ires_sdma.ov5T.dep" src="ires_sdma.c"/>
+        <srcFile name="package/rel/ti_sdo_fc_ires_sdma.tar.dep" src="package/rel/ti_sdo_fc_ires_sdma.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.3,3"
+            platform="host.platforms.arm"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/codesourcery/arm-2009q1/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/debug/sdma"
+        pname="lib/debug/sdma.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/sdma"
+        pname="lib/release/sdma.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sdo_fc_ires_sdma"
+        pname="ti_sdo_fc_ires_sdma.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="iresman_sdma.h"/>
+        <file name="ires_sdma.h"/>
+        <file name="iresman_protocol_sdma.h"/>
+        <file name="_sdma.h"/>
+        <file name="package.bld"/>
+        <file name="simple_GCArmv5T.mak"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/debug/sdma.av5T"/>
+        <file name="package/package_ti.sdo.fc.ires.sdma.c"/>
+        <file name="iresman_sdma.c"/>
+        <file name="ires_sdma.c"/>
+        <file name="lib/release/sdma.av5T"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

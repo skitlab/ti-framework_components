@@ -1,0 +1,13 @@
+package/lib/lib/debug/gt_noOS/Trace.oem3: Trace.c /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/std.h ../../../../../ti/sdo/utils/trace/CBuf.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stdio.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stdarg.h ./Trace.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stddef.h /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/ti/targets/arm/elf/std.h /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/ti/targets/select.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/linkage.h /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/ti/targets/std.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stdint.h 
+Trace.c:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/std.h:
+../../../../../ti/sdo/utils/trace/CBuf.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stdio.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stdarg.h:
+./Trace.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stddef.h:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/ti/targets/arm/elf/std.h:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/ti/targets/select.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/linkage.h:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/ti/targets/std.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stdint.h:

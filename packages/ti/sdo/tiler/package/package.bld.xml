@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sdo.tiler" version="1, 0, 0" producerId="undefined">
+    <units>
+        <module name="Settings"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="src/remote/MemMgr_stub.c"/>
+        <srcFile name="Settings.c"/>
+        <srcFile name="src/remote/MemMgr_skel.c"/>
+        <srcFile name="src/memmgr/memmgr.c"/>
+        <srcFile name="src/memmgr/tilermgr.c"/>
+        <srcFile name="src/rtos/memmgr.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/debug/tiler_stub.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/tiler_stub/package/package_ti.sdo.tiler.oem3.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/debug/tiler_stub/src/remote/MemMgr_stub.oem3.dep" src="src/remote/MemMgr_stub.c"/>
+        <srcFile name="package/lib/debug/tiler_stub/Settings.oem3.dep" src="Settings.c"/>
+        <srcFile name="lib/release/tiler_stub.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/tiler_stub/package/package_ti.sdo.tiler.oem3.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/release/tiler_stub/src/remote/MemMgr_stub.oem3.dep" src="src/remote/MemMgr_stub.c"/>
+        <srcFile name="package/lib/release/tiler_stub/Settings.oem3.dep" src="Settings.c"/>
+        <srcFile name="lib/debug/tiler_stub.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/tiler_stub/package/package_ti.sdo.tiler.oe674.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/debug/tiler_stub/src/remote/MemMgr_stub.oe674.dep" src="src/remote/MemMgr_stub.c"/>
+        <srcFile name="package/lib/debug/tiler_stub/Settings.oe674.dep" src="Settings.c"/>
+        <srcFile name="lib/release/tiler_stub.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/tiler_stub/package/package_ti.sdo.tiler.oe674.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/release/tiler_stub/src/remote/MemMgr_stub.oe674.dep" src="src/remote/MemMgr_stub.c"/>
+        <srcFile name="package/lib/release/tiler_stub/Settings.oe674.dep" src="Settings.c"/>
+        <srcFile name="lib/debug/tiler_skel.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/tiler_skel/package/package_ti.sdo.tiler.ov5T.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/debug/tiler_skel/src/remote/MemMgr_skel.ov5T.dep" src="src/remote/MemMgr_skel.c"/>
+        <srcFile name="package/lib/debug/tiler_skel/Settings.ov5T.dep" src="Settings.c"/>
+        <srcFile name="lib/release/tiler_skel.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/tiler_skel/package/package_ti.sdo.tiler.ov5T.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/release/tiler_skel/src/remote/MemMgr_skel.ov5T.dep" src="src/remote/MemMgr_skel.c"/>
+        <srcFile name="package/lib/release/tiler_skel/Settings.ov5T.dep" src="Settings.c"/>
+        <srcFile name="lib/debug/tiler_linux.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/tiler_linux/package/package_ti.sdo.tiler.ov5T.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/debug/tiler_linux/src/memmgr/memmgr.ov5T.dep" src="src/memmgr/memmgr.c"/>
+        <srcFile name="package/lib/debug/tiler_linux/src/memmgr/tilermgr.ov5T.dep" src="src/memmgr/tilermgr.c"/>
+        <srcFile name="package/lib/debug/tiler_linux/Settings.ov5T.dep" src="Settings.c"/>
+        <srcFile name="lib/release/tiler_linux.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/tiler_linux/package/package_ti.sdo.tiler.ov5T.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/release/tiler_linux/src/memmgr/memmgr.ov5T.dep" src="src/memmgr/memmgr.c"/>
+        <srcFile name="package/lib/release/tiler_linux/src/memmgr/tilermgr.ov5T.dep" src="src/memmgr/tilermgr.c"/>
+        <srcFile name="package/lib/release/tiler_linux/Settings.ov5T.dep" src="Settings.c"/>
+        <srcFile name="lib/debug/tiler_rtos.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/tiler_rtos/package/package_ti.sdo.tiler.oem3.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/debug/tiler_rtos/src/rtos/memmgr.oem3.dep" src="src/rtos/memmgr.c"/>
+        <srcFile name="package/lib/debug/tiler_rtos/Settings.oem3.dep" src="Settings.c"/>
+        <srcFile name="lib/release/tiler_rtos.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/tiler_rtos/package/package_ti.sdo.tiler.oem3.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/release/tiler_rtos/src/rtos/memmgr.oem3.dep" src="src/rtos/memmgr.c"/>
+        <srcFile name="package/lib/release/tiler_rtos/Settings.oem3.dep" src="Settings.c"/>
+        <srcFile name="lib/debug/tiler_rtos.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/tiler_rtos/package/package_ti.sdo.tiler.oe674.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/debug/tiler_rtos/src/rtos/memmgr.oe674.dep" src="src/rtos/memmgr.c"/>
+        <srcFile name="package/lib/debug/tiler_rtos/Settings.oe674.dep" src="Settings.c"/>
+        <srcFile name="lib/release/tiler_rtos.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/tiler_rtos/package/package_ti.sdo.tiler.oe674.dep" src="package/package_ti.sdo.tiler.c"/>
+        <srcFile name="package/lib/release/tiler_rtos/src/rtos/memmgr.oe674.dep" src="src/rtos/memmgr.c"/>
+        <srcFile name="package/lib/release/tiler_rtos/Settings.oe674.dep" src="Settings.c"/>
+        <srcFile name="package/rel/ti_sdo_tiler.tar.dep" src="package/rel/ti_sdo_tiler.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.arm.elf.M3"
+            version="ti.targets.arm.elf.M3{1,0,4.9,2"
+            platform="ti.platforms.simDM8168"
+            isa="v7M"
+            suffix="em3"
+            rootDir="/proj/productization/tools/cgt470/cgt470_4_9_2/"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.3,1"
+            platform="ti.platforms.evmDA830"
+            isa="674"
+            suffix="e674"
+            rootDir="/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.3,3"
+            platform="host.platforms.arm"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/codesourcery/arm-2009q1/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/debug/tiler_stub"
+        pname="lib/debug/tiler_stub.aem3"
+        profile="debug"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/release/tiler_stub"
+        pname="lib/release/tiler_stub.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/debug/tiler_stub"
+        pname="lib/debug/tiler_stub.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/tiler_stub"
+        pname="lib/release/tiler_stub.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/tiler_skel"
+        pname="lib/debug/tiler_skel.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/tiler_skel"
+        pname="lib/release/tiler_skel.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/tiler_linux"
+        pname="lib/debug/tiler_linux.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/tiler_linux"
+        pname="lib/release/tiler_linux.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/tiler_rtos"
+        pname="lib/debug/tiler_rtos.aem3"
+        profile="debug"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/release/tiler_rtos"
+        pname="lib/release/tiler_rtos.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/debug/tiler_rtos"
+        pname="lib/debug/tiler_rtos.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/tiler_rtos"
+        pname="lib/release/tiler_rtos.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sdo_tiler"
+        pname="ti_sdo_tiler.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="MemMgr.h"/>
+        <file name="Settings.h"/>
+        <file name="Settings.c"/>
+        <file name="package.bld"/>
+        <file name="src/memmgr/debug_utils.h"/>
+        <file name="src/memmgr/list_utils.h"/>
+        <file name="src/memmgr/mem_types.h"/>
+        <file name="src/memmgr/memmgr.h"/>
+        <file name="src/memmgr/tiler.h"/>
+        <file name="src/memmgr/tilermem.h"/>
+        <file name="src/memmgr/tilermem_utils.h"/>
+        <file name="src/memmgr/tilermgr.h"/>
+        <file name="src/memmgr/utils.h"/>
+        <file name="simple_GCArmv5T.mak"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/debug/tiler_stub.aem3"/>
+        <file name="package/package_ti.sdo.tiler.c"/>
+        <file name="src/remote/MemMgr_stub.c"/>
+        <file name="lib/release/tiler_stub.aem3"/>
+        <file name="lib/debug/tiler_stub.ae674"/>
+        <file name="lib/release/tiler_stub.ae674"/>
+        <file name="lib/debug/tiler_skel.av5T"/>
+        <file name="src/remote/MemMgr_skel.c"/>
+        <file name="lib/release/tiler_skel.av5T"/>
+        <file name="lib/debug/tiler_linux.av5T"/>
+        <file name="src/memmgr/memmgr.c"/>
+        <file name="src/memmgr/tilermgr.c"/>
+        <file name="lib/release/tiler_linux.av5T"/>
+        <file name="lib/debug/tiler_rtos.aem3"/>
+        <file name="src/rtos/memmgr.c"/>
+        <file name="lib/release/tiler_rtos.aem3"/>
+        <file name="lib/debug/tiler_rtos.ae674"/>
+        <file name="lib/release/tiler_rtos.ae674"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

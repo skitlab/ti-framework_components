@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sdo.fc.ecpy" version="1, 0, 1" producerId="undefined">
+    <units>
+        <module name="ECPY"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sdo.fc.ecpy.c"/>
+        <srcFile name="ecpy_init.c"/>
+        <srcFile name="ecpy_impl.c"/>
+        <srcFile name="ecpy_configure16.c"/>
+        <srcFile name="ecpy_configure32.c"/>
+        <srcFile name="ecpycfg.c"/>
+        <srcFile name="ecpy_wait.c"/>
+        <srcFile name="ecpy_directwait.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/debug/ecpy.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/ecpy/package/package_ti.sdo.fc.ecpy.oe674.dep" src="package/package_ti.sdo.fc.ecpy.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy/ecpy_init.oe674.dep" src="ecpy_init.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy/ecpy_impl.oe674.dep" src="ecpy_impl.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy/ecpy_configure16.oe674.dep" src="ecpy_configure16.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy/ecpy_configure32.oe674.dep" src="ecpy_configure32.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy/ecpycfg.oe674.dep" src="ecpycfg.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy/ecpy_wait.oe674.dep" src="ecpy_wait.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy/ecpy_directwait.oe674.dep" src="ecpy_directwait.c"/>
+        <srcFile name="lib/release/ecpy.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ecpy/package/package_ti.sdo.fc.ecpy.oe674.dep" src="package/package_ti.sdo.fc.ecpy.c"/>
+        <srcFile name="package/lib/lib/release/ecpy/ecpy_init.oe674.dep" src="ecpy_init.c"/>
+        <srcFile name="package/lib/lib/release/ecpy/ecpy_impl.oe674.dep" src="ecpy_impl.c"/>
+        <srcFile name="package/lib/lib/release/ecpy/ecpy_configure16.oe674.dep" src="ecpy_configure16.c"/>
+        <srcFile name="package/lib/lib/release/ecpy/ecpy_configure32.oe674.dep" src="ecpy_configure32.c"/>
+        <srcFile name="package/lib/lib/release/ecpy/ecpycfg.oe674.dep" src="ecpycfg.c"/>
+        <srcFile name="package/lib/lib/release/ecpy/ecpy_wait.oe674.dep" src="ecpy_wait.c"/>
+        <srcFile name="package/lib/lib/release/ecpy/ecpy_directwait.oe674.dep" src="ecpy_directwait.c"/>
+        <srcFile name="lib/debug/ecpy_cacheMode.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/ecpy_cacheMode/package/package_ti.sdo.fc.ecpy.oe674.dep" src="package/package_ti.sdo.fc.ecpy.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy_cacheMode/ecpy_init.oe674.dep" src="ecpy_init.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy_cacheMode/ecpy_impl.oe674.dep" src="ecpy_impl.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy_cacheMode/ecpy_configure16.oe674.dep" src="ecpy_configure16.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy_cacheMode/ecpy_configure32.oe674.dep" src="ecpy_configure32.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy_cacheMode/ecpycfg.oe674.dep" src="ecpycfg.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy_cacheMode/ecpy_wait.oe674.dep" src="ecpy_wait.c"/>
+        <srcFile name="package/lib/lib/debug/ecpy_cacheMode/ecpy_directwait.oe674.dep" src="ecpy_directwait.c"/>
+        <srcFile name="lib/release/ecpy_cacheMode.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ecpy_cacheMode/package/package_ti.sdo.fc.ecpy.oe674.dep" src="package/package_ti.sdo.fc.ecpy.c"/>
+        <srcFile name="package/lib/lib/release/ecpy_cacheMode/ecpy_init.oe674.dep" src="ecpy_init.c"/>
+        <srcFile name="package/lib/lib/release/ecpy_cacheMode/ecpy_impl.oe674.dep" src="ecpy_impl.c"/>
+        <srcFile name="package/lib/lib/release/ecpy_cacheMode/ecpy_configure16.oe674.dep" src="ecpy_configure16.c"/>
+        <srcFile name="package/lib/lib/release/ecpy_cacheMode/ecpy_configure32.oe674.dep" src="ecpy_configure32.c"/>
+        <srcFile name="package/lib/lib/release/ecpy_cacheMode/ecpycfg.oe674.dep" src="ecpycfg.c"/>
+        <srcFile name="package/lib/lib/release/ecpy_cacheMode/ecpy_wait.oe674.dep" src="ecpy_wait.c"/>
+        <srcFile name="package/lib/lib/release/ecpy_cacheMode/ecpy_directwait.oe674.dep" src="ecpy_directwait.c"/>
+        <srcFile name="package/rel/ti_sdo_fc_ecpy.tar.dep" src="package/rel/ti_sdo_fc_ecpy.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.3,1"
+            platform="ti.platforms.evmDA830"
+            isa="674"
+            suffix="e674"
+            rootDir="/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/debug/ecpy"
+        pname="lib/debug/ecpy.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/ecpy"
+        pname="lib/release/ecpy.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/ecpy_cacheMode"
+        pname="lib/debug/ecpy_cacheMode.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/ecpy_cacheMode"
+        pname="lib/release/ecpy_cacheMode.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sdo_fc_ecpy"
+        pname="ti_sdo_fc_ecpy.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="ecpy.h"/>
+        <file name="ecpy_wait.h"/>
+        <file name="ecpy_configure32.h"/>
+        <file name="ecpy_util.h"/>
+        <file name="ecpy_configure16.h"/>
+        <file name="ecpy_directwait.h"/>
+        <file name="package.bld"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/debug/ecpy.ae674"/>
+        <file name="package/package_ti.sdo.fc.ecpy.c"/>
+        <file name="ecpy_init.c"/>
+        <file name="ecpy_impl.c"/>
+        <file name="ecpy_configure16.c"/>
+        <file name="ecpy_configure32.c"/>
+        <file name="ecpycfg.c"/>
+        <file name="ecpy_wait.c"/>
+        <file name="ecpy_directwait.c"/>
+        <file name="lib/release/ecpy.ae674"/>
+        <file name="lib/debug/ecpy_cacheMode.ae674"/>
+        <file name="lib/release/ecpy_cacheMode.ae674"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

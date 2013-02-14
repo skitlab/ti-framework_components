@@ -1,0 +1,11 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.fc.ires.edma3chan"
+ProjectType=External
+CPUFamily=TMS320C67XX
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.fc.ires.edma3chan.c"
+Source="../iresman_edma3Chan.c"
+Source="../ires_edma3Chan.c"

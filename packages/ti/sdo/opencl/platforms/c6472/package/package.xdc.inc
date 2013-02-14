@@ -1,0 +1,12 @@
+package.xdc
+package.xs
+package/ti.sdo.opencl.platforms.c6472.sch
+package/.vers_g180
+package/.vers_r170
+package/.vers_b150
+package/.xdc-y25
+package/ti_sdo_opencl_platforms_c6472.java
+package/ti_sdo_opencl_platforms_c6472.class
+package/package_ti.sdo.opencl.platforms.c6472.c
+package/package.defs.h
+package/ti.sdo.opencl.platforms.c6472.ccs

@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$ires__edma3_chan_8h.html" title="IRES EDMA3CHAN PROTOCOL Interface Definitions &#45; Allows algorithms to request and receive handles repr..." alt="" coords="8,84,264,108" />
+<area shape="rect" href="$xdas_8h.html" title="This header defines all types and constants used in the XDAS interfaces." alt="" coords="13,158,112,182" />
+<area shape="rect" href="$ires__common_8h.html" title="IRES Resource Protocol Definitions &#45; IRES Resource." alt="" coords="136,158,282,182" />
+<area shape="rect" href="$ialg_8h.html" title="This header defines all types, constants, and functions defined by XDAIS for algorithms." alt="" coords="184,233,234,257" />
+</map>

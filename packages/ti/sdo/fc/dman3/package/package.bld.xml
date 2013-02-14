@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sdo.fc.dman3" version="1, 0, 4" producerId="undefined">
+    <units>
+        <module name="DMAN3"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="dman3.c"/>
+        <srcFile name="dman3_initImpl.c"/>
+        <srcFile name="dman3_init.c"/>
+        <srcFile name="dman3_api.c"/>
+        <srcFile name="rmm.c"/>
+        <srcFile name="dman3_externalRM_initImpl.c"/>
+        <srcFile name="dman3_externalRM_api.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/debug/dman3.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/dman3/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/dman3_initImpl.oe674.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/dman3_init.oe674.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/dman3_api.oe674.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/release/dman3.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/dman3/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3/dman3_initImpl.oe674.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/release/dman3/dman3_init.oe674.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/release/dman3/dman3_api.oe674.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/release/dman3/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/dman3Cfg.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/dman3_initImpl.oe674.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/dman3_api.oe674.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/release/dman3Cfg.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/dman3_initImpl.oe674.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/dman3_api.oe674.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/dman3cpu.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/dman3_initImpl.oe674.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/dman3_init.oe674.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/dman3_api.oe674.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/release/dman3cpu.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/dman3_initImpl.oe674.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/dman3_init.oe674.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/dman3_api.oe674.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/dman3RM.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/dman3RM/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3RM/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3RM/dman3_externalRM_initImpl.oe674.dep" src="dman3_externalRM_initImpl.c"/>
+        <srcFile name="package/lib/lib/debug/dman3RM/dman3_init.oe674.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/debug/dman3RM/dman3_externalRM_api.oe674.dep" src="dman3_externalRM_api.c"/>
+        <srcFile name="package/lib/lib/debug/dman3RM/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/release/dman3RM.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/dman3RM/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3RM/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3RM/dman3_externalRM_initImpl.oe674.dep" src="dman3_externalRM_initImpl.c"/>
+        <srcFile name="package/lib/lib/release/dman3RM/dman3_init.oe674.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/release/dman3RM/dman3_externalRM_api.oe674.dep" src="dman3_externalRM_api.c"/>
+        <srcFile name="package/lib/lib/release/dman3RM/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/dman3RMCfg.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/dman3RMCfg/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3RMCfg/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3RMCfg/dman3_externalRM_initImpl.oe674.dep" src="dman3_externalRM_initImpl.c"/>
+        <srcFile name="package/lib/lib/debug/dman3RMCfg/dman3_externalRM_api.oe674.dep" src="dman3_externalRM_api.c"/>
+        <srcFile name="package/lib/lib/debug/dman3RMCfg/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/release/dman3RMCfg.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/dman3RMCfg/package/package_ti.sdo.fc.dman3.oe674.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3RMCfg/dman3.oe674.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3RMCfg/dman3_externalRM_initImpl.oe674.dep" src="dman3_externalRM_initImpl.c"/>
+        <srcFile name="package/lib/lib/release/dman3RMCfg/dman3_externalRM_api.oe674.dep" src="dman3_externalRM_api.c"/>
+        <srcFile name="package/lib/lib/release/dman3RMCfg/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/dman3.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/dman3/package/package_ti.sdo.fc.dman3.ov5T.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/dman3.ov5T.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/dman3_initImpl.ov5T.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/dman3_init.ov5T.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/dman3_api.ov5T.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/debug/dman3/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="lib/release/dman3.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/dman3/package/package_ti.sdo.fc.dman3.ov5T.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3/dman3.ov5T.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3/dman3_initImpl.ov5T.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/release/dman3/dman3_init.ov5T.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/release/dman3/dman3_api.ov5T.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/release/dman3/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/dman3Cfg.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/package/package_ti.sdo.fc.dman3.ov5T.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/dman3.ov5T.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/dman3_initImpl.ov5T.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/dman3_api.ov5T.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/debug/dman3Cfg/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="lib/release/dman3Cfg.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/package/package_ti.sdo.fc.dman3.ov5T.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/dman3.ov5T.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/dman3_initImpl.ov5T.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/dman3_api.ov5T.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/release/dman3Cfg/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/dman3cpu.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/package/package_ti.sdo.fc.dman3.ov5T.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/dman3.ov5T.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/dman3_initImpl.ov5T.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/dman3_init.ov5T.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/dman3_api.ov5T.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpu/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="lib/release/dman3cpu.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/package/package_ti.sdo.fc.dman3.ov5T.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/dman3.ov5T.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/dman3_initImpl.ov5T.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/dman3_init.ov5T.dep" src="dman3_init.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/dman3_api.ov5T.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpu/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/dman3cpuCfg.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/dman3cpuCfg/package/package_ti.sdo.fc.dman3.ov5T.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpuCfg/dman3.ov5T.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpuCfg/dman3_initImpl.ov5T.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpuCfg/dman3_api.ov5T.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/debug/dman3cpuCfg/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="lib/release/dman3cpuCfg.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/dman3cpuCfg/package/package_ti.sdo.fc.dman3.ov5T.dep" src="package/package_ti.sdo.fc.dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpuCfg/dman3.ov5T.dep" src="dman3.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpuCfg/dman3_initImpl.ov5T.dep" src="dman3_initImpl.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpuCfg/dman3_api.ov5T.dep" src="dman3_api.c"/>
+        <srcFile name="package/lib/lib/release/dman3cpuCfg/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="package/rel/ti_sdo_fc_dman3.tar.dep" src="package/rel/ti_sdo_fc_dman3.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.3,1"
+            platform="ti.platforms.evmDA830"
+            isa="674"
+            suffix="e674"
+            rootDir="/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.3,3"
+            platform="host.platforms.arm"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/codesourcery/arm-2009q1/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/debug/dman3"
+        pname="lib/debug/dman3.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/dman3"
+        pname="lib/release/dman3.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/dman3Cfg"
+        pname="lib/debug/dman3Cfg.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/dman3Cfg"
+        pname="lib/release/dman3Cfg.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/dman3cpu"
+        pname="lib/debug/dman3cpu.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/dman3cpu"
+        pname="lib/release/dman3cpu.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/dman3RM"
+        pname="lib/debug/dman3RM.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/dman3RM"
+        pname="lib/release/dman3RM.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/dman3RMCfg"
+        pname="lib/debug/dman3RMCfg.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/dman3RMCfg"
+        pname="lib/release/dman3RMCfg.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/dman3"
+        pname="lib/debug/dman3.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/dman3"
+        pname="lib/release/dman3.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/dman3Cfg"
+        pname="lib/debug/dman3Cfg.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/dman3Cfg"
+        pname="lib/release/dman3Cfg.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/dman3cpu"
+        pname="lib/debug/dman3cpu.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/dman3cpu"
+        pname="lib/release/dman3cpu.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/dman3cpuCfg"
+        pname="lib/debug/dman3cpuCfg.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/dman3cpuCfg"
+        pname="lib/release/dman3cpuCfg.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sdo_fc_dman3"
+        pname="ti_sdo_fc_dman3.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="dman3.h"/>
+        <file name="dman3.tci"/>
+        <file name="dman3_c.tpl"/>
+        <file name="dman3_cmd.tpl"/>
+        <file name="dman3_impl.h"/>
+        <file name="rmm.h"/>
+        <file name="_rmm.h"/>
+        <file name="dman3_externalRM_impl.h"/>
+        <file name="package.bld"/>
+        <file name="simple_GCArmv5T.mak"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/debug/dman3.ae674"/>
+        <file name="package/package_ti.sdo.fc.dman3.c"/>
+        <file name="dman3.c"/>
+        <file name="dman3_initImpl.c"/>
+        <file name="dman3_init.c"/>
+        <file name="dman3_api.c"/>
+        <file name="rmm.c"/>
+        <file name="lib/release/dman3.ae674"/>
+        <file name="lib/debug/dman3Cfg.ae674"/>
+        <file name="lib/release/dman3Cfg.ae674"/>
+        <file name="lib/debug/dman3cpu.ae674"/>
+        <file name="lib/release/dman3cpu.ae674"/>
+        <file name="lib/debug/dman3RM.ae674"/>
+        <file name="dman3_externalRM_initImpl.c"/>
+        <file name="dman3_externalRM_api.c"/>
+        <file name="lib/release/dman3RM.ae674"/>
+        <file name="lib/debug/dman3RMCfg.ae674"/>
+        <file name="lib/release/dman3RMCfg.ae674"/>
+        <file name="lib/debug/dman3.av5T"/>
+        <file name="lib/release/dman3.av5T"/>
+        <file name="lib/debug/dman3Cfg.av5T"/>
+        <file name="lib/release/dman3Cfg.av5T"/>
+        <file name="lib/debug/dman3cpu.av5T"/>
+        <file name="lib/release/dman3cpu.av5T"/>
+        <file name="lib/debug/dman3cpuCfg.av5T"/>
+        <file name="lib/release/dman3cpuCfg.av5T"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

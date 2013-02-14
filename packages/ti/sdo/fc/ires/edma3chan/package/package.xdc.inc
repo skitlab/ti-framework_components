@@ -1,0 +1,16 @@
+package.xdc
+package.xs
+INTERFACE.xdc
+EDMA3CHAN.xdc
+EDMA3CHANLITE.xdc
+EDMA3CHANLITE.xdt
+package/ti.sdo.fc.ires.edma3chan.sch
+package/.vers_g180
+package/.vers_r170
+package/.vers_b150
+package/.xdc-y25
+package/ti_sdo_fc_ires_edma3chan.java
+package/ti_sdo_fc_ires_edma3chan.class
+package/package_ti.sdo.fc.ires.edma3chan.c
+package/package.defs.h
+package/ti.sdo.fc.ires.edma3chan.ccs

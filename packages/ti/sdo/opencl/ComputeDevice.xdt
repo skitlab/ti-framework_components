@@ -1,0 +1,139 @@
+%%{
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * */
+%%}
+%%{
+    var ComputeDevice = this.$package.ComputeDevice;
+
+function argInitVal(decl)
+{
+    var val = "";
+
+    if (decl == ComputeDevice.ArgType_Int) {
+        val = "0x0001";
+    }
+    else if (decl == ComputeDevice.ArgType_LocalPtr) {
+        val = "0x0002";
+    }
+    else if (decl == ComputeDevice.ArgType_GlobalPtr) {
+        val = "0x0003";
+    }
+    else if (decl == ComputeDevice.ArgType_SrPtr) {
+        val = "0x0004";
+    }
+
+    return val;
+}
+
+%%}
+#include <ti/sdo/opencl/ComputeDevice.h>
+
+%   /* generate function prototypes */
+%   for (var u = 0; u < ComputeDevice.units.length; u++) {
+%       var unit = ComputeDevice.units[u];
+/* unit_`u` prototypes */
+%       if ((unit.initFxn != undefined) && (unit.initFxn != null)) {
+Void `unit.initFxn`(Void);
+%       }
+%       if ((unit.exitFxn != undefined) && (unit.exitFxn != null)) {
+Void `unit.exitFxn`(Void);
+%       }
+%       for (var f = 0; f < unit.fxnTab.length; f++) {
+%           var fxnDesc = unit.fxnTab[f];
+Void `fxnDesc.name`(Void);
+%       }
+
+/* unit_`u` kernel argument arrays */
+%       for (var f = 0; f < unit.fxnTab.length; f++) {
+%           var fxnDesc = unit.fxnTab[f];
+%           var initVals = new Array();
+UInt ti_sdo_opencl_Args_`fxnDesc.name`[] = {
+%           for (var a = 0; a < fxnDesc.args.length; a++) {
+%               initVals.push(argInitVal(fxnDesc.args[a]));
+%           }
+    `initVals.join(", ")`
+};
+%       }
+
+/* unit_`u` function table */
+ComputeDevice_FxnDesc ti_sdo_opencl_FxnTab_Unit_`u`[] = {
+%       for (var f = 0; f < unit.fxnTab.length; f++) {
+%           var fxnDesc = unit.fxnTab[f];
+    {
+        "`fxnDesc.name`",
+        (Fxn)`fxnDesc.name`,
+        `fxnDesc.numArgs`,
+        &ti_sdo_opencl_Args_`fxnDesc.name`[0]
+%           if (f+1 < unit.fxnTab.length) {
+    },
+%           } else {
+    }
+%           }
+};
+%       }
+
+%   }
+
+%   if (ComputeDevice.units.length > 0) {
+/* ComputeDevice unit table */
+Int ti_sdo_opencl_ComputeDevice_numUnits = `ComputeDevice.units.length`;
+ComputeDevice_Unit ti_sdo_opencl_ComputeDevice_units[] = {
+%   for (var i = 0; i < ComputeDevice.units.length; i++) {
+%       var unit = ComputeDevice.units[i];
+    {
+%       if (unit.initFxn != undefined) {
+        `unit.initFxn`,
+%       } else {
+            NULL,
+%       }
+%       if (unit.exitFxn != undefined) {
+        `unit.exitFxn`,
+%       } else {
+            NULL,
+%       }
+        `unit.fxnTab.length`,
+        &ti_sdo_opencl_FxnTab_Unit_`i`[0]
+%       if (i+1 < ComputeDevice.units.length) {
+    },
+%       } else {
+    }
+%       }
+%   }
+};
+%   }
+%%{
+/*
+ * @(#) ti.sdo.opencl; 1, 0, 0,4; 2-22-2012 18:09:27; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+
+%%}

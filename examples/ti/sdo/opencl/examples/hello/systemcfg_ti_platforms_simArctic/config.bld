@@ -1,0 +1,138 @@
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ */
+
+
+/*
+ *  ======== config.bld ========
+ *
+ */
+
+var Build = xdc.useModule('xdc.bld.BuildEnvironment');
+
+/*  Memory Map for ti.platforms.simArctic               comments
+ *  ------------------------------------------------------------------------
+ *  0000_0000 - 00FF_FFFF   100_0000  (  16 MB) CODE    code, run addr (arp32)
+ *  4002_0000 - 4002_6FFF       7000  (  28 KB) DMEM    data (arp32)
+ *  4002_7000 - 4002_7FFF       1000  (   4 KB) SR0     SharedRegion_0 (arp32)
+ *  4005_0000 - 4005_3FFF       4000  (  16 KB) IBUFLA  IBuf A Low
+ *  4005_4000 - 4005_7FFF       4000  (  16 KB) IBUFHA  IBuf A High
+ *  4007_0000 - 4007_3FFF       4000  (  16 KB) IBUFLB  IBuf B Low
+ *  4007_4000 - 4007_7FFF       4000  (  16 KB) IBUFHB  IBuf B High
+ *  5902_7000 - 5902_7FFF       1000  (   4 KB) SR0     SharedRegion_0 (dsp)
+ *  ------------------------------------------------------------------------
+ *  8000_0000 - 800F_FFFF    10_0000  (   1 MB) PROG    code/data (dsp)
+ *  8010_0000 - 80FF_FFFF    F0_0000  (  15 MB) ----
+ *  8100_0000 - 810F_FFFF    10_0000  (   1 MB) CODE    code, load addr (arp32)
+ *  8110_0000 - 811F_FFFF    10_0000  (   1 MB) EXDATA  external data (apr32)
+ *  8120_0000 - 811F_FFFF    E0_0000  (  14 MB) ----
+ *  8200_0000 - 8FFF_FFFF   E00_0000  ( 224 MB) ----
+ *
+ *  8000_0000 - 80FF_FFFF   100_0000  (  16 MB) CODE    code, load addr (arp32)
+ *  8100_0000 - 81FF_FFFF   100_0000  (  16 MB) EXDATA  external data (apr32)
+ *  8200_0000 - 83FF_FFFF   200_0000  (  32 MB) PROG    code/data (dsp)
+ *  8400_0000 - 8FFF_FFFF   C00_0000  ( 192 MB) SR1     SharedRegion_1
+ */
+
+Build.platformTable["ti.platforms.simArctic:arp32"] = {
+    customMemoryMap: [
+        ["ARP32VECS", {
+            base:  0x80000000, len: 0x100, page: 0,
+            name:  "ARP32VECS", space: "code/data", access: "RWX",
+            comment: "External memory for ARP32 interrupt vectors"
+        }],
+        [ "ARP32", {
+            base: 0x80000100, len: 0x1ffff00, page: 1,
+            name: "ARP32", space: "code", access: "RX",
+            comment: "ARP32 Code Memory (~32 MB)"
+        }],
+        [ "DMEM", {
+            base: 0x40020000, len: 0x7000, page: 1,
+            name: "DMEM", space: "data", access: "RW",
+            comment: "Local data memory (28 KB)"
+        }],
+        [ "SR0", {
+            base: 0x40027000, len: 0x1000, page: 1,
+            name: "SR0", space: "data", access: "RW",
+            comment: "IPC SharedRegion_0 (4 KB)"
+        }],
+        [ "IBUFLA", {
+            base: 0x40050000, len: 0x4000,page: 1,
+            name: "IBUFLA", space: "data", access: "RW",
+            comment: "IBuf A Low (16 KB)"
+        }],
+        [ "IBUFHA", {
+            base: 0x40054000, len: 0x4000, page: 1,
+            name: "IBUFHA", space: "data", access: "RW",
+            comment: "IBuf A High (16 KB)"
+        }],
+        [ "IBUFLB", {
+            base: 0x40070000, len: 0x4000, page: 1,
+            name: "IBUFLB", space: "data", access: "RW",
+            comment: "IBuf B Low (16 KB)"
+        }],
+        [ "IBUFHB", {
+            base: 0x40074000, len: 0x4000, page: 1,
+            name: "IBUFHB", space: "data", access: "RW",
+            comment: "IBuf B High (16 KB)"
+        }]
+    ],
+    codeMemory:  "ARP32",
+    dataMemory:  "DMEM",
+    stackMemory: "DMEM"
+};
+
+Build.platformTable["ti.platforms.simArctic:dsp"] = {
+    customMemoryMap: [
+        [ "SR0", {  /* non-cacheable */
+            base: 0x59027000, len: 0x1000,
+            name: "SR0", space: "data", access: "RW",
+            comment: "IPC SharedRegion_0 (4 KB)"
+        }],
+        [ "PROG", {  /* cacheable */
+            base: 0x82000000, len: 0x2000000,
+            name: "PROG", space: "code/data", access: "RWX",
+            comment: "Program code/data memory (32 MB)"
+        }]
+    ],
+    l1PMode: "32k",
+    l1DMode: "32k",
+    l2Mode:  "512k",
+    codeMemory:  "PROG",
+    dataMemory:  "PROG",
+    stackMemory: "PROG"
+};
+/*
+ *  @(#) ti.sdo.opencl.examples.hello; 1, 0, 0,4; 2-22-2012 18:09:32; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+

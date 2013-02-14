@@ -1,0 +1,12 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.utils.trace"
+ProjectType=External
+CPUFamily=TMS470R4X
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.utils.trace.c"
+Source="../gt.c"
+Source="../CBuf.c"
+Source="../gt_config.c"

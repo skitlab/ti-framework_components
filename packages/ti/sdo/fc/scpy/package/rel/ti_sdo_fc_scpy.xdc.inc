@@ -1,0 +1,13 @@
+package/package.bld.xml
+package/package.ext.xml
+package/package.rel.dot
+package/build.cfg
+package/package.xdc.inc
+scpy.h
+package.bld
+simple_GCArmv5T.mak
+package/package.cfg.xdc.inc
+lib/debug/scpy.av5T
+package/package_ti.sdo.fc.scpy.c
+scpy.c
+lib/release/scpy.av5T

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sdo.fc.scpy" version="1, 0, 0" producerId="undefined">
+    <units>
+        <module name="SCPY"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sdo.fc.scpy.c"/>
+        <srcFile name="scpy.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/debug/scpy.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/scpy/package/package_ti.sdo.fc.scpy.ov5T.dep" src="package/package_ti.sdo.fc.scpy.c"/>
+        <srcFile name="package/lib/lib/debug/scpy/scpy.ov5T.dep" src="scpy.c"/>
+        <srcFile name="lib/release/scpy.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/scpy/package/package_ti.sdo.fc.scpy.ov5T.dep" src="package/package_ti.sdo.fc.scpy.c"/>
+        <srcFile name="package/lib/lib/release/scpy/scpy.ov5T.dep" src="scpy.c"/>
+        <srcFile name="package/rel/ti_sdo_fc_scpy.tar.dep" src="package/rel/ti_sdo_fc_scpy.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.3,3"
+            platform="host.platforms.arm"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/codesourcery/arm-2009q1/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/debug/scpy"
+        pname="lib/debug/scpy.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/scpy"
+        pname="lib/release/scpy.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sdo_fc_scpy"
+        pname="ti_sdo_fc_scpy.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="scpy.h"/>
+        <file name="package.bld"/>
+        <file name="simple_GCArmv5T.mak"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/debug/scpy.av5T"/>
+        <file name="package/package_ti.sdo.fc.scpy.c"/>
+        <file name="scpy.c"/>
+        <file name="lib/release/scpy.av5T"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

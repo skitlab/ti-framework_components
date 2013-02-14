@@ -1,0 +1,17 @@
+package/package.bld.xml
+package/package.ext.xml
+package/package.rel.dot
+package/build.cfg
+package/package.xdc.inc
+iresman_edma3Chan.h
+ires_edma3Chan.h
+iresman_protocol_edma3Chan.h
+_edma3Chan.h
+edma3Chan2Lite.h
+package.bld
+package/package.cfg.xdc.inc
+lib/debug/edma3Chan.ae674
+package/package_ti.sdo.fc.ires.edma3chan.c
+iresman_edma3Chan.c
+ires_edma3Chan.c
+lib/release/edma3Chan.ae674

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sdo.opencl" version="1, 0, 0" producerId="undefined">
+    <units>
+        <module name="OpenCL"/>
+        <module name="ComputeDevice"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="CLCommandQueue.c"/>
+        <srcFile name="CLContext.c"/>
+        <srcFile name="CLDevice.c"/>
+        <srcFile name="CLPlatform.c"/>
+        <srcFile name="CLProgram.c"/>
+        <srcFile name="CLMemObj.c"/>
+        <srcFile name="CLKernel.c"/>
+        <srcFile name="CLEvent.c"/>
+        <srcFile name="CLMemObj_syslink.c"/>
+        <srcFile name="ComputeDevice.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/debug/opencl_api.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/opencl_api/package/package_ti.sdo.opencl.oem3.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLCommandQueue.oem3.dep" src="CLCommandQueue.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLContext.oem3.dep" src="CLContext.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLDevice.oem3.dep" src="CLDevice.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLPlatform.oem3.dep" src="CLPlatform.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLProgram.oem3.dep" src="CLProgram.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLMemObj.oem3.dep" src="CLMemObj.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLKernel.oem3.dep" src="CLKernel.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLEvent.oem3.dep" src="CLEvent.c"/>
+        <srcFile name="lib/release/opencl_api.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/opencl_api/package/package_ti.sdo.opencl.oem3.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLCommandQueue.oem3.dep" src="CLCommandQueue.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLContext.oem3.dep" src="CLContext.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLDevice.oem3.dep" src="CLDevice.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLPlatform.oem3.dep" src="CLPlatform.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLProgram.oem3.dep" src="CLProgram.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLMemObj.oem3.dep" src="CLMemObj.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLKernel.oem3.dep" src="CLKernel.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLEvent.oem3.dep" src="CLEvent.c"/>
+        <srcFile name="lib/debug/opencl_api.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/opencl_api/package/package_ti.sdo.opencl.oe674.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLCommandQueue.oe674.dep" src="CLCommandQueue.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLContext.oe674.dep" src="CLContext.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLDevice.oe674.dep" src="CLDevice.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLPlatform.oe674.dep" src="CLPlatform.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLProgram.oe674.dep" src="CLProgram.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLMemObj.oe674.dep" src="CLMemObj.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLKernel.oe674.dep" src="CLKernel.c"/>
+        <srcFile name="package/lib/debug/opencl_api/CLEvent.oe674.dep" src="CLEvent.c"/>
+        <srcFile name="lib/release/opencl_api.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/opencl_api/package/package_ti.sdo.opencl.oe674.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLCommandQueue.oe674.dep" src="CLCommandQueue.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLContext.oe674.dep" src="CLContext.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLDevice.oe674.dep" src="CLDevice.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLPlatform.oe674.dep" src="CLPlatform.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLProgram.oe674.dep" src="CLProgram.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLMemObj.oe674.dep" src="CLMemObj.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLKernel.oe674.dep" src="CLKernel.c"/>
+        <srcFile name="package/lib/release/opencl_api/CLEvent.oe674.dep" src="CLEvent.c"/>
+        <srcFile name="lib/debug/opencl_api_syslink.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/package/package_ti.sdo.opencl.ov5T.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/CLCommandQueue.ov5T.dep" src="CLCommandQueue.c"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/CLContext.ov5T.dep" src="CLContext.c"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/CLDevice.ov5T.dep" src="CLDevice.c"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/CLPlatform.ov5T.dep" src="CLPlatform.c"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/CLProgram.ov5T.dep" src="CLProgram.c"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/CLMemObj.ov5T.dep" src="CLMemObj.c"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/CLKernel.ov5T.dep" src="CLKernel.c"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/CLEvent.ov5T.dep" src="CLEvent.c"/>
+        <srcFile name="package/lib/debug/opencl_api_syslink/CLMemObj_syslink.ov5T.dep" src="CLMemObj_syslink.c"/>
+        <srcFile name="lib/release/opencl_api_syslink.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/package/package_ti.sdo.opencl.ov5T.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/CLCommandQueue.ov5T.dep" src="CLCommandQueue.c"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/CLContext.ov5T.dep" src="CLContext.c"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/CLDevice.ov5T.dep" src="CLDevice.c"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/CLPlatform.ov5T.dep" src="CLPlatform.c"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/CLProgram.ov5T.dep" src="CLProgram.c"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/CLMemObj.ov5T.dep" src="CLMemObj.c"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/CLKernel.ov5T.dep" src="CLKernel.c"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/CLEvent.ov5T.dep" src="CLEvent.c"/>
+        <srcFile name="package/lib/release/opencl_api_syslink/CLMemObj_syslink.ov5T.dep" src="CLMemObj_syslink.c"/>
+        <srcFile name="lib/debug/opencl_runtime.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/opencl_runtime/package/package_ti.sdo.opencl.oem3.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/debug/opencl_runtime/ComputeDevice.oem3.dep" src="ComputeDevice.c"/>
+        <srcFile name="lib/release/opencl_runtime.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/opencl_runtime/package/package_ti.sdo.opencl.oem3.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/release/opencl_runtime/ComputeDevice.oem3.dep" src="ComputeDevice.c"/>
+        <srcFile name="lib/debug/opencl_runtime.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/opencl_runtime/package/package_ti.sdo.opencl.oe674.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/debug/opencl_runtime/ComputeDevice.oe674.dep" src="ComputeDevice.c"/>
+        <srcFile name="lib/release/opencl_runtime.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/opencl_runtime/package/package_ti.sdo.opencl.oe674.dep" src="package/package_ti.sdo.opencl.c"/>
+        <srcFile name="package/lib/release/opencl_runtime/ComputeDevice.oe674.dep" src="ComputeDevice.c"/>
+        <srcFile name="package/rel/ti_sdo_opencl.tar.dep" src="package/rel/ti_sdo_opencl.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.arm.elf.M3"
+            version="ti.targets.arm.elf.M3{1,0,4.9,2"
+            platform="ti.platforms.simDM8168"
+            isa="v7M"
+            suffix="em3"
+            rootDir="/proj/productization/tools/cgt470/cgt470_4_9_2/"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.3,1"
+            platform="ti.platforms.evmDA830"
+            isa="674"
+            suffix="e674"
+            rootDir="/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.3,3"
+            platform="host.platforms.arm"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/codesourcery/arm-2009q1/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/debug/opencl_api"
+        pname="lib/debug/opencl_api.aem3"
+        profile="debug"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/release/opencl_api"
+        pname="lib/release/opencl_api.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/debug/opencl_api"
+        pname="lib/debug/opencl_api.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/opencl_api"
+        pname="lib/release/opencl_api.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/opencl_api_syslink"
+        pname="lib/debug/opencl_api_syslink.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/opencl_api_syslink"
+        pname="lib/release/opencl_api_syslink.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/opencl_runtime"
+        pname="lib/debug/opencl_runtime.aem3"
+        profile="debug"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/release/opencl_runtime"
+        pname="lib/release/opencl_runtime.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/debug/opencl_runtime"
+        pname="lib/debug/opencl_runtime.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/opencl_runtime"
+        pname="lib/release/opencl_runtime.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sdo_opencl"
+        pname="ti_sdo_opencl.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="doc-files"/>
+        <file name="CLMemObj_syslink.h"/>
+        <file name="ComputeDevice.h"/>
+        <file name="package.bld"/>
+        <file name="TICommandQueue.h"/>
+        <file name="TIContext.h"/>
+        <file name="TIDevice.h"/>
+        <file name="TIEvent.h"/>
+        <file name="TIKernel.h"/>
+        <file name="TIMem.h"/>
+        <file name="TIPlatform.h"/>
+        <file name="TIProgram.h"/>
+        <file name="ti_cl.h"/>
+        <file name="simple_GCArmv5T.mak"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/debug/opencl_api.aem3"/>
+        <file name="package/package_ti.sdo.opencl.c"/>
+        <file name="CLCommandQueue.c"/>
+        <file name="CLContext.c"/>
+        <file name="CLDevice.c"/>
+        <file name="CLPlatform.c"/>
+        <file name="CLProgram.c"/>
+        <file name="CLMemObj.c"/>
+        <file name="CLKernel.c"/>
+        <file name="CLEvent.c"/>
+        <file name="lib/release/opencl_api.aem3"/>
+        <file name="lib/debug/opencl_api.ae674"/>
+        <file name="lib/release/opencl_api.ae674"/>
+        <file name="lib/debug/opencl_api_syslink.av5T"/>
+        <file name="CLMemObj_syslink.c"/>
+        <file name="lib/release/opencl_api_syslink.av5T"/>
+        <file name="lib/debug/opencl_runtime.aem3"/>
+        <file name="ComputeDevice.c"/>
+        <file name="lib/release/opencl_runtime.aem3"/>
+        <file name="lib/debug/opencl_runtime.ae674"/>
+        <file name="lib/release/opencl_runtime.ae674"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- --COPYRIGHT--,BSD
+ *  Copyright (c) 2012, Texas Instruments Incorporated
+ *  All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *
+ *  *  Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *  *  Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *  *  Neither the name of Texas Instruments Incorporated nor the names of
+ *     its contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ *  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ *  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ *  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ *  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ *  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ *  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ *  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ *  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * --/COPYRIGHT--
+-->
+<html>
+<head>
+  <title>Framework Components Example Build Instructions</title>
+<!-- For now, we use the doxygen style sheet -->
+  <link type="text/css" rel="stylesheet" href="../docs/html/doxygen.css">
+    <style type="text/css">
+    body {
+        margin: 20px;
+    }
+    </style>
+</head>
+<body>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td bgcolor="black" width="1">
+        <a href="http://www.ti.com">
+          <img src="../docs/html/tilogo.gif" border="0" alt="Texas
+          Instruments">
+        </a>
+      </td>
+      <td bgcolor="red">
+        <img src="../docs/html/titagline.gif" alt="Technology for
+        Innovators">
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h1>Build Instructions for Framework Components Examples</h1>
+<hr>
+<h2>General Information</h2>
+<p>This page explains how to build the examples provided in the
+Framework Components product.
+</p>
+
+<hr>
+<h2>Requirements</h2>
+<p>See the <a href="../framework_components_3_22_01_07_ReleaseNotes.html">Release Notes</a>
+for the specific software and hardware components this release of
+Framework Components has been validated against.
+</p>
+<hr>
+<h2>Directory Structure</h2>
+<pre>
+examples
+    +---ti
+        +---sdo
+            +---opencl
+            |   +---autoviz
+            |   +---hello
+            +---rcm
+            |   +---hello
+            +---fc
+                +---dman3
+                |   +---examples
+                |       +---fastcopy
+                |          +---&lt;device_os&gt; (device/OS-specific directories)
+                +---dskt2
+                    +---examples
+                +---rman
+                    +---examples
+                        +---bufres
+                        +---bufres_yield
+                        +---dmaXferScratch
+                        +---dummyEdma3
+                        +---hdvicp
+                        +---nullresource
+                        +---scratchEdma3
+                        +---sdma
+                        +---shmbuf
+                        +---vicp
+</pre>
+
+<hr>
+<h2>Directory Conventions</h2>
+<p><i>Important</i>: throughout the rest of this document, we will use the
+following notation:
+</p>
+<ul>
+  <li><b><tt>&lt;FC_INSTALL_DIR&gt;</tt></b> - the root directory of your FC
+  installation.  The FC packages are in the
+  <tt>&lt;FC_INSTALL_DIR&gt;/packages</tt> directory (or repository); the
+  original examples are in the <tt>&lt;FC_INSTALL_DIR&gt;/examples</tt>
+  directory (or repository).</li>
+  <li><b><tt>&lt;XDAIS_INSTALL_DIR&gt;</tt></b> - the root directory of your
+  XDAIS installation.  Some distributions of this FC release include an
+  <b>fctools</b> directory which contains an XDAIS release.  In the case of
+  those distributions, <tt>&lt;XDAIS_INSTALL_DIR&gt;</tt> could be set to
+  <tt>&lt;FC_INSTALL_DIR&gt;/fctools</tt>.  Note that the XDAIS packages will
+  be located in the <tt>&lt;XDAIS_INSTALL_DIR&gt;/packages</tt> directory
+  (or repository).</li>
+  <li><b><tt>&lt;XDC_INSTALL_DIR&gt;</tt></b> - the root directory of your
+  XDC tools installation.  The FC examples now have a dependency on the XDC
+  tools std.h header file. If you have installed DSP BIOS, you can set
+  <tt>&lt;XDC_INSTALL_DIR&gt</tt> to <tt>&lt;BIOS_INSTALL_DIR&gt;/xdctools</tt>.
+  Otherwise, set <tt>&lt;XDC_INSTALL_DIR&gt</tt> to the root directory of your XDC
+  tools installation.</li>
+</ul>
+
+<h2>Preparing to Build the Examples</h2>
+<h3>Create a working directory</h3>
+<p>
+Create a working directory (e.g. <b>c:/myPackages</b>) and copy the
+<b>examples</b> directory into it (e.g. <b>c:/myPackages/examples</b>).
+This will be where you build and modify the Framework Components examples.
+</p>
+<p>
+Doing this will ensure you have a backup copy of the original examples, as
+provided by the Framework Components product.
+</p>
+
+<hr>
+<h2>Building examples under ti/sdo/fc/examples</h4> 
+<!-- <h3>Build using XDC tools</h2> -->
+<h3>1. Manage xdcpaths.mak and products.mak</h3>
+<p>The Framework Components examples are provided with XDC build scripts.
+<b>examples/xdcpaths.mak</b> is the Makefile include file used to define the targets and environment in which the example XDC packages will be built.
+</p>
+<p>At the root of the Examples directory, there is a <b>makefile</b> that will
+need to be edited for your particular usecase. 
+Edit the following variables described below
+</p>
+
+<h4>PROGRAMS</h4>
+<ul>
+  <li>Some of the FC examples support different types of runtime
+    environments (e.g. single processor, multiprocessor client/server).
+  The <b>PROGRAMS</b> variable specifies which types of environments you
+  want to build the examples for.
+  Edit this variable to add/remove types of programs to build.
+  </li>
+</ul>
+
+<h4>DEVICE</h4>
+<ul>
+  <li>Different FC examples build for different devices.
+  The <b>DEVICE</b> variable specifies the device you want to build
+  your examples for. A comment above this variable will show the list of
+  devices supported in this release.
+  Edit this variable to add/remove devices for which to build the examples.
+  </li>
+</ul>
+
+<h4>MY_XDC_PATH</h4>
+<ul>
+  <li>Any other components required for modifications made to existing examples
+   can be added via this variable.  (This is typically not used.)
+   </li>
+</ul>
+
+<h3>2. Dependencies</h3>
+<p>Dependencies can be set in <b>$(FC_INSTALL_DIR)/products.mak</b>, which is 
+then included by <b>examples/xdcpaths.mak</b>.</p>
+<h4>INSTALL_DIR</h4>
+<ul>
+  <li> The many <b>INSTALL_DIR</b> variables let you set the path to other
+  dependent components. Depending on the programs you are building and the
+  devices you build for, you will need to set the path for one or more of
+  these components.  If your distribution includes fctools/, you can set
+  many of these variables to $(FC_INSTALL_DIR)/fctools.
+  </li>
+</ul>
+
+<h4>Codegen Tools</h4>
+<ul>
+  <li>Correct code generation tool paths will need to be specified for the
+  architectures you will be building for. For instance, to build for the C6472
+  device, you will need to set the appropriate cgtools variables to the TI C64x
+  toolchain location.<br />
+  Note that for TI toolchains, this is the directory that contains bin/,
+  include/, and lib/ subdirectories.<br />
+  To disable the build for a given architecture for your device, ensure that
+  the corresponding cgtools variables are undefined.  For example, to disable
+  M3elf builds for the TI816X device, don't assign the M3 ELF cgtools variable.
+  </li>
+</ul>
+
+<h3>3. Build examples</h3>
+<p>
+From the base of your examples directory, type</p>
+<p>&nbsp;&nbsp;&nbsp; <b>gmake clean<br>
+&nbsp;&nbsp;&nbsp; gmake</b></p>
+This will build all the examples that are applicable for your <b>DEVICE</b> and
+<b>PROGRAMS</b>.
+Other make targets might also be available in the Makefile to build subsets of
+the examples.
+
+<h2>Building examples under ti/sdo/opencl</h4> 
+<h3>1. Manage makefile</h3>
+<p>Under individual examples in the ti/sdo/opencl directory, 
+there is a <b>makefile</b> that will need to be edited for your particular usecase. 
+Edit the following variables described below
+</p>
+<h3>2. Dependencies</h3>
+<p>Dependencies can be set in <b>makefile</b>
+<h4>INSTALL_DIR</h4>
+<ul>
+  <li> The many <b>INSTALL_DIR</b> variables let you set the path to other
+  dependent components. Depending on the programs you are building and the
+  devices you build for, you will need to set the path for one or more of
+  these components.  If your distribution includes fctools/, you can set
+  many of these variables to $(FC_INSTALL_DIR)/fctools.
+  </li>
+</ul>
+
+<h4>Codegen Tools</h4>
+<ul>
+  <li>Correct code generation tool paths will need to be specified for the
+  architectures you will be building for. For instance, to build for the C6472
+  device, you will need to set the appropriate cgtools variables to the TI C64x
+  toolchain location.<br />
+  Note that for TI toolchains, this is the directory that contains bin/,
+  include/, and lib/ subdirectories.<br />
+  </li>
+</ul>
+
+<h3>2. Build examples</h3>
+<p>
+In your specific example directory (for e.g., ti/sdo/opencl/examples/autoviz), 
+type</p> <p>&nbsp;&nbsp;&nbsp; <b>gmake clean<br> &nbsp;&nbsp;&nbsp; gmake</b></p>
+This will build all the examples that are specified in the <b>makefile</b> 
+
+<hr>
+<p>
+Last updated: February 22, 2012
+</p>
+</body>
+</html>

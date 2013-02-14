@@ -1,0 +1,189 @@
+/* --COPYRIGHT--,BSD
+ * Copyright (c) $(CPYYEAR), Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * --/COPYRIGHT--
+ */
+
+/*
+ *  ======== ires_algorithm.cfg ========
+ */
+
+
+// Make chipType global so it can be seen in imported cfg files.
+xdc.global.chipType = Program.build.cfgArgs.chipType;
+
+/* Load common XDC config settings */
+utils.importFile("../common.cfg");
+
+
+//
+// You have to set Defaults.common$.namedInstance to true, if you want to
+// see the name in the code. If you don't have this, and try to print out
+// the name, you will see something like:
+//
+//  Number of heaps: 2
+//  Heap[0] name: {unknown-instance-name}
+//  Heap[1] name: {unknown-instance-name}
+//
+var Defaults = xdc.useModule('xdc.runtime.Defaults');
+Defaults.common$.namedInstance = true;
+
+/* Bring in and configure the RMAN Module */
+var RMAN = xdc.useModule('ti.sdo.fc.rman.RMANCFG');
+RMAN.useDSKT2 = false;
+
+/*
+ * Set a table size that will accommodate all the resource managers (IRESMANs)
+ * that will be registered with RMAN
+ */
+RMAN.tableSize = 10;
+
+RMAN.persistentAllocFxn = "DSKT2_allocPersistent";
+RMAN.persistentFreeFxn = "DSKT2_freePersistent";
+
+var EDMA3 = xdc.useModule('ti.sdo.fc.edma3.Settings');
+
+/*
+RMAN.persistentAllocFxn = "DSKT2_allocPersistent";
+RMAN.persistentFreeFxn = "DSKT2_freePersistent";
+*/
+
+EDMA3.semCreateFxn = "mySemCreate";
+EDMA3.semDeleteFxn = "mySemDelete";
+EDMA3.semPendFxn = "mySemPend";
+EDMA3.semPostFxn = "mySemPost";
+
+if (chipType.match(/DM6446|3430|3530/)) {
+    EDMA3.maxPaRams = [15,30,0,0];
+    EDMA3.maxTccs = [15,13,0,0];
+    EDMA3.maxEdmaChannels = [15,13,0,0];
+    EDMA3.maxQdmaChannels = [1,0,0,0];
+}
+else if (chipType.match(/DM6467/)) {
+    EDMA3.maxPaRams = [15,30,0,0];
+    EDMA3.maxTccs = [15,13,0,0];
+    EDMA3.maxEdmaChannels = [13,13,0,0];
+    EDMA3.maxQdmaChannels = [1,0,0,0];
+    //EDMA3.contiguousPaRams = true;
+    EDMA3.regionConfig = "DM6467_config";
+}
+else if (chipType.match(/6455/)) {
+    EDMA3.maxPaRams = [64,64,0,0];
+    EDMA3.maxTccs = [10,10,0,0];
+    EDMA3.maxEdmaChannels = [5,5,0,0];
+    EDMA3.maxQdmaChannels = [1,0,0,0];
+    //EDMA3.contiguousPaRams = true;
+}
+else if (chipType.match(/365/)) {
+    //EDMA3.contiguousPaRams = true;
+}
+else {
+    throw("Unsupported chipType: " + chipType);
+}
+
+
+/* Switch to debug profile for all FC modules */
+xdc.useModule('ti.sdo.fc.global.Settings').profile = "debug";
+
+/* Switch on trace for some modules specifically */
+// Leave these here temporarily to make sure packages will return a default
+// library, and not null.
+xdc.loadPackage('ti.sdo.fc.rman').profile = "debug_trace";
+xdc.loadPackage('ti.sdo.fc.ires.edma3chan').profile = "debug_trace";
+//xdc.loadPackage('ti.sdo.fc.ires.edma3chan').profile = "debug";
+xdc.loadPackage('ti.sdo.fc.edma3').profile = "debug_trace";
+
+//////////////////////////////////////////////////////////////////////////////
+//  Set up logging
+
+var Diags = xdc.useModule('xdc.runtime.Diags');
+
+var LoggerSys = xdc.useModule('ti.sdo.utils.loggers.LoggerSysTID');
+
+var LoggerSysParams = new LoggerSys.Params();
+
+Defaults.common$.logger = LoggerSys.create(LoggerSysParams);
+
+/*
+ *  We will use Diags_setMask() in main to enable/disable the trace we want
+ *  for various modules, but in order for this to work, we have to set each
+ *  of the trace levels to RUNTIME_ON or RUNTIME_OFF. For example, if we
+ *  removed the line:
+ *      Defaults.common$.diags_ENTRY = Diags.RUNTIME_ON;
+ *
+ *  below, even if we have the code:
+ *
+ *      Diags_setMask("ti.sdo.fc.dskt2.RMANCFG+E");
+ *
+ *  in main(), we will not see any of the RMAN entry level log statements.
+ *
+ *  Note: We could set the tracing for each module individually, for example,
+ *
+ *      RMAN.common$.diags_ENTRY = Diags.RUNTIME_ON;
+ *
+ *  but the Defaults settings apply to all RTSC modules (including Main),
+ *  unless specifically overriden on a per-module basis.
+ */
+Defaults.common$.diags_ENTRY = Diags.RUNTIME_OFF;
+Defaults.common$.diags_EXIT = Diags.RUNTIME_OFF;
+Defaults.common$.diags_USER1 = Diags.RUNTIME_OFF;
+Defaults.common$.diags_USER2 = Diags.RUNTIME_OFF;
+Defaults.common$.diags_USER3 = Diags.RUNTIME_OFF;
+Defaults.common$.diags_USER4 = Diags.RUNTIME_OFF;
+Defaults.common$.diags_USER5 = Diags.RUNTIME_OFF;
+Defaults.common$.diags_USER6 = Diags.RUNTIME_OFF;
+Defaults.common$.diags_USER7 = Diags.RUNTIME_OFF;
+
+// Turn on xdc.runtime tracing.
+//Diags.setMaskMeta("xdc.runtime.%", Diags.ALL, Diags.RUNTIME_ON);
+
+// Turn of fc tracing
+//Diags.setMaskMeta("ti.sdo.fc.%", Diags.ALL, Diags.RUNTIME_ON);
+
+// Set up the timestamp that will show up in the logs
+var Timestamp = xdc.useModule('xdc.runtime.Timestamp');
+
+// Set Timestamp Proxy for Linux. BIOS Timestamp Proxy should be set by
+// the xdc.useModule('ti.sysbios.xdcruntime.Settings'); in ../common.cfg
+if (Program.build.target.os == "Linux") {
+    // gettimeofday()-based
+    Timestamp.SupportProxy =
+        xdc.useModule('ti.sdo.xdcruntime.linux.TimestampPosix');
+}
+
+// This line is necessary to get Assert() to work.
+Defaults.common$.diags_INTERNAL = Diags.ALWAYS_ON;
+
+//  End of logging setup
+//////////////////////////////////////////////////////////////////////////////
+
+/* For debugging and trace purposes */
+var EDMA3CHAN = xdc.useModule('ti.sdo.fc.ires.edma3chan.EDMA3CHAN');
+//var EDMA3LLD = xdc.loadPackage('ti.sdo.edma3.rm');

@@ -1,0 +1,103 @@
+clean::
+	$(RM) package/ti.sdo.fc.utils.osal.noOS.sch
+	$(RM) package/.vers_g180
+	$(RM) package/.vers_r170
+	$(RM) package/.vers_b150
+	$(RM) package/.xdc-y25
+	$(RM) package/ti_sdo_fc_utils_osal_noOS.java
+	$(RM) package/ti_sdo_fc_utils_osal_noOS.class
+	$(RM) package/package_ti.sdo.fc.utils.osal.noOS.c
+	$(RM) package/package.defs.h
+	$(RM) GateNull.h
+	$(RM) package/internal/GateNull.xdc.h
+	$(RM) GateMPNull.h
+	$(RM) package/internal/GateMPNull.xdc.h
+	$(RM) SemThreadNull.h
+	$(RM) package/internal/SemThreadNull.xdc.h
+	$(RM) SemProcessNull.h
+	$(RM) package/internal/SemProcessNull.xdc.h
+	$(RM) package/ti.sdo.fc.utils.osal.noOS.ccs
+
+.interfaces: package/ti.sdo.fc.utils.osal.noOS.sch package/.vers_g180 package/.vers_r170 package/.vers_b150 package/.xdc-y25 package/ti_sdo_fc_utils_osal_noOS.java package/package_ti.sdo.fc.utils.osal.noOS.c package/package.defs.h GateNull.h package/internal/GateNull.xdc.h GateMPNull.h package/internal/GateMPNull.xdc.h SemThreadNull.h package/internal/SemThreadNull.xdc.h SemProcessNull.h package/internal/SemProcessNull.xdc.h package/ti.sdo.fc.utils.osal.noOS.ccs 
+package/package.xdc.inc: package/.vers_g180
+package/.vers_g180:
+package/package.xdc.inc: package/.vers_r170
+package/.vers_r170:
+package/package.xdc.inc: package/.vers_b150
+package/.vers_b150:
+
+.interfaces: Settings.xdc GateNull.xdc GateMPNull.xdc SemThreadNull.xdc SemProcessNull.xdc 
+
+# schema include file dependencies
+package.xs:
+package/package.xdc.inc: package.xs
+Settings.xs:
+package/package.xdc.inc: Settings.xs
+GateNull.xs:
+package/package.xdc.inc: GateNull.xs
+GateMPNull.xs:
+package/package.xdc.inc: GateMPNull.xs
+
+# schema update dependencies
+package/package.xdc.inc: Settings.xdc
+package/package.xdc.inc: GateNull.xdc
+package/package.xdc.inc: GateMPNull.xdc
+package/package.xdc.inc: SemThreadNull.xdc
+package/package.xdc.inc: SemProcessNull.xdc
+package/package.xdc.inc: xdc/IPackage.xdc
+xdc/IPackage.xdc:
+vpath xdc/IPackage.xdc $(XPKGVPATH)
+package/package.xdc.inc: xdc/runtime/knl/IGateThreadSupport.xdc
+xdc/runtime/knl/IGateThreadSupport.xdc:
+vpath xdc/runtime/knl/IGateThreadSupport.xdc $(XPKGVPATH)
+package/package.xdc.inc: xdc/runtime/knl/IGateProcessSupport.xdc
+xdc/runtime/knl/IGateProcessSupport.xdc:
+vpath xdc/runtime/knl/IGateProcessSupport.xdc $(XPKGVPATH)
+package/package.xdc.inc: xdc/runtime/knl/ISemThreadSupport.xdc
+xdc/runtime/knl/ISemThreadSupport.xdc:
+vpath xdc/runtime/knl/ISemThreadSupport.xdc $(XPKGVPATH)
+package/package.xdc.inc: xdc/runtime/knl/ISemaphore.xdc
+xdc/runtime/knl/ISemaphore.xdc:
+vpath xdc/runtime/knl/ISemaphore.xdc $(XPKGVPATH)
+package/package.xdc.inc: xdc/runtime/knl/ISemProcessSupport.xdc
+xdc/runtime/knl/ISemProcessSupport.xdc:
+vpath xdc/runtime/knl/ISemProcessSupport.xdc $(XPKGVPATH)
+
+ifneq (clean,$(MAKECMDGOALS))
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/global/java/package.jar:
+package/package.xdc.inc: /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/global/java/package.jar
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/shelf/java/ecj.jar:
+package/package.xdc.inc: /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/shelf/java/ecj.jar
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/intern/gen/java/package.jar:
+package/package.xdc.inc: /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/intern/gen/java/package.jar
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/shelf/java/antlr.jar:
+package/package.xdc.inc: /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/shelf/java/antlr.jar
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/intern/xsr/java/package.jar:
+package/package.xdc.inc: /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/intern/xsr/java/package.jar
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/shelf/java/tar.jar:
+package/package.xdc.inc: /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/shelf/java/tar.jar
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/spec/java/package.jar:
+package/package.xdc.inc: /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/spec/java/package.jar
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/intern/cmd/java/package.jar:
+package/package.xdc.inc: /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/services/intern/cmd/java/package.jar
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/shelf/java/js.jar:
+package/package.xdc.inc: /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/xdctools_3_23_03_53/packages/xdc/shelf/java/js.jar
+endif
+# goals for files generated during schema generation but unspecified by schema's pattern rule
+package/package.xdc.inc: GateNull.h
+GateNull.h:
+package/package.xdc.inc: package/internal/GateNull.xdc.h
+package/internal/GateNull.xdc.h:
+package/package.xdc.inc: GateMPNull.h
+GateMPNull.h:
+package/package.xdc.inc: package/internal/GateMPNull.xdc.h
+package/internal/GateMPNull.xdc.h:
+package/package.xdc.inc: SemThreadNull.h
+SemThreadNull.h:
+package/package.xdc.inc: package/internal/SemThreadNull.xdc.h
+package/internal/SemThreadNull.xdc.h:
+package/package.xdc.inc: SemProcessNull.h
+SemProcessNull.h:
+package/package.xdc.inc: package/internal/SemProcessNull.xdc.h
+package/internal/SemProcessNull.xdc.h:
+

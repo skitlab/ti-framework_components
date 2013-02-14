@@ -1,0 +1,209 @@
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ */
+/*
+ *  ======== package.bld ========
+ *  Build script for an example app that services requests from an alg 
+ *  requesting IRES EDMA3CHAN resources. 
+ *
+ */
+
+/* explicit references to global objects */
+var Build = xdc.useModule('xdc.bld.BuildEnvironment');
+var Pkg = xdc.useModule('xdc.bld.PackageContents');
+var Common = xdc.loadCapsule("../common.xs");
+
+/* use common package build support */
+var BuildHelp = xdc.useModule('ti.sdo.tools.build.PackageBuildHelp');
+BuildHelp.usePlatformInstanceName = true;
+
+/* add appropriate main.c source file */
+BuildHelp.skipExec = function(prog, targ, platName, execAttrs)
+{
+    if (targ.os == undefined) {
+        prog.sources.$add("main_BIOS.c");
+    }
+    else {
+        prog.sources.$add("main_native.c");
+    }
+
+    /* don't skip executable */
+    return (false);
+}
+
+BuildHelp.skipPlatform = function(platName, targ)
+{
+    //Skipping DM6446, since Universal dma codec is not suitable for it
+    if (platName.match(/DM6446/)) {
+        return (true);
+    }
+
+    return (false);
+}
+
+/* clean bin folder */
+Pkg.generatedFiles.$add("bin/");
+
+/* add custom files to all releases */
+Pkg.attrs.exportCfg = true;
+Pkg.attrs.exportDoc = true;
+Pkg.attrs.exportSrc = false;
+Pkg.attrs.exportExe = false;
+Pkg.attrs.exportAll = true;
+Pkg.otherFiles = [
+    "package.bld",
+    "makefile"
+];
+
+var progArray = new Array();
+
+var platlist = Common.getDMAPlatforms("64P"); //Array of all platforms that
+                                            //DMA platforms support.
+progArray.push(
+    new BuildHelp.ProgAttrs({
+        name: "dmaXferScratch",
+        isas: [ "64P"],
+        platforms: platlist,
+        sources: ["app", "mySem"],
+        execAttrs: { cfgScript: "dmaXferScratch.cfg" }
+    })
+);
+
+var platlist = Common.getDMAPlatforms("674"); //Array of all platforms that
+                                            //DMA platforms support.
+progArray.push(
+    new BuildHelp.ProgAttrs({
+        name: "dmaXferScratch",
+        isas: [ "674"],
+        platforms: platlist,
+        sources: ["app", "mySem"],
+        execAttrs: { cfgScript: "dmaXferScratch.cfg" }
+    })
+    );
+
+/* This program is an example of separately built images for each core for
+   multicore devices */
+var numCores = 6
+for (coreId = 0; coreId < numCores; coreId++) {
+    progArray.push( 
+        new BuildHelp.ProgAttrs({
+            name: "dmaXferScratchMulti" + coreId,
+            isas: ["64P"],
+            platforms: ["ti.platforms.evm6472"],
+            sources: [ "app", "edma3_all_cfg", "edma3_c6472_cfg.c" ],
+            execAttrs: { 
+                  defs: " -DMULTICORE -DCOREID=" + coreId + " ",
+                  cfgScript: "dmaXferScratchMulti.cfg",
+                  cfgArgs: "{coreId: " + coreId + ", numCores:" + numCores + "}", 
+            }
+        })
+    );
+}
+
+/* This program is an example of separately built images for each core for
+   multicore devices */
+numCores = 3;
+for (coreId = 0; coreId < numCores; coreId++) {
+    progArray.push( 
+        new BuildHelp.ProgAttrs({
+            name: "dmaXferScratchMulti" + coreId,
+            isas: ["64P"],
+            platforms: ["ti.platforms.evm6474"],
+            sources: [ "app", "edma3_all_cfg"],
+            execAttrs: { 
+                  defs: " -DMULTICORE -DCOREID=" + coreId + " ",
+                  cfgScript: "dmaXferScratchMulti.cfg",
+                  cfgArgs: "{coreId: " + coreId + ", numCores:" + numCores +"}",
+            }
+        })
+    );
+}
+
+/* This program is an example of separately built images for each core for
+   multicore devices */
+numCores = 8;
+for (coreId = 0; coreId < numCores; coreId++) {
+    progArray.push( 
+        new BuildHelp.ProgAttrs({
+            name: "dmaXferScratchMulti" + coreId,
+            isas: ["66"],
+            platforms: ["ti.platforms.evm6678"],
+            sources: [ "app", "edma3_all_cfg"],
+            execAttrs: { 
+                  defs: " -DMULTICORE -DCOREID=" + coreId + " ",
+                  cfgScript: "dmaXferScratchMulti.cfg",
+                  cfgArgs: "{coreId: " + coreId + ", numCores:" + numCores +"}",
+            }
+        })
+    );
+}
+
+/* This program is an example of separately built images for each core for
+   multicore devices */
+numCores = 4;
+for (coreId = 0; coreId < numCores; coreId++) {
+    progArray.push( 
+        new BuildHelp.ProgAttrs({
+            name: "dmaXferScratchMulti" + coreId,
+            isas: ["66"],
+            platforms: ["ti.platforms.evm6670"],
+            sources: [ "app", "edma3_all_cfg"],
+            execAttrs: { 
+                  defs: " -DMULTICORE -DCOREID=" + coreId + " ",
+                  cfgScript: "dmaXferScratchMulti.cfg",
+                  cfgArgs: "{coreId: " + coreId + ", numCores:" + numCores +"}",
+            }
+        })
+    );
+}
+
+/* This program is an example of a single image that can run on all cores on
+   a multicore device. */
+progArray.push( 
+    new BuildHelp.ProgAttrs({
+        name: "singleImage",
+        platforms: ["ti.platforms.evm6678"],
+        sources: [ "app", "edma3_all_cfg"],
+        execAttrs: { 
+            defs: " -DMULTICORE -DSINGLEIMAGE -DSHANNON ",
+            cfgScript: "singleImage.cfg",
+        }
+    })
+);
+
+/* generate the package executables */
+BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+/*
+ *  @(#) ti.sdo.fc.rman.examples.dmaXferScratch; 1, 0, 0,4; 2-22-2012 18:07:49; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+

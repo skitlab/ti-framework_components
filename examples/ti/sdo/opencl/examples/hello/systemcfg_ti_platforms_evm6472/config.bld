@@ -1,0 +1,124 @@
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ */
+
+
+/*
+ *  ======== config.bld ========
+ *
+ */
+
+var Build = xdc.useModule('xdc.bld.BuildEnvironment');
+
+/*  Memory Map for ti.platforms.evm6472
+ *
+ *  0020_0000 - 002B_FFFF     C_0000  ( 768 KB) Shared L2 RAM
+ *  0080_0000 - 0089_7FFF     9_8000  ( 608 KB) Local L2 RAM/CACHE
+ *  00E0_0000 - 00E0_7FFF       8000  (  32 KB) Internal L1P RAM/CACHE
+ *  00F0_0000 - 00F0_7FFF       8000  (  32 KB) Internal L1D RAM/CACHE
+ *  E000_0000 - EFFF_FFFF  1000_0000  ( 256 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  0020_0000 - 0020_6FFF       7000  (  28 KB) Shared L2 RAM (DMEM 28/32)
+ *  0020_7000 - 0020_7FFF       1000  (   4 KB) Shared L2 RAM (IPC 4/32)
+ *  0020_8000 - 002B_FFFF     B_8000  ( 736 KB) Shared L2 RAM (unused)
+ *  0080_0000 - 0080_7FFF       8000  (  32 KB) Local L2 (IBUF_A)
+ *  0080_8000 - 0080_FFFF       8000  (  32 KB) Local L2 (IBUF_B)
+ *  0081_0000 - 0085_7FFF     4_8000  ( 288 KB) Local L2 (unused)
+ *  0085_8000 - 0089_7FFF     4_0000  ( 256 KB) Local L2 CACHE
+ *  00E0_0000 - 00E0_7FFF       8000  (  32 KB) Internal L1P CACHE  [core_0]
+ *  00F0_0000 - 00F0_7FFF       8000  (  32 KB) Internal L1D CACHE  [core_0]
+ *  E000_0000 - E0FF_FFFF   100_0000  (  16 MB) MEM_CORE_0 (host)
+ *  E100_0000 - E10F_FFFF    10_0000  (   1 MB) CODE_CORE_1 (server)
+ *  E110_0000 - E11F_FFFF    10_0000  (   1 MB) DATA_CORE_1 (server)
+ *  E120_0000 - EFFF_FFFF   EE0_0000  ( 238 MB) --------
+ */
+
+var MemMapSects = {
+    DMEM: {
+        name: "DMEM", space: "data", access: "RWX",
+        base: 0x200000, len: 0x7000,
+        comment: "Local Data Memory Core 1 (28 KB)"
+    },
+    IPC: {
+        name: "IPC", space: "code/data", access: "RWX",
+        base: 0x207000, len: 0x1000,
+        comment: "IPC SharedRegion_0 (4 KB)"
+    },
+    MEM_CORE_0: {
+        name: "MEM_CORE_0", space: "code/data", access: "RWX",
+        base: 0xE0000000, len: 0x1000000,
+        comment: "External Memory Core 0 (16 MB)"
+    },
+    CODE_CORE_1: {
+        name: "CODE_CORE_1", space: "code/data", access: "RWX",
+        base: 0xE1000000, len: 0x100000,
+        comment: "Code Core 1 (1 MB)"
+    },
+    DATA_CORE_1: {
+        name: "DATA_CORE_1", space: "data", access: "RWX",
+        base: 0xE1100000, len: 0x100000,
+        comment: "Data Core 1 (1 MB)"
+    }
+};
+
+Build.platformTable["ti.platforms.evm6472:core0"] = {
+    customMemoryMap: [
+        [ "IPC",        MemMapSects.IPC          ],
+        [ "MEM_CORE_0", MemMapSects.MEM_CORE_0   ]
+    ],
+    l1PMode: "32k",     // all cache in Internal L1P RAM/CACHE
+    l1DMode: "32k",     // all cache in Internal L1D RAM/CACHE
+    l2Mode: "256k",     // max cache in Local L2 RAM/CACHE
+    codeMemory:  "MEM_CORE_0",
+    dataMemory:  "MEM_CORE_0",
+    stackMemory: "MEM_CORE_0"
+};
+
+Build.platformTable["ti.platforms.evm6472:core1"] = {
+    customMemoryMap: [
+        [ "DMEM",           MemMapSects.DMEM         ],
+        [ "IPC",            MemMapSects.IPC          ],
+        [ "CODE_CORE_1",    MemMapSects.CODE_CORE_1  ],
+        [ "DATA_CORE_1",    MemMapSects.DATA_CORE_1  ]
+    ],
+    l1PMode: "32k",     // all cache in Internal L1P RAM/CACHE
+    l1DMode: "0k",      // no cache in Internal L1D RAM/CACHE
+    l2Mode: "0k",       // no cache in Local L2 RAM/CACHE
+    codeMemory:  "CODE_CORE_1",
+    dataMemory:  "DATA_CORE_1",
+    stackMemory: "DATA_CORE_1"
+};
+/*
+ *  @(#) ti.sdo.opencl.examples.hello; 1, 0, 0,4; 2-22-2012 18:09:32; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+

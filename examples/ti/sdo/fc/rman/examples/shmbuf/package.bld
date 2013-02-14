@@ -1,0 +1,158 @@
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ */
+/*
+ *  ======== package.bld ========
+ *  Build script for RMAN Memory Resource example.
+ *
+ */
+
+var Build = xdc.useModule('xdc.bld.BuildEnvironment');
+var Pkg = xdc.useModule('xdc.bld.PackageContents');
+
+/* use common package build support */
+var BuildHelp = xdc.useModule('ti.sdo.tools.build.PackageBuildHelp');
+BuildHelp.usePlatformInstanceName = true;
+
+BuildHelp.skipExec = function(prog, targ, platName, execAttrs)
+{
+    if (targ.os == undefined) {
+        prog.sources.$add("main_BIOS.c");
+    }
+    else {
+        return (true);
+//        prog.sources.$add("main_native.c");
+    }
+
+    /* don't skip executable */
+    return (false);
+}
+
+/* bin/ is a generated directory that 'xdc clean' should remove */
+Pkg.generatedFiles.$add("bin/");
+
+/* add custom files to all releases */
+Pkg.attrs.exportCfg = true;
+Pkg.attrs.exportDoc = true;
+Pkg.attrs.exportSrc = false;
+Pkg.attrs.exportExe = false;
+Pkg.attrs.exportAll = true;
+Pkg.otherFiles = [
+    "package.bld",
+];
+
+// check if platform specified in XDCARGS, 'arguments' is XDCARGS
+// XDCARGS="... platform=ti.platforms.evm3530 ..."
+var cmdPlat = (" " + arguments.join(" ") + " ").match(/ platform=([^ ]+) /);
+cmdPlat = cmdPlat != null ? cmdPlat[1] : null;
+
+// check if profile specified in XDCARGS, 'arguments' is XDCARGS
+// XDCARGS="... profile=debug ..."
+var cmdProf = (" " + arguments.join(" ") + " ").match(/ profile=([^ ]+) /);
+cmdProf = cmdProf != null ? cmdProf[1] : null;
+
+var buildPlatforms = {
+    Linux86: {
+        platforms: [
+            "host.platforms.PC",
+        ]
+    },
+};
+
+
+// list of preferred profiles to build for
+var profileAry = [ "debug", /* "release" */];
+
+// list of programs to build
+var progArray = new Array();
+
+/*
+ * Executables for all platforms (2430, dm6446)
+ * To add a new program, just create a new element in the progs array and
+ * set it equal to an array listing the objects the program requires.
+ *
+ * The output will have the name "<element>_tiomapxxxx.<ext>" or
+ * "<element>_dm6446.<ext>" , and there
+ * must be a tconf script describing the programs configuration with the
+ * name <element>.tcf.
+ */
+for (var t in buildPlatforms) {
+    // shmbuf_test0
+    progArray.push(
+        new BuildHelp.ProgAttrs({
+            name: "shmbuf_test0",
+            platforms: buildPlatforms[t].platforms,
+            sources: [
+                "shmbuf_test0", "shmbuf_util",
+                ],
+            execAttrs: {
+                cfgScript: "test.cfg",
+            },
+        })
+    );
+    // shmbuf_test1
+    progArray.push(
+        new BuildHelp.ProgAttrs({
+            name: "shmbuf_test1",
+            platforms: buildPlatforms[t].platforms,
+            sources: [
+                "shmbuf_test1", "shmbuf_util",
+            ],
+            execAttrs: {
+                cfgScript: "test.cfg",
+            }
+        })
+    );
+    // shmbuf_test1
+    progArray.push( 
+        new BuildHelp.ProgAttrs({
+            name: "shmbuf_test2",
+            platforms: buildPlatforms[t].platforms,
+            sources: [
+                "shmbuf_test2", "shmbuf_util",
+                "shmalg_ti", "shmalg_ti_vtab",
+            ],
+            execAttrs: {
+                cfgScript: "test.cfg",
+            }
+        }) 
+    );
+}
+
+
+/* generate the package executables */
+BuildHelp.makeExecutables(progArray, arguments, profileAry);
+/*
+ *  @(#) ti.sdo.fc.rman.examples.shmbuf; 1, 0, 0,4; 2-22-2012 18:08:19; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+

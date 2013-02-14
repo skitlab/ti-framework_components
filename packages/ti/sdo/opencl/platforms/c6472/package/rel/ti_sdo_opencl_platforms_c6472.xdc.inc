@@ -1,0 +1,16 @@
+Device.c
+package.xdc
+Platform.c
+package.xs
+package.bld
+package/package.bld.xml
+package/package.ext.xml
+package/package.rel.dot
+package/build.cfg
+package/package.xdc.inc
+package.bld
+package/package.cfg.xdc.inc
+lib/debug/opencl_platform_c6472.aem3
+lib/release/opencl_platform_c6472.aem3
+lib/debug/opencl_platform_c6472.ae674
+lib/release/opencl_platform_c6472.ae674

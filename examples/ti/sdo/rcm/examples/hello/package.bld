@@ -1,0 +1,887 @@
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ */
+
+
+/*
+ *  ======== package.bld ========
+ *
+ */
+
+/* explicit references to global objects */
+var Build = xdc.useModule('xdc.bld.BuildEnvironment');
+var Pkg = xdc.useModule('xdc.bld.PackageContents');
+
+/* clean bin folder */
+Pkg.generatedFiles.$add("bin/");
+
+/* add custom files to all releases */
+Pkg.attrs.exportAll = true;
+
+/*
+ * If DEVICE and PROGRAMS are set via XDCARGS, we respect that and
+ * only build what's requested. Else, we build everything we can.
+ */
+var programs = undefined;
+var devices = undefined;
+
+for (var x = 0; x < arguments.length; x++) {
+    if (arguments[x].match(/^DEVICE=/)) {
+        devices = arguments[x].split("=")[1];
+    }
+    if (arguments[x].match(/^PROGRAMS=/)) {
+        programs = arguments[x].split("=")[1];
+    }
+}
+
+/* use common package build support */
+var BuildHelp = xdc.useModule('ti.sdo.tools.build.PackageBuildHelp');
+
+BuildHelp.skipExec = function(prog, target, platName)
+{
+    var skipIt = false;
+
+    if (prog.name.match(/^bios\//) && (target.os != undefined)) {
+        skipIt = true;
+    }
+    else if (prog.name.match(/^Qnx\//) && (target.os != "Qnx")) {
+        skipIt = true;
+    }
+
+    return(skipIt);
+}
+
+
+/*  External Memory Map for ti.platforms.evm3530
+ *
+ *  8000_0000 - 87FF_FFFF   800_0000  ( 128 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  8000_0000 - 84FF_FFFF   500_0000  (  80 MB) Linux
+ *  8500_0000 - 86FF_FFFF   200_0000  (  32 MB) --------
+ *  8700_0000 - 87AF_FFFF    B0_0000  (  11 MB) DDR2 (BIOS, Application)
+ *  87B0_0000 - 87CF_FFFF    20_0000  (   2 MB) AppShared (shared memory)
+ *  87D0_0000 - 87FF_FFFF    30_0000  (   3 MB) SharedRegion_0
+ */
+var evm3530_ExtMemMap = {
+    DDR2: {
+        name: "DDR2", space: "code/data", access: "RWX",
+        base: 0x87000000, len: 0xB00000  /* 11 MB */
+    },
+    AppShared: {
+        name: "AppShared", space: "data", access: "RW",
+        base: 0x87B00000, len: 0x200000  /* 2 MB */
+    },
+    IPC_SR0: {
+        name: "IPC_SR0", space: "data", access: "RW",
+        base: 0x87D00000, len: 0x300000  /* 3 MB */
+    }
+};
+
+/* platform instance evm3530 DSP (C64x+) */
+Build.platformTable["ti.platforms.evm3530:dsp"] = {
+    customMemoryMap: [
+        [ "DDR2",      evm3530_ExtMemMap.DDR2 ],
+        [ "AppShared", evm3530_ExtMemMap.AppShared ],
+        [ "IPC_SR0",   evm3530_ExtMemMap.IPC_SR0 ]
+    ],
+    codeMemory: "DDR2",
+    dataMemory: "DDR2",
+    stackMemory: "DDR2",
+    l1DMode: "32k",
+    l1PMode: "32k",
+    l2Mode:  "64k"
+};
+
+/* temporary: don't build until validated */
+if (false) {
+if ((devices == undefined) ||
+    (devices.match(/OMAP3530/) && programs.match(/DSP_SERVER/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server",
+            platforms: [ "ti.platforms.evm3530:dsp" ],
+            isas: [ "64P" ],
+            sources: [ "main_server_BIOS.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__OMAP3530__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"DSP\", hostProcName: \"HOST\", " +
+                    "sr0Name: \"IPC_SR0\" }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+
+if ((devices == undefined) ||
+    (devices.match(/OMAP3530/) && programs.match(/APP_CLIENT/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "Linux/Hello",
+            platforms: [ "ti.platforms.evm3530" ],
+            isas: [ "v5T", "v6" ],
+            sources: [
+                "main_host_HLOS.c",
+                "SystemCfg_host.c",
+                "Hello.c"
+            ],
+            execAttrs: {
+                defs: "-D__OMAP3530__",
+                cfgScript: "Hello.cfg",
+                cfgArgs: "{ procName: \"DSP\", sr0Name: \"IPC_SR0\" }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+}
+
+
+/*  External Memory Map for ti.platforms.evmTI814X (Linux)
+ *
+ *  8000_0000 - 8FFF_FFFF  1000_0000  ( 256 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  8000_0000 - 8AFF_FFFF   B00_0000  ( 176 MB) A8 (HLOS or SYS/BIOS)
+ *  8B00_0000 - 8CFF_FFFF   200_0000  (  32 MB) DSP (SYS/BIOS, App, etc)
+ *  8D00_0000 - 8DBF_FFFF    C0_0000  (  12 MB) SharedRegion 1
+ *  8DC0_0000 - 8DDF_FFFF    20_0000  (   2 MB) HDVPSS
+ *  8DE0_0000 - 8DFF_FFFF    20_0000  (   2 MB) V4L2
+ *  8E00_0000 - 8EFF_FFFF   100_0000  (  16 MB) SharedRegion 0
+ *  8F00_0000 - 8FFF_FFFF   100_0000  (  16 MB) M3 (SYS/BIOS, App, etc)
+ */
+var evmTI814X_ExtMemMap = {
+    DDR3_HOST: {
+        name: "DDR3_HOST", space: "code/data", access: "RWX",
+        base: 0x80000000, len: 0x0B000000,  /* 176 MB */
+        comment: "DDR3 Memory reserved for use by the A8"
+    },
+    DDR3_DSP: {
+        name: "DDR3_DSP", space: "code/data", access: "RWX",
+        base: 0x8B000000, len: 0x02000000,  /* 32 MB */
+        comment: "DDR3 Memory reserved for use by the C674"
+    },
+    DDR3_SR1: {
+        name: "DDR3_SR1", space: "data", access: "RW",
+        base: 0x8D000000, len:  0x00C00000,  /* 12 MB */
+        comment: "DDR3 Memory reserved for use by SharedRegion 1"
+    },
+    DDR3_HDVPSS: {
+        name: "DDR3_HDVPSS", space: "code/data", access: "RWX",
+        base: 0x8DC00000, len: 0x00200000,  /* 2 MB */
+        comment: "DDR3 Memory reserved for use by HDVPSS"
+    },
+    DDR3_V4L2: {
+        name: "DDR3_V4L2", space: "code/data", access: "RWX",
+        base: 0x8DE00000, len: 0x00200000,  /* 2 MB */
+        comment: "DDR3 Memory reserved for use by V4L2"
+    },
+    IPC_SR0: {
+        name: "IPC_SR0", space: "data", access: "RW",
+        base: 0x8E000000, len: 0x01000000,  /* 16 MB */
+        comment: "DDR3 Memory reserved for use by SharedRegion 0"
+    },
+    DDR3_M3: {
+        name: "DDR3_M3", space: "code/data", access: "RWX",
+        base: 0x8F000000, len: 0x01000000,  /* 16 MB */
+        comment: "DDR3 Memory reserved for use by the M3 core"
+    }
+};
+
+/* platform instance evmTI814X HOST (Cortex A8) */
+Build.platformTable["ti.platforms.evmTI814X:host"] = {
+    externalMemoryMap: [
+        [ "DDR3_HOST", evmTI814X_ExtMemMap.DDR3_HOST ],
+        [ "DDR3_SR1",  evmTI814X_ExtMemMap.DDR3_SR1 ],
+        [ "IPC_SR0",   evmTI814X_ExtMemMap.IPC_SR0 ]
+    ],
+    codeMemory:  "DDR3_HOST",
+    dataMemory:  "DDR3_HOST",
+    stackMemory: "DDR3_HOST"
+};
+
+/* platform instance evmTI814X VIDEO (Cortex M3) */
+Build.platformTable["ti.platforms.evmTI814X:video"] = {
+    externalMemoryMap: [
+        [ "DDR3_M3",  evmTI814X_ExtMemMap.DDR3_M3 ],
+        [ "DDR3_SR1", evmTI814X_ExtMemMap.DDR3_SR1 ],
+        [ "IPC_SR0",  evmTI814X_ExtMemMap.IPC_SR0 ]
+    ],
+    codeMemory:  "DDR3_M3",
+    dataMemory:  "DDR3_M3",
+    stackMemory: "DDR3_M3"
+};
+
+/* platform instance evmTI814X VPSS (Cortex M3) */
+Build.platformTable["ti.platforms.evmTI814X:vpss"] = {
+    externalMemoryMap: [
+        [ "DDR3_HDVPSS", evmTI814X_ExtMemMap.DDR3_HDVPSS ],
+        [ "DDR3_SR1",    evmTI814X_ExtMemMap.DDR3_SR1 ],
+        [ "IPC_SR0",     evmTI814X_ExtMemMap.IPC_SR0 ]
+    ],
+    codeMemory:  "DDR3_HDVPSS",
+    dataMemory:  "DDR3_HDVPSS",
+    stackMemory: "DDR3_HDVPSS"
+};
+
+/* platform instance evmTI814X DSP (C674) */
+Build.platformTable["ti.platforms.evmTI814X:dsp"] = {
+    externalMemoryMap: [
+        [ "DDR3_DSP", evmTI814X_ExtMemMap.DDR3_DSP ],
+        [ "DDR3_SR1", evmTI814X_ExtMemMap.DDR3_SR1 ],
+        [ "IPC_SR0",  evmTI814X_ExtMemMap.IPC_SR0 ]
+    ],
+    codeMemory:  "DDR3_DSP",
+    dataMemory:  "DDR3_DSP",
+    stackMemory: "DDR3_DSP",
+    l1DMode: "32k",
+    l1PMode: "32k",
+    l2Mode:  "256k"
+};
+
+/* temporary: don't build until validated */
+if (false) {
+if ((devices == undefined) ||
+    (devices.match(/TI814X/) && programs.match(/DSP_SERVER/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server_video",
+            platforms: [ "ti.platforms.evmTI814X:video" ],
+            isas: [ "v7M" ],
+            sources: [ "main_server_BIOS.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__TMS320TI814X__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"VIDEO-M3\", hostProcName: \"HOST\", " +
+                    "sr0Name: \"IPC_SR0\", syslink: false }"
+            }
+        }),
+
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server_video_syslink",
+            platforms: [ "ti.platforms.evmTI814X:video" ],
+            isas: [ "v7M" ],
+            sources: [ "main_server_BIOS.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__TMS320TI814X__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"VIDEO-M3\", hostProcName: \"HOST\", " +
+                    "sr0Name: \"IPC_SR0\", syslink: true }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+
+if ((devices == undefined) ||
+    (devices.match(/TI814X/) && programs.match(/APP_CLIENT/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/Hello",
+            platforms: [ "ti.platforms.evmTI814X:host" ],
+            isas: [ "v7A" ],
+            sources: [
+                "main_host_BIOS.c",
+                "Hello.c"
+            ],
+            execAttrs: {
+                defs: "-D__TMS320TI814X__",
+                cfgScript: "Hello.cfg",
+                cfgArgs: "{ procName: \"HOST\", sr0Name: \"IPC_SR0\" }"
+            }
+        }),
+
+        new BuildHelp.ProgAttrs({
+            name: "Linux/Hello",
+            platforms: [ "ti.platforms.evmTI814X" ],
+            isas: [ "v5T" ],
+            sources: [
+                "main_host_HLOS.c",
+                "SystemCfg_host.c",
+                "Hello.c"
+            ],
+            execAttrs: {
+                defs: "-D__TMS320TI814X__",
+                cfgScript: "Hello.cfg",
+                cfgArgs: "{ procName: \"HOST\", sr0Name: \"IPC_SR0\" }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+}
+
+
+/*  Memory Map for ti.platforms.evmTI814X (QNX)
+ *
+ *  8000_0000 - FFFF_FFFF  8000_0000  (2048 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  8000_0000 - 8FFF_FFFF  1000_0000  ( 256 MB) QNX
+ *  9000_0000 - 9DFF_FFFF   E00_0000  ( 224 MB) --------
+ *  9E00_0000 - 9E00_FFFF     1_0000  (  64 KB) SR_0 (ipc)
+ *  9E01_0000 - 9E02_FFFF     2_0000  ( 128 KB) SR_1 (MessageQ buffers)
+ *  9E03_0000 - 9EFF_FFFF    FD_0000  ( ~15 MB) --------
+ *  9F00_0000 - 9FBF_FFFF    C0_0000  (  12 MB) DSP_PROG (code, data)
+ *  9FC0_0000 - 9FDF_FFFF    20_0000  (   2 MB) VIDEO_PROG (code, data)
+ *  9FE0_0000 - 9FFF_FFFF    20_0000  (   2 MB) VPSS_PROG (code, data)
+ *  A000_0000 - BFFF_FFFF  2000_0000  ( 512 MB) --------
+ *  C000_0000 - CFFF_FFFF  1000_0000  ( 256 MB) QNX
+ *  D000_0000 - FFFF_FFFF  3000_0000  ( 768 MB) --------
+ */
+
+var evmTI814X_qnx_SR_0 = {
+        name: "SR_0", space: "data", access: "RWX",
+        base: 0x9E000000, len: 0x10000,
+        comment: "SR#0 Memory (64 KB)"
+    };
+
+var evmTI814X_qnx_SR_1 = {
+        name: "SR_1", space: "data", access: "RWX",
+        base: 0x9E010000, len: 0x20000,
+        comment: "SR#1 Memory (128 KB)"
+    };
+
+Build.platformTable["ti.platforms.evmTI814X:qnx_dsp"] = {
+    externalMemoryMap: [
+        [ evmTI814X_qnx_SR_0.name, evmTI814X_qnx_SR_0 ],
+        [ evmTI814X_qnx_SR_1.name, evmTI814X_qnx_SR_1 ],
+        [ "DSP_PROG", {
+            name: "DSP_PROG", space: "code/data", access: "RWX",
+            base: 0x9F000000, len: 0xC00000,
+            comment: "DSP Program Memory (12 MB)"
+        }]
+    ],
+    codeMemory:  "DSP_PROG",
+    dataMemory:  "DSP_PROG",
+    stackMemory: "DSP_PROG",
+    l1DMode: "32k",
+    l1PMode: "32k",
+    l2Mode: "256k"
+};
+
+Build.platformTable["ti.platforms.evmTI814X:qnx_video"] = {
+    externalMemoryMap: [
+        [ evmTI814X_qnx_SR_0.name, evmTI814X_qnx_SR_0 ],
+        [ evmTI814X_qnx_SR_1.name, evmTI814X_qnx_SR_1 ],
+        [ "VIDEO_PROG", {
+            name: "VIDEO_PROG", space: "code/data", access: "RWX",
+            base: 0x9FC00000, len: 0x200000,
+            comment: "VIDEO Program Memory (2 MB)"
+        }]
+    ],
+    codeMemory:  "VIDEO_PROG",
+    dataMemory:  "VIDEO_PROG",
+    stackMemory: "VIDEO_PROG"
+};
+
+if ((devices == undefined) ||
+    (devices.match(/TI814X/) && programs.match(/DSP_SERVER/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server_video_qnx",
+            platforms: [ "ti.platforms.evmTI814X:qnx_video" ],
+            isas: [ "v7M" ],
+            sources: [ "main_server_BIOS.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__TMS320TI814X__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"VIDEO-M3\", hostProcName: \"HOST\", " +
+                    "sr0Name: \"SR_0\", syslink: true }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+
+if ((devices == undefined) ||
+    (devices.match(/TI814X/) && programs.match(/APP_CLIENT/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "Qnx/Hello",
+            platforms: [ "ti.platforms.evmTI814X" ],
+            isas: [ "v7A" ],
+            sources: [
+                "main_host_HLOS.c",
+                "Hello.c"
+            ],
+            execAttrs: {
+                defs: "-D__TMS320TI814X_QNX__",
+                cfgScript: "Hello.cfg",
+                cfgArgs: "{ procName: \"HOST\", sr0Name: \"IPC_SR0\" }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+
+
+/*  External Memory Map for ti.platforms.evmTI816X (Netra)
+ *
+ *  8000_0000 - 8FFF_FFFF  1000_0000  ( 256 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  8000_0000 - 8AFF_FFFF   B00_0000  ( 176 MB) A8 (HLOS or SYS/BIOS)
+ *  8B00_0000 - 8CFF_FFFF   200_0000  (  32 MB) DSP (SYS/BIOS, App, etc)
+ *  8D00_0000 - 8DBF_FFFF    C0_0000  (  12 MB) SharedRegion 1
+ *  8DC0_0000 - 8DDF_FFFF    20_0000  (   2 MB) HDVPSS
+ *  8DE0_0000 - 8DFF_FFFF    20_0000  (   2 MB) V4L2
+ *  8E00_0000 - 8EFF_FFFF   100_0000  (  16 MB) SharedRegion 0
+ *  8F00_0000 - 8FFF_FFFF   100_0000  (  16 MB) M3 (SYS/BIOS, App, etc)
+ */
+
+/* platform instance evmTI816X VIDEO (Cortex M3) */
+Build.platformTable["ti.platforms.evmTI816X:video"] = {
+    codeMemory:  "DDR3_M3",
+    dataMemory:  "DDR3_M3",
+    stackMemory: "DDR3_M3"
+};
+
+/* temporary: don't build until validated */
+if (false) {
+if ((devices == undefined) ||
+    (devices.match(/TI8168/) && programs.match(/DSP_SERVER/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server_video_syslink",
+            platforms: [ "ti.platforms.evmTI816X:video" ],
+            isas: [ "v7M" ],
+            sources: [ "main_server_BIOS.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__TMS320TI816X__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"VIDEO-M3\", hostProcName: \"HOST\", " +
+                    "sr0Name: \"DDR3_SR0\", syslink: true }"
+            }
+        })
+/*
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server_video",
+            platforms: [ "ti.platforms.evmTI816X:video" ],
+            isas: [ "v7M" ],
+            sources: [ "main_server_BIOS.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__TMS320TI816X__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"VIDEO-M3\", hostProcName: \"HOST\", " +
+                    "sr0Name: \"DDR3_SR0\", syslink: false }"
+            }
+        })
+*/
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+
+if ((devices == undefined) ||
+    (devices.match(/TI8168/) && programs.match(/APP_CLIENT/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "Linux/Hello",
+            platforms: [ "ti.platforms.evmTI816X" ],
+            isas: [ "v5T", "v6" ],
+            sources: [
+                "main_host_HLOS.c",
+                "SystemCfg_host.c",
+                "Hello.c"
+            ],
+            execAttrs: {
+                defs: "-D__TMS320TI816X__",
+                cfgScript: "Hello.cfg",
+                cfgArgs: "{ procName: \"HOST\", sr0Name: \"DDR3_SR0\" }"
+            }
+        })
+/*
+        new BuildHelp.ProgAttrs({
+            name: "bios/Hello",
+            platforms: [ "ti.platforms.evmTI816X:host" ],
+            isas: [ "v7A" ],
+            sources: [
+                "main_host_BIOS.c",
+                "Hello.c"
+            ],
+            execAttrs: {
+                defs: "-D__TMS320TI816X__",
+                cfgScript: "Hello.cfg",
+                cfgArgs: "{ procName: \"HOST\", sr0Name: \"DDR3_SR0\" }"
+            }
+        })
+*/
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+}
+
+
+/*  Custom Memory Map for ti.platforms.evm6472
+ *
+ *  0020_0000 - 002B_FFFF     C_0000  ( 768 KB) Shared L2 RAM
+ *  0080_0000 - 0089_7FFF     9_8000  ( 608 KB) Local L2 RAM/CACHE
+ *  00E0_0000 - 00E0_7FFF       8000  (  32 KB) Local L1P RAM/CACHE
+ *  00F0_0000 - 00F0_7FFF       8000  (  32 KB) Local L1D RAM/CACHE
+ *  E000_0000 - EFFF_FFFF  1000_0000  ( 256 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  0020_0000 - 0027_4FFF     7_5000  ( 468 KB) Shared L2 RAM
+ *  0027_5000 - 002B_FFFF     4_B000  ( 300 KB) Shared L2 RAM (IPC_SR0)
+ *  0080_0000 - 0085_7FFF     5_8000  ( 352 KB) Local L2 RAM
+ *  0085_8000 - 0089_7FFF     4_0000  ( 256 KB) Local L2 CACHE
+ *  00E0_0000 - 00E0_7FFF       8000  (  32 KB) Local L1P CACHE
+ *  00F0_0000 - 00F0_7FFF       8000  (  32 KB) Local L1D CACHE
+ *  E000_0000 - E3FF_FFFF   400_0000  (  64 MB) Core 0 (Application)
+ *  E400_0000 - E5FF_FFFF   200_0000  (  32 MB) Core 1 (Server)
+ *  E600_0000 - E7FF_FFFF   200_0000  (  32 MB) Core 2
+ *  E800_0000 - E9FF_FFFF   200_0000  (  32 MB) Core 3
+ *  EA00_0000 - EBFF_FFFF   200_0000  (  32 MB) Core 4
+ *  EC00_0000 - EDFF_FFFF   200_0000  (  32 MB) Core 5
+ *  EE00_0000 - EFFF_FFFF   200_0000  (  32 MB) --------
+ */
+var evm6472_CustMemMap = {
+    SL2RAM: {
+        name: "SL2RAM", space: "code/data", access: "RWX",
+        base: 0x00200000, len: 0x00075000,  /* 468 KB */
+        comment: "Shared 468K/768K L2 RAM memory"
+    },
+    IPC_SR0: {
+        name: "IPC_SR0", space: "code/data", access: "RWX",
+        base: 0x00275000, len: 0x0004B000,  /* 300 KB */
+        comment: "Shared 300K/768K L2 RAM for IPC SharedRegion_0"
+    },
+    LL2RAM: {
+        name: "LL2RAM", space: "code/data", access: "RWX",
+        base: 0x00800000, len: 0x00058000,  /* 352 KB */
+        comment: "Local 352K L2 RAM memory"
+    },
+    CORE0: {
+        name: "CORE0", space: "code/data", access: "RWX",
+        base: 0xE0000000, len: 0x04000000,  /* 64 MB */
+        comment: "External Memory reserved for Core 0"
+    },
+    CORE1: {
+        name: "CORE1", space: "code/data", access: "RWX",
+        base: 0xE4000000, len: 0x02000000,  /* 32 MB */
+        comment: "External Memory reserved for Core 1"
+    },
+    CORE2: {
+        name: "CORE2", space: "code/data", access: "RWX",
+        base: 0xE6000000, len: 0x02000000,  /* 32 MB */
+        comment: "External Memory reserved for Core 2"
+    },
+    CORE3: {
+        name: "CORE3", space: "code/data", access: "RWX",
+        base: 0xE8000000, len: 0x02000000,  /* 32 MB */
+        comment: "External Memory reserved for Core 3"
+    },
+    CORE4: {
+        name: "CORE4", space: "code/data", access: "RWX",
+        base: 0xEA000000, len: 0x02000000,  /* 32 MB */
+        comment: "External Memory reserved for Core 4"
+    },
+    CORE5: {
+        name: "CORE5", space: "code/data", access: "RWX",
+        base: 0xEC000000, len: 0x02000000,  /* 32 MB */
+        comment: "External Memory reserved for Core 5"
+    }
+};
+
+/* platform instance evm6472 CORE0 core */
+Build.platformTable["ti.platforms.evm6472:core0"] = {
+    customMemoryMap: [
+        [ "SL2RAM",    evm6472_CustMemMap.SL2RAM ],
+        [ "IPC_SR0",   evm6472_CustMemMap.IPC_SR0 ],
+        [ "LL2RAM",    evm6472_CustMemMap.LL2RAM ],
+        [ "CORE0",     evm6472_CustMemMap.CORE0 ]
+    ],
+    codeMemory:  "CORE0",
+    dataMemory:  "CORE0",
+    stackMemory: "CORE0",
+    l1DMode: "32k",
+    l1PMode: "32k",
+    l2Mode:  "256k"
+};
+
+/* platform instance evm6472 CORE1 core */
+Build.platformTable["ti.platforms.evm6472:core1"] = {
+    customMemoryMap: [
+        [ "SL2RAM",    evm6472_CustMemMap.SL2RAM ],
+        [ "IPC_SR0",   evm6472_CustMemMap.IPC_SR0 ],
+        [ "LL2RAM",    evm6472_CustMemMap.LL2RAM ],
+        [ "CORE1",     evm6472_CustMemMap.CORE1 ]
+    ],
+    codeMemory:  "CORE1",
+    dataMemory:  "CORE1",
+    stackMemory: "CORE1",
+    l1DMode: "32k",
+    l1PMode: "32k",
+    l2Mode:  "256k"
+};
+
+/* temporary: don't build until validated */
+if (false) {
+if ((devices == undefined) ||
+    (devices.match(/C6472/) && programs.match(/DSP_SERVER/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server_core1",
+            platforms: [ "ti.platforms.evm6472:core1" ],
+            isas: [ "64P" ],
+            sources: [ "main_server_BIOS.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__TMS320C6472__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"CORE1\", hostProcName: \"CORE0\", " +
+                    "sr0Name: \"IPC_SR0\" }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+
+if ((devices == undefined) ||
+    (devices.match(/C6472|C6474/) && programs.match(/APP_CLIENT/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/Hello_core0",
+            platforms: [ "ti.platforms.evm6472:core0" ],
+            isas: [ "64P" ],
+            sources: [
+                "main_host_BIOS.c",
+                "Hello.c"
+            ],
+            execAttrs: {
+                defs: "-D__TMS320C6472__",
+                cfgScript: "Hello.cfg",
+                cfgArgs: "{ procName: \"CORE0\", sr0Name: \"IPC_SR0\" }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+}
+
+/* TODO - simArctic currently disabled until the mem map stabilizes */
+if (false) {
+/*  Memory Map for ti.platforms.simArctic
+ *
+ *  1002_0000 - 1002_7FFF       8000  (  32 KB) DMEM
+ *  1004_0000 - 1004_7FFF       8000  (  32 KB) WBUF
+ *  1005_0000 - 1005_3FFF       4000  (  16 KB) IBUFLA (IBuf A Low)
+ *  1005_4000 - 1005_7FFF       4000  (  16 KB) IBUFHA (IBuf A High)
+ *  1007_0000 - 1007_3FFF       4000  (  16 KB) IBUFLB (IBuf B Low)
+ *  1007_4000 - 1007_7FFF       4000  (  16 KB) IBUFHB (IBuf B High)
+ *  8000_0000 - 8FFF_FFFF  1000_0000  ( 256 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  0000_0000 - 00EF_FFFF    F0_0000  (  15 MB) CODE_T16 (virtual)
+ *  1002_0000 - 1002_6FFF       7000  (  28 KB) DMEM (data)
+ *  1002_7000 - 1002_7FFF       1000  (   4 KB) IPC_SR0_T16 (SharedRegion_0)
+ *  1005_0000 - 1005_3FFF       4000  (  16 KB) IBUFLA (IBuf A Low)
+ *  1005_4000 - 1005_7FFF       4000  (  16 KB) IBUFHA (IBuf A High)
+ *  1007_0000 - 1007_3FFF       4000  (  16 KB) IBUFLB (IBuf B Low)
+ *  1007_4000 - 1007_7FFF       4000  (  16 KB) IBUFHB (IBuf B High)
+ *  2002_7000 - 2002_7FFF       1000  (   4 KB) IPC_SR0_DSP (SharedRegion_0)
+ *  8000_0000 - 80EF_FFFF    F0_0000  (  15 MB) CODE_DSP
+ *  80F0_0000 - 80FF_FFFF    10_0000  (   1 MB) DATA_DSP
+ *  8100_0000 - 81EF_FFFF    F0_0000  (  15 MB) CODE_T16 (physical)
+ *  81F0_0000 - 81FF_FFFF    10_0000  (   1 MB) DATA_T16
+ *  8200_0000 - 8FFF_FFFF   E00_0000  ( 224 MB) SR_1 (SharedRegion_1)
+ */
+
+var simT16_MemMap = {
+    CODE_T16: {
+        name: "CODE_T16", space: "code/data", access: "RWX",
+        base: 0x00000000, len: 0xF00000,
+        //base: 0x81000000, len: 0xF00000,
+        comment: "T16 Code Memory (15 MB)"
+    },
+    DMEM: {
+        name: "DMEM", space: "data", access: "RW",
+        base: 0x40020000, len: 0x7000,
+        comment: "Local data memory (28 KB)"
+    },
+    IPC_SR0_T16: {
+        name: "IPC_SR0_T16", space: "data", access: "RW",
+        base: 0x40027000, len: 0x1000,
+        comment: "IPC SharedRegion_0 T16 (4 KB)"
+    },
+    IBUFLA: {
+        name: "IBUFLA", space: "data", access: "R",
+        base: 0x40050000, len: 0x4000,
+        comment: "IBuf A Low (16 KB)"
+    },
+    IBUFHA: {
+        name: "IBUFHA", space: "data", access: "R",
+        base: 0x40054000, len: 0x4000,
+        comment: "IBuf A High (16 KB)"
+    },
+    IBUFLB: {
+        name: "IBUFLB", space: "data", access: "R",
+        base: 0x40070000, len: 0x4000,
+        comment: "IBuf B Low (16 KB)"
+    },
+    IBUFHB: {
+        name: "IBUFHB", space: "data", access: "R",
+        base: 0x40074000, len: 0x4000,
+        comment: "IBuf B High (16 KB)"
+    },
+    IPC_SR0_DSP: {
+        name: "IPC_SR0_DSP", space: "data", access: "RW",
+        base: 0x59027000, len: 0x1000,
+        comment: "IPC SharedRegion_0 DSP (4 KB)"
+    },
+    CODE_DSP: {
+        name: "CODE_DSP", space: "code/data", access: "RWX",
+        base: 0x80000000, len: 0xF00000,
+        comment: "DSP Code Memory (15 MB)"
+    },
+    DATA_DSP: {
+        name: "DATA_DSP", space: "data", access: "RW",
+        base: 0x80F00000, len: 0x100000,
+        comment: "DSP Data Memory (1 MB)"
+    },
+    CODE_T16_PHY: {
+        name: "CODE_T16_PHY", space: "code/data", access: "RWX",
+        base: 0x81000000, len: 0xF00000,
+        comment: "T16 Code Memory (15 MB), physical address"
+    },
+    DATA_T16: {
+        name: "DATA_T16", space: "data", access: "RW",
+        base: 0x81F00000, len: 0x100000,
+        comment: "T16 Data Memory (1 MB)"
+    },
+    SR_1: {
+        name: "SR_1", space: "data",
+        base: 0x82000000, len: 0xE000000,
+        comment: "SharedRegion_1 (224 MB)"
+    }
+};
+
+Build.platformTable["ti.platforms.simArctic:t16"] = {
+    customMemoryMap: [
+        [ "CODE_T16",       simT16_MemMap.CODE_T16    ],
+        [ "DMEM",           simT16_MemMap.DMEM        ],
+        [ "IPC_SR0_T16",    simT16_MemMap.IPC_SR0_T16 ],
+        [ "IBUFLA",         simT16_MemMap.IBUFLA      ],
+        [ "IBUFHA",         simT16_MemMap.IBUFHA      ],
+        [ "IBUFLB",         simT16_MemMap.IBUFLB      ],
+        [ "IBUFHB",         simT16_MemMap.IBUFHB      ],
+        [ "IBUFHB",         simT16_MemMap.IBUFHB      ],
+        [ "DATA_T16",       simT16_MemMap.DATA_T16    ],
+//      [ "SR_1",           simT16_MemMap.SR_1        ]
+    ],
+    codeMemory:  "CODE_T16",
+    dataMemory:  "DATA_T16",  // TODO: make data fit in DMEM
+//  dataMemory:  "DMEM",      // TODO: make data fit in DMEM
+    stackMemory: "DATA_T16"   // TODO: make stack fit in DMEM
+//  stackMemory: "DMEM"       // TODO: make stack fit in DMEM
+};
+
+if ((devices == undefined) ||
+    (devices.match(/Arctic/) && programs.match(/DSP_SERVER/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server",
+            platforms: [ "ti.platforms.simArctic:t16" ],
+            isas: [ "arp32" ],
+            sources: [ "main_server_BIOS.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__ARCTIC__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"ARP32\", hostProcName: \"DSP\", " +
+                    "sr0Name: \"IPC_SR0_T16\", syslink: false }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+    //BuildHelp.makeExecutables(progArray, arguments, ["whole_program"]);
+    //BuildHelp.makeExecutables(progArray, arguments, ["release"]);
+}
+
+Build.platformTable["ti.platforms.simArctic:dsp"] = {
+    customMemoryMap: [
+        [ "IPC_SR0_DSP",    simT16_MemMap.IPC_SR0_DSP ],
+        [ "CODE_DSP",       simT16_MemMap.CODE_DSP    ],
+        [ "DATA_DSP",       simT16_MemMap.DATA_DSP    ],
+        [ "SR_1",           simT16_MemMap.SR_1        ]
+    ],
+    l1DMode: "0k",      // 32k
+    l1PMode: "0k",      // 32k
+    l2Mode:  "0k",      // 256k
+    codeMemory:  "CODE_DSP",
+    dataMemory:  "DATA_DSP",
+    stackMemory: "DATA_DSP"
+};
+
+if ((devices == undefined) ||
+    (devices.match(/arctic/) && programs.match(/APP_CLIENT/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/Hello",
+            platforms: [ "ti.platforms.simArctic:dsp" ],
+            isas: [ "674" ],
+            sources: [
+                "main_host_BIOS.c",
+                "Hello.c"
+            ],
+            execAttrs: {
+                defs: "-D__ARCTIC__",
+                cfgScript: "Hello.cfg",
+                cfgArgs: "{ procName: \"DSP\", sr0Name: \"IPC_SR0_DSP\" }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+} /* disabled simArctic */
+/*
+ *  @(#) ti.sdo.rcm.examples.hello; 1,0,0,4; 2-22-2012 18:10:14; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$dskt2_8h.html" title="Provides services to support XDAIS algorithm instance objects." alt="" coords="8,83,66,107" />
+<area shape="rect" href="$ires__hdvicp2_8h.html" title="IRES PROTOCOL HDVICP2 Interface Definitions (Beta) &#45; Allows algorithms to request and receive handles..." alt="" coords="90,83,189,107" />
+<area shape="rect" href="$ires__tiledmemory_8h.html" title="IRES PROTOCOL TILEDMEMORY Interface Definitions (Beta) &#45; Allows algorithms to request and receive han..." alt="" coords="213,83,338,107" />
+<area shape="rect" href="$ires__vicp2_8h.html" title="IRES PROTOCOL VICP2 Interface Definitions &#45; Allows algorithms to request and receive handles represen..." alt="" coords="362,83,448,107" />
+<area shape="rect" href="$rman_8h.html" title="IRES generic Resource Manager RMAN Definitions &#45; Generic Resource Manager that manages resource alloc..." alt="" coords="472,83,530,107" />
+</map>

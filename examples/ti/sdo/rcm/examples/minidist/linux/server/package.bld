@@ -1,0 +1,358 @@
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ */
+
+
+/*
+ *  ======== package.bld ========
+ *
+ */
+
+/* explicit references to global objects */
+var Build = xdc.useModule('xdc.bld.BuildEnvironment');
+var Pkg = xdc.useModule('xdc.bld.PackageContents');
+
+/*
+ * If DEVICE and PROGRAMS are set via XDCARGS, we respect that and
+ * only build what's requested. Else, we build everything we can.
+ */
+var programs = undefined;
+var devices = undefined;
+
+for (var x = 0; x < arguments.length; x++) {
+    if (arguments[x].match(/^DEVICE=/)) {
+        devices = arguments[x].split("=")[1];
+    }
+    if (arguments[x].match(/^PROGRAMS=/)) {
+        programs = arguments[x].split("=")[1];
+    }
+}
+
+/* use common package build support */
+var BuildHelp = xdc.useModule('ti.sdo.tools.build.PackageBuildHelp');
+
+BuildHelp.skipExec = function(prog, targ, platName)
+{
+    if (targ.$name.match(/\.elf\./)) {
+        if (prog.execAttrs.lopts == undefined) {
+            prog.execAttrs.lopts = "";
+        }
+        prog.execAttrs.lopts += " --dynamic --retain=_Ipc_ResetVector ";
+    }
+
+    return false;  /* always build executable */
+}
+
+/* clean bin folder */
+Pkg.generatedFiles.$add("bin/");
+
+/* add custom files to all releases */
+Pkg.attrs.exportCfg = false;
+Pkg.attrs.exportDoc = true;
+Pkg.attrs.exportSrc = false;
+Pkg.attrs.exportExe = false;
+Pkg.attrs.exportAll = true;
+Pkg.otherFiles = [
+    "makefile",
+    "package.bld"
+];
+
+/* list of programs to build */
+var progArray = new Array();
+
+/*  Memory Map for ti.platforms.evm3530
+ *
+ *  8000_0000 - 87FF_FFFF   800_0000  ( 128 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  8000_0000 - 84FF_FFFF   500_0000  (  80 MB) Linux
+ *  8500_0000 - 86FF_FFFF   200_0000  (  32 MB) --------
+ *  8700_0000 - 87AF_FFFF    B0_0000  (  11 MB) DDR2 (BIOS, Application)
+ *  87B0_0000 - 87CF_FFFF    20_0000  (   2 MB) AppShared (shared memory)
+ *  87D0_0000 - 87FF_FFFF    30_0000  (   3 MB) SysLink (shared memory)
+ */
+var ti_platforms_evm3530_MemoryMap = [
+        [ "DDR2", {
+            name: "DDR2", space: "code/data",
+            base: 0x87000000, len: 0xB00000 }
+        ],
+        [ "AppShared", {
+            name: "AppShared", space: "code/data",
+            base: 0x87B00000, len: 0x200000 }
+        ],
+        [ "IPC", {
+            name: "IPC", space: "code/data",
+            base: 0x87D00000, len: 0x300000 }
+        ]
+];
+
+/* configure with SysLink memory map and default cache */
+Build.platformTable["ti.platforms.evm3530:dsp"] = {
+    customMemoryMap: ti_platforms_evm3530_MemoryMap,
+    codeMemory: "DDR2",
+    dataMemory: "DDR2",
+    stackMemory: "DDR2",
+};
+
+if ((devices == undefined) ||
+    (devices.match(/OMAP3530/) && programs.match(/DSP_SERVER/))) {
+
+    progArray.push(
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server",
+            platforms: [ "ti.platforms.evm3530:dsp" ],
+            isas: [ "64P" ],
+            sources: [ "main_server_BIOS.c", "SystemCfg.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__OMAP3530__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ hostProcName: \"HOST\" }"
+            }
+        })
+    );
+}
+
+/*  Memory Map for ti.platforms.evmTI816X
+ *
+ *  8000_0000 - 8FFF_FFFF  1000_0000  ( 256 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  8000_0000 - 87FF_FFFF   800_0000  ( 128 MB) Linux (reserved)
+ *  8800_0000 - 88BF_FFFF    C0_0000  (  12 MB) --------
+ *  88C0_0000 - 89BF_FFFF   100_0000  (  16 MB) CMEM (reserved)
+ *  89C0_0000 - 8B3F_FFFF   180_0000  (  24 MB) DDRALGHEAP_DSP
+ *  8B40_0000 - 8BBF_FFFF    80_0000  (   8 MB) DDR_DSP (BIOS, App, etc)
+ *  8BC0_0000 - 8D3F_FFFF   180_0000  (  24 MB) DDRALGHEAP_VIDEO
+ *  8D40_0000 - 8DBF_FFFF    80_0000  (   8 MB) DDR_VIDEO (BIOS, App, etc)
+ *  8DC0_0000 - 8F3F_FFFF   180_0000  (  24 MB) DDRALGHEAP_VPSS
+ *  8F40_0000 - 8FBF_FFFF    80_0000  (   8 MB) DDR_VPSS (BIOS, App, etc)
+ *  8FC0_0000 - 8FFF_FFFF    40_0000  (   4 MB) IPC/SysLink (shared memory)
+ */
+var ti_platforms_evmTI816X_MemoryMap = [
+        [ "DDRALHEAP_DSP", {
+            name: "DDRALHEAP_DSP", space: "data",
+            base: 0x89C00000, len: 0x1800000 }
+        ],
+        [ "DDRALHEAP_DSP", {
+            name: "DDRALHEAP_DSP", space: "data",
+            base: 0x89C00000, len: 0x1800000 }
+        ],
+        [ "DDR_DSP", {
+            name: "DDR_DSP", space: "code/data",
+            base: 0x8B400000, len: 0x800000 }
+        ],
+        [ "DDRALHEAP_VIDEO", {
+            name: "DDRALHEAP_VIDEO", space: "data",
+            base: 0x8BC00000, len: 0x1800000 }
+        ],
+        [ "DDR_VIDEO", {
+            name: "DDR_VIDEO", space: "code/data",
+            base: 0x8D400000, len: 0x800000 }
+        ],
+        [ "DDRALHEAP_VPSS", {
+            name: "DDRALHEAP_VPSS", space: "data",
+            base: 0x8DC00000, len: 0x1800000 }
+        ],
+        [ "DDR_VPSS", {
+            name: "DDR_VPSS", space: "code/data",
+            base: 0x8F400000, len: 0x800000 }
+        ],
+        [ "IPC", {
+            name: "IPC", space: "code/data",
+            base: 0x8FC00000, len: 0x400000 }
+        ]
+];
+
+/* platform instance evmTI816X DSP core */
+Build.platformTable["ti.platforms.evmTI816X:dsp"] = {
+    externalMemoryMap: ti_platforms_evmTI816X_MemoryMap,
+    codeMemory: "DDR_DSP",
+    dataMemory: "DDR_DSP",
+    stackMemory: "DDR_DSP"
+};
+
+/* platform instance evmTI816X VIDEO core */
+Build.platformTable["ti.platforms.evmTI816X:video"] = {
+    externalMemoryMap: ti_platforms_evmTI816X_MemoryMap,
+    codeMemory: "DDR_VIDEO",
+    dataMemory: "DDR_VIDEO",
+    stackMemory: "DDR_VIDEO"
+};
+
+/* platform instance evmTI816X VPSS core */
+Build.platformTable["ti.platforms.evmTI816X:vpss"] = {
+    externalMemoryMap: ti_platforms_evmTI816X_MemoryMap,
+    codeMemory: "DDR_VPSS",
+    dataMemory: "DDR_VPSS",
+    stackMemory: "DDR_VPSS"
+};
+
+if ((devices == undefined) ||
+    (devices.match(/TI816X/) && programs.match(/DSP_SERVER/))) {
+
+    progArray.push(
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server_video",
+            platforms: [ "ti.platforms.evmTI816X:video" ],
+            isas: [ "v7M" ],
+            sources: [ "main_server_BIOS.c", "SystemCfg.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__TMS320TI816X__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"VIDEO-M3\", hostProcName: \"HOST\" }"
+            }
+        })
+    );
+
+    progArray.push(
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server_vpss",
+            platforms: [ "ti.platforms.evmTI816X:vpss" ],
+            isas: [ "v7M" ],
+            sources: [ "main_server_BIOS.c", "SystemCfg.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__TMS320TI816X__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"VPSS-M3\", hostProcName: \"HOST\" }"
+            }
+        })
+    );
+}
+
+/*  Memory Map for ti.platforms.evm6472
+ *
+ *  E000_0000 - EFFF_FFFF  1000_0000  ( 256 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  0020_0000 - 0027_4FFF     7_5000  ( 468 KB) Shared L2 RAM
+ *  0027_5000 - 002B_FFFF     4_B000  ( 300 KB) Shared L2 RAM (IPC)
+ *  0080_0000 - 0089_7FFF     9_8000  ( 608 KB) Local L2 RAM/CACHE
+ *  E000_0000 - E3FF_FFFF   400_0000  (  64 MB) Core 0 (Application)
+ *  E400_0000 - E5FF_FFFF   200_0000  (  32 MB) Core 1 (Server)
+ *  E600_0000 - E7FF_FFFF   200_0000  (  32 MB) Core 2
+ *  E800_0000 - E9FF_FFFF   200_0000  (  32 MB) Core 3
+ *  EA00_0000 - EBFF_FFFF   200_0000  (  32 MB) Core 4
+ *  EC00_0000 - EDFF_FFFF   200_0000  (  32 MB) Core 5
+ *  EE00_0000 - EFFF_FFFF   200_0000  (  32 MB) --------
+ */
+var ti_platforms_evm6472_MemoryMap = [
+        [ "SL2RAM", {
+            comment: "468K/768K Shared L2 RAM memory",
+            name: "SL2RAM", space: "code/data", access: "RWX",
+            base: 0x200000, len: 0x75000 }
+        ],
+        [ "IPC", {
+            comment: "300K/768K Shared L2 RAM for IPC",
+            name: "IPC", space: "code/data", access: "RWX",
+            base: 0x275000, len: 0x4B000 }
+        ],
+        [ "LL2RAM", {
+            comment: "608K Local L2 RAM/CACHE memory",
+            name: "LL2RAM", space: "code/data", access: "RWX",
+            base: 0x800000, len: 0x98000 }
+        ],
+/*
+        [ "L1PSRAM", {
+            comment: "Internal 32KB RAM/CACHE L1 program memory",
+            name: "L1PSRAM", space: "code", access: "RWX",
+            base: 0xE00000, len: 0x8000 }
+        ],
+        [ "L1DSRAM", {
+            comment: "Internal 32KB RAM/CACHE L1 data memory",
+            name: "L1DSRAM", space: "data", access: "RW",
+            base: 0xF00000, len: 0x8000 }
+        ],
+*/
+        [ "CORE0", {
+            name: "CORE0", space: "code/data",
+            base: 0xE0000000, len: 0x4000000 }
+        ],
+        [ "CORE1", {
+            name: "CORE1", space: "code/data",
+            base: 0xE4000000, len: 0x2000000 }
+        ],
+        [ "CORE2", {
+            name: "CORE2", space: "code/data",
+            base: 0xE6000000, len: 0x2000000 }
+        ],
+        [ "CORE3", {
+            name: "CORE3", space: "code/data",
+            base: 0xE8000000, len: 0x2000000 }
+        ],
+        [ "CORE4", {
+            name: "CORE4", space: "code/data",
+            base: 0xEA000000, len: 0x2000000 }
+        ],
+        [ "CORE5", {
+            name: "CORE5", space: "code/data",
+            base: 0xEC000000, len: 0x2000000 }
+        ]
+];
+
+/* platform instance evm6472 CORE0 core */
+Build.platformTable["ti.platforms.evm6472:core0"] = {
+    customMemoryMap: ti_platforms_evm6472_MemoryMap,
+    codeMemory: "CORE0",
+    dataMemory: "CORE0",
+    stackMemory: "CORE0"
+};
+
+/* platform instance evm6472 CORE1 core */
+Build.platformTable["ti.platforms.evm6472:core1"] = {
+    customMemoryMap: ti_platforms_evm6472_MemoryMap,
+    codeMemory: "CORE1",
+    dataMemory: "CORE1",
+    stackMemory: "CORE1"
+};
+
+if ((devices == undefined) ||
+    (devices.match(/C6472/) && programs.match(/DSP_SERVER/))) {
+
+    progArray.push(
+        new BuildHelp.ProgAttrs({
+            name: "bios/Server_core1",
+            platforms: [ "ti.platforms.evm6472:core1" ],
+            isas: [ "64P" ],
+            sources: [ "main_server_BIOS.c", "SystemCfg.c", "Server.c" ],
+            execAttrs: {
+                defs: "-D__TMS320C6472__",
+                cfgScript: "Server.cfg",
+                cfgArgs: "{ procName: \"CORE1\", hostProcName: \"CORE0\" }"
+            }
+        })
+    );
+}
+
+/* generate the package executables */
+BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+/*
+ *  @(#) ti.sdo.rcm.examples.minidist.linux.server; 1,0,0,4; 2-22-2012 18:10:25; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+

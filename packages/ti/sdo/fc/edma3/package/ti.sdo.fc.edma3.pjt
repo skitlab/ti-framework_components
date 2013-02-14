@@ -1,0 +1,11 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.fc.edma3"
+ProjectType=External
+CPUFamily=TMS320C67XX
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.fc.edma3.c"
+Source="../edma3_config.c"
+Source="../edma3Cfg.c"

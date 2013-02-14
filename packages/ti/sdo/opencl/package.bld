@@ -1,0 +1,148 @@
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ */
+
+
+/*
+ *  ======== package.bld ========
+ *
+ */
+
+/* explicit references to global objects */
+var Build = xdc.useModule('xdc.bld.BuildEnvironment');
+var Pkg = xdc.useModule('xdc.bld.PackageContents');
+
+/* use common package build support */
+var BuildHelp = xdc.useModule('ti.sdo.tools.build.PackageBuildHelp');
+
+BuildHelp.skipLib = function(lib, target)
+{
+    /* skip the Linux86 target */
+    if (target.$name.match(/Linux86/)) {
+
+        return (true);  /* don't build */
+    }
+
+    /* skip ti.syslink based implementation if not on HLOS */
+    else if ((lib.libAttrs.defs != undefined)
+        && (lib.libAttrs.defs.match(/OpenCL_ti_syslink/))) {
+
+        if (target.os != undefined) {
+            /* HLOS.  For now, assume SysLink is there and build this lib */
+            return (false);
+        }
+        else {
+            /* BIOS.  Skip this SysLink-based lib */
+            return (true);
+        }
+    }
+
+    else if (target.os == undefined) {
+        /* IPC based lib, build it for all BIOS targets */
+        return (false);
+    }
+    else {
+        /* Unsupported env (e.g. GCArmv5T + IPC-based lib), skip it */
+        return (true);
+    }
+}
+
+/* clean lib folder */
+Pkg.generatedFiles.$add("lib/");
+Pkg.libDir = "package/";
+
+/* add custom files to all releases */
+Pkg.attrs.exportSrc = true;
+Pkg.otherFiles = [
+    "doc-files/",
+    "CLMemObj_syslink.h",
+    "ComputeDevice.h",
+    "package.bld",
+    "TICommandQueue.h",
+    "TIContext.h",
+    "TIDevice.h",
+    "TIEvent.h",
+    "TIKernel.h",
+    "TIMem.h",
+    "TIPlatform.h",
+    "TIProgram.h",
+    "ti_cl.h",
+    "simple_GCArmv5T.mak"
+];
+
+/* find khronos.opencl package base directory */
+var khronos = xdc.getPackageBase('khronos.opencl') + " ";
+
+/* source files for opencl implementation */
+var fileList = [ "CLCommandQueue.c", "CLContext.c", "CLDevice.c",
+        "CLPlatform.c", "CLProgram.c", "CLMemObj.c", "CLKernel.c",
+        "CLEvent.c" ];
+
+/* list of libraries to build */
+var libArray = new Array();
+
+libArray.push(
+    new BuildHelp.LibAttrs({
+        name: "opencl_api",
+        sources:  fileList,
+        libAttrs: {
+            defs: "-DOpenCL_ti_sdo_ipc",
+            incs: "-I" + khronos
+        }
+    })
+);
+
+libArray.push(
+    new BuildHelp.LibAttrs({
+        name: "opencl_api_syslink",
+        sources:  fileList.concat("CLMemObj_syslink.c"),
+        libAttrs: {
+            defs: "-DOpenCL_ti_syslink",
+            incs: "-I" + khronos
+        }
+    })
+);
+
+libArray.push(
+    new BuildHelp.LibAttrs({
+        name: "opencl_runtime",
+        sources:  [ "ComputeDevice.c" ]
+    })
+);
+
+/* generate the package libraries */
+BuildHelp.makeLibraries(libArray, arguments);
+/*
+ *  @(#) ti.sdo.opencl; 1, 0, 0,4; 2-22-2012 18:09:28; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+

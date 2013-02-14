@@ -1,0 +1,14 @@
+package/lib/release/tiler_rtos/src/rtos/memmgr.oe674: src/rtos/memmgr.c /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1/include/stdio.h src/memmgr/list_utils.h src/memmgr/memmgr.h src/memmgr/tiler.h src/memmgr/tilermem.h src/memmgr/tilermem_utils.h src/memmgr/tilermgr.h src/memmgr/utils.h /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1/include/linkage.h /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1/include/stdarg.h src/memmgr/mem_types.h /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1/include/stdint.h 
+src/rtos/memmgr.c:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1/include/stdio.h:
+src/memmgr/list_utils.h:
+src/memmgr/memmgr.h:
+src/memmgr/tiler.h:
+src/memmgr/tilermem.h:
+src/memmgr/tilermem_utils.h:
+src/memmgr/tilermgr.h:
+src/memmgr/utils.h:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1/include/linkage.h:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1/include/stdarg.h:
+src/memmgr/mem_types.h:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1/include/stdint.h:

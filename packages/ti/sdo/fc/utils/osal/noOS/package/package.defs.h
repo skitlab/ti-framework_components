@@ -1,0 +1,65 @@
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-y25
+ */
+
+#ifndef ti_sdo_fc_utils_osal_noOS__
+#define ti_sdo_fc_utils_osal_noOS__
+
+
+/*
+ * ======== module ti.sdo.fc.utils.osal.noOS.GateNull ========
+ */
+
+typedef struct ti_sdo_fc_utils_osal_noOS_GateNull_Fxns__ ti_sdo_fc_utils_osal_noOS_GateNull_Fxns__;
+typedef const ti_sdo_fc_utils_osal_noOS_GateNull_Fxns__* ti_sdo_fc_utils_osal_noOS_GateNull_Module;
+typedef struct ti_sdo_fc_utils_osal_noOS_GateNull_Params ti_sdo_fc_utils_osal_noOS_GateNull_Params;
+typedef struct ti_sdo_fc_utils_osal_noOS_GateNull_Object ti_sdo_fc_utils_osal_noOS_GateNull_Object;
+typedef struct ti_sdo_fc_utils_osal_noOS_GateNull_Struct ti_sdo_fc_utils_osal_noOS_GateNull_Struct;
+typedef ti_sdo_fc_utils_osal_noOS_GateNull_Object* ti_sdo_fc_utils_osal_noOS_GateNull_Handle;
+typedef struct ti_sdo_fc_utils_osal_noOS_GateNull_Object__ ti_sdo_fc_utils_osal_noOS_GateNull_Instance_State;
+typedef ti_sdo_fc_utils_osal_noOS_GateNull_Object* ti_sdo_fc_utils_osal_noOS_GateNull_Instance;
+
+/*
+ * ======== module ti.sdo.fc.utils.osal.noOS.GateMPNull ========
+ */
+
+typedef struct ti_sdo_fc_utils_osal_noOS_GateMPNull_Fxns__ ti_sdo_fc_utils_osal_noOS_GateMPNull_Fxns__;
+typedef const ti_sdo_fc_utils_osal_noOS_GateMPNull_Fxns__* ti_sdo_fc_utils_osal_noOS_GateMPNull_Module;
+typedef struct ti_sdo_fc_utils_osal_noOS_GateMPNull_Params ti_sdo_fc_utils_osal_noOS_GateMPNull_Params;
+typedef struct ti_sdo_fc_utils_osal_noOS_GateMPNull_Object ti_sdo_fc_utils_osal_noOS_GateMPNull_Object;
+typedef struct ti_sdo_fc_utils_osal_noOS_GateMPNull_Struct ti_sdo_fc_utils_osal_noOS_GateMPNull_Struct;
+typedef ti_sdo_fc_utils_osal_noOS_GateMPNull_Object* ti_sdo_fc_utils_osal_noOS_GateMPNull_Handle;
+typedef struct ti_sdo_fc_utils_osal_noOS_GateMPNull_Object__ ti_sdo_fc_utils_osal_noOS_GateMPNull_Instance_State;
+typedef ti_sdo_fc_utils_osal_noOS_GateMPNull_Object* ti_sdo_fc_utils_osal_noOS_GateMPNull_Instance;
+
+/*
+ * ======== module ti.sdo.fc.utils.osal.noOS.SemThreadNull ========
+ */
+
+typedef struct ti_sdo_fc_utils_osal_noOS_SemThreadNull_Fxns__ ti_sdo_fc_utils_osal_noOS_SemThreadNull_Fxns__;
+typedef const ti_sdo_fc_utils_osal_noOS_SemThreadNull_Fxns__* ti_sdo_fc_utils_osal_noOS_SemThreadNull_Module;
+typedef struct ti_sdo_fc_utils_osal_noOS_SemThreadNull_Params ti_sdo_fc_utils_osal_noOS_SemThreadNull_Params;
+typedef struct ti_sdo_fc_utils_osal_noOS_SemThreadNull_Object ti_sdo_fc_utils_osal_noOS_SemThreadNull_Object;
+typedef struct ti_sdo_fc_utils_osal_noOS_SemThreadNull_Struct ti_sdo_fc_utils_osal_noOS_SemThreadNull_Struct;
+typedef ti_sdo_fc_utils_osal_noOS_SemThreadNull_Object* ti_sdo_fc_utils_osal_noOS_SemThreadNull_Handle;
+typedef struct ti_sdo_fc_utils_osal_noOS_SemThreadNull_Object__ ti_sdo_fc_utils_osal_noOS_SemThreadNull_Instance_State;
+typedef ti_sdo_fc_utils_osal_noOS_SemThreadNull_Object* ti_sdo_fc_utils_osal_noOS_SemThreadNull_Instance;
+
+/*
+ * ======== module ti.sdo.fc.utils.osal.noOS.SemProcessNull ========
+ */
+
+typedef struct ti_sdo_fc_utils_osal_noOS_SemProcessNull_Fxns__ ti_sdo_fc_utils_osal_noOS_SemProcessNull_Fxns__;
+typedef const ti_sdo_fc_utils_osal_noOS_SemProcessNull_Fxns__* ti_sdo_fc_utils_osal_noOS_SemProcessNull_Module;
+typedef struct ti_sdo_fc_utils_osal_noOS_SemProcessNull_Params ti_sdo_fc_utils_osal_noOS_SemProcessNull_Params;
+typedef struct ti_sdo_fc_utils_osal_noOS_SemProcessNull_Object ti_sdo_fc_utils_osal_noOS_SemProcessNull_Object;
+typedef struct ti_sdo_fc_utils_osal_noOS_SemProcessNull_Struct ti_sdo_fc_utils_osal_noOS_SemProcessNull_Struct;
+typedef ti_sdo_fc_utils_osal_noOS_SemProcessNull_Object* ti_sdo_fc_utils_osal_noOS_SemProcessNull_Handle;
+typedef struct ti_sdo_fc_utils_osal_noOS_SemProcessNull_Object__ ti_sdo_fc_utils_osal_noOS_SemProcessNull_Instance_State;
+typedef ti_sdo_fc_utils_osal_noOS_SemProcessNull_Object* ti_sdo_fc_utils_osal_noOS_SemProcessNull_Instance;
+
+
+#endif /* ti_sdo_fc_utils_osal_noOS__ */ 

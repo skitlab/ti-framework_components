@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sdo.fc.acpy3" version="1, 0, 4" producerId="undefined">
+    <units>
+        <module name="ACPY3"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sdo.fc.acpy3.c"/>
+        <srcFile name="acpy3_config.c"/>
+        <srcFile name="acpy3_configure.c"/>
+        <srcFile name="acpy3_complete.c"/>
+        <srcFile name="acpy3_completelinked.c"/>
+        <srcFile name="acpy3_fastconfigure16b.c"/>
+        <srcFile name="acpy3_fastconfigure32b.c"/>
+        <srcFile name="acpy3_fastsetfinal.c"/>
+        <srcFile name="acpy3_init.c"/>
+        <srcFile name="acpy3_start_cpucopy.c"/>
+        <srcFile name="acpy3_wait_cpucopy.c"/>
+        <srcFile name="acpy3_setfinal.c"/>
+        <srcFile name="acpy3_start.c"/>
+        <srcFile name="acpy3_qdma.c"/>
+        <srcFile name="acpy3.c"/>
+        <srcFile name="acpy3_wait.c"/>
+        <srcFile name="acpy3_waitlinked.c"/>
+        <srcFile name="acpy3_start_arm.c"/>
+        <srcFile name="acpy3_qdma_arm.c"/>
+        <srcFile name="acpy3_arm.c"/>
+        <srcFile name="acpy3_wait_arm.c"/>
+        <srcFile name="acpy3_waitlinked_arm.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/debug/acpy3.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/acpy3/package/package_ti.sdo.fc.acpy3.oe674.dep" src="package/package_ti.sdo.fc.acpy3.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_config.oe674.dep" src="acpy3_config.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_configure.oe674.dep" src="acpy3_configure.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_complete.oe674.dep" src="acpy3_complete.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_completelinked.oe674.dep" src="acpy3_completelinked.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_fastconfigure16b.oe674.dep" src="acpy3_fastconfigure16b.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_fastconfigure32b.oe674.dep" src="acpy3_fastconfigure32b.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_fastsetfinal.oe674.dep" src="acpy3_fastsetfinal.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_init.oe674.dep" src="acpy3_init.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_start_cpucopy.oe674.dep" src="acpy3_start_cpucopy.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_wait_cpucopy.oe674.dep" src="acpy3_wait_cpucopy.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_setfinal.oe674.dep" src="acpy3_setfinal.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_start.oe674.dep" src="acpy3_start.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_qdma.oe674.dep" src="acpy3_qdma.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3.oe674.dep" src="acpy3.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_wait.oe674.dep" src="acpy3_wait.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_waitlinked.oe674.dep" src="acpy3_waitlinked.c"/>
+        <srcFile name="lib/release/acpy3.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/acpy3/package/package_ti.sdo.fc.acpy3.oe674.dep" src="package/package_ti.sdo.fc.acpy3.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_config.oe674.dep" src="acpy3_config.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_configure.oe674.dep" src="acpy3_configure.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_complete.oe674.dep" src="acpy3_complete.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_completelinked.oe674.dep" src="acpy3_completelinked.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_fastconfigure16b.oe674.dep" src="acpy3_fastconfigure16b.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_fastconfigure32b.oe674.dep" src="acpy3_fastconfigure32b.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_fastsetfinal.oe674.dep" src="acpy3_fastsetfinal.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_init.oe674.dep" src="acpy3_init.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_start_cpucopy.oe674.dep" src="acpy3_start_cpucopy.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_wait_cpucopy.oe674.dep" src="acpy3_wait_cpucopy.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_setfinal.oe674.dep" src="acpy3_setfinal.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_start.oe674.dep" src="acpy3_start.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_qdma.oe674.dep" src="acpy3_qdma.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3.oe674.dep" src="acpy3.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_wait.oe674.dep" src="acpy3_wait.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_waitlinked.oe674.dep" src="acpy3_waitlinked.c"/>
+        <srcFile name="lib/debug/acpy3cpu.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/package/package_ti.sdo.fc.acpy3.oe674.dep" src="package/package_ti.sdo.fc.acpy3.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_config.oe674.dep" src="acpy3_config.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_configure.oe674.dep" src="acpy3_configure.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_complete.oe674.dep" src="acpy3_complete.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_completelinked.oe674.dep" src="acpy3_completelinked.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_fastconfigure16b.oe674.dep" src="acpy3_fastconfigure16b.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_fastconfigure32b.oe674.dep" src="acpy3_fastconfigure32b.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_fastsetfinal.oe674.dep" src="acpy3_fastsetfinal.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_init.oe674.dep" src="acpy3_init.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_start_cpucopy.oe674.dep" src="acpy3_start_cpucopy.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_wait_cpucopy.oe674.dep" src="acpy3_wait_cpucopy.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_setfinal.oe674.dep" src="acpy3_setfinal.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_start.oe674.dep" src="acpy3_start.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_qdma.oe674.dep" src="acpy3_qdma.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3.oe674.dep" src="acpy3.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_wait.oe674.dep" src="acpy3_wait.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_waitlinked.oe674.dep" src="acpy3_waitlinked.c"/>
+        <srcFile name="lib/release/acpy3cpu.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/package/package_ti.sdo.fc.acpy3.oe674.dep" src="package/package_ti.sdo.fc.acpy3.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_config.oe674.dep" src="acpy3_config.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_configure.oe674.dep" src="acpy3_configure.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_complete.oe674.dep" src="acpy3_complete.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_completelinked.oe674.dep" src="acpy3_completelinked.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_fastconfigure16b.oe674.dep" src="acpy3_fastconfigure16b.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_fastconfigure32b.oe674.dep" src="acpy3_fastconfigure32b.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_fastsetfinal.oe674.dep" src="acpy3_fastsetfinal.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_init.oe674.dep" src="acpy3_init.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_start_cpucopy.oe674.dep" src="acpy3_start_cpucopy.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_wait_cpucopy.oe674.dep" src="acpy3_wait_cpucopy.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_setfinal.oe674.dep" src="acpy3_setfinal.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_start.oe674.dep" src="acpy3_start.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_qdma.oe674.dep" src="acpy3_qdma.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3.oe674.dep" src="acpy3.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_wait.oe674.dep" src="acpy3_wait.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_waitlinked.oe674.dep" src="acpy3_waitlinked.c"/>
+        <srcFile name="lib/debug/acpy3.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/acpy3/package/package_ti.sdo.fc.acpy3.ov5T.dep" src="package/package_ti.sdo.fc.acpy3.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_config.ov5T.dep" src="acpy3_config.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_configure.ov5T.dep" src="acpy3_configure.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_complete.ov5T.dep" src="acpy3_complete.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_completelinked.ov5T.dep" src="acpy3_completelinked.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_fastconfigure16b.ov5T.dep" src="acpy3_fastconfigure16b.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_fastconfigure32b.ov5T.dep" src="acpy3_fastconfigure32b.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_fastsetfinal.ov5T.dep" src="acpy3_fastsetfinal.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_init.ov5T.dep" src="acpy3_init.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_start_cpucopy.ov5T.dep" src="acpy3_start_cpucopy.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_wait_cpucopy.ov5T.dep" src="acpy3_wait_cpucopy.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_setfinal.ov5T.dep" src="acpy3_setfinal.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_start_arm.ov5T.dep" src="acpy3_start_arm.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_qdma_arm.ov5T.dep" src="acpy3_qdma_arm.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_arm.ov5T.dep" src="acpy3_arm.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_wait_arm.ov5T.dep" src="acpy3_wait_arm.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3/acpy3_waitlinked_arm.ov5T.dep" src="acpy3_waitlinked_arm.c"/>
+        <srcFile name="lib/release/acpy3.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/acpy3/package/package_ti.sdo.fc.acpy3.ov5T.dep" src="package/package_ti.sdo.fc.acpy3.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_config.ov5T.dep" src="acpy3_config.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_configure.ov5T.dep" src="acpy3_configure.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_complete.ov5T.dep" src="acpy3_complete.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_completelinked.ov5T.dep" src="acpy3_completelinked.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_fastconfigure16b.ov5T.dep" src="acpy3_fastconfigure16b.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_fastconfigure32b.ov5T.dep" src="acpy3_fastconfigure32b.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_fastsetfinal.ov5T.dep" src="acpy3_fastsetfinal.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_init.ov5T.dep" src="acpy3_init.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_start_cpucopy.ov5T.dep" src="acpy3_start_cpucopy.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_wait_cpucopy.ov5T.dep" src="acpy3_wait_cpucopy.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_setfinal.ov5T.dep" src="acpy3_setfinal.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_start_arm.ov5T.dep" src="acpy3_start_arm.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_qdma_arm.ov5T.dep" src="acpy3_qdma_arm.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_arm.ov5T.dep" src="acpy3_arm.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_wait_arm.ov5T.dep" src="acpy3_wait_arm.c"/>
+        <srcFile name="package/lib/lib/release/acpy3/acpy3_waitlinked_arm.ov5T.dep" src="acpy3_waitlinked_arm.c"/>
+        <srcFile name="lib/debug/acpy3cpu.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/package/package_ti.sdo.fc.acpy3.ov5T.dep" src="package/package_ti.sdo.fc.acpy3.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_config.ov5T.dep" src="acpy3_config.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_configure.ov5T.dep" src="acpy3_configure.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_complete.ov5T.dep" src="acpy3_complete.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_completelinked.ov5T.dep" src="acpy3_completelinked.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_fastconfigure16b.ov5T.dep" src="acpy3_fastconfigure16b.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_fastconfigure32b.ov5T.dep" src="acpy3_fastconfigure32b.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_fastsetfinal.ov5T.dep" src="acpy3_fastsetfinal.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_init.ov5T.dep" src="acpy3_init.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_start_cpucopy.ov5T.dep" src="acpy3_start_cpucopy.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_wait_cpucopy.ov5T.dep" src="acpy3_wait_cpucopy.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_setfinal.ov5T.dep" src="acpy3_setfinal.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_start_arm.ov5T.dep" src="acpy3_start_arm.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_qdma_arm.ov5T.dep" src="acpy3_qdma_arm.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_arm.ov5T.dep" src="acpy3_arm.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_wait_arm.ov5T.dep" src="acpy3_wait_arm.c"/>
+        <srcFile name="package/lib/lib/debug/acpy3cpu/acpy3_waitlinked_arm.ov5T.dep" src="acpy3_waitlinked_arm.c"/>
+        <srcFile name="lib/release/acpy3cpu.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/package/package_ti.sdo.fc.acpy3.ov5T.dep" src="package/package_ti.sdo.fc.acpy3.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_config.ov5T.dep" src="acpy3_config.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_configure.ov5T.dep" src="acpy3_configure.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_complete.ov5T.dep" src="acpy3_complete.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_completelinked.ov5T.dep" src="acpy3_completelinked.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_fastconfigure16b.ov5T.dep" src="acpy3_fastconfigure16b.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_fastconfigure32b.ov5T.dep" src="acpy3_fastconfigure32b.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_fastsetfinal.ov5T.dep" src="acpy3_fastsetfinal.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_init.ov5T.dep" src="acpy3_init.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_start_cpucopy.ov5T.dep" src="acpy3_start_cpucopy.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_wait_cpucopy.ov5T.dep" src="acpy3_wait_cpucopy.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_setfinal.ov5T.dep" src="acpy3_setfinal.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_start_arm.ov5T.dep" src="acpy3_start_arm.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_qdma_arm.ov5T.dep" src="acpy3_qdma_arm.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_arm.ov5T.dep" src="acpy3_arm.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_wait_arm.ov5T.dep" src="acpy3_wait_arm.c"/>
+        <srcFile name="package/lib/lib/release/acpy3cpu/acpy3_waitlinked_arm.ov5T.dep" src="acpy3_waitlinked_arm.c"/>
+        <srcFile name="package/rel/ti_sdo_fc_acpy3.tar.dep" src="package/rel/ti_sdo_fc_acpy3.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.3,1"
+            platform="ti.platforms.evmDA830"
+            isa="674"
+            suffix="e674"
+            rootDir="/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.3,3"
+            platform="host.platforms.arm"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/codesourcery/arm-2009q1/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/debug/acpy3"
+        pname="lib/debug/acpy3.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/acpy3"
+        pname="lib/release/acpy3.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/acpy3cpu"
+        pname="lib/debug/acpy3cpu.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/acpy3cpu"
+        pname="lib/release/acpy3cpu.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/acpy3"
+        pname="lib/debug/acpy3.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/acpy3"
+        pname="lib/release/acpy3.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/acpy3cpu"
+        pname="lib/debug/acpy3cpu.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/acpy3cpu"
+        pname="lib/release/acpy3cpu.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sdo_fc_acpy3"
+        pname="ti_sdo_fc_acpy3.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="acpy3.h"/>
+        <file name="acpy3_fastconfigure16b.h"/>
+        <file name="acpy3_fastconfigure32b.h"/>
+        <file name="acpy3_fastsetfinal.h"/>
+        <file name="acpy3_setfinal.h"/>
+        <file name="acpy3_start.h"/>
+        <file name="acpy3_wait.h"/>
+        <file name="acpy3_complete.h"/>
+        <file name="acpy3_qdma.h"/>
+        <file name="acpy3_qdma_arm.h"/>
+        <file name="acpy3_util.h"/>
+        <file name="acpy3_instr.h"/>
+        <file name="package.bld"/>
+        <file name="simple_GCArmv5T.mak"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/debug/acpy3.ae674"/>
+        <file name="package/package_ti.sdo.fc.acpy3.c"/>
+        <file name="acpy3_config.c"/>
+        <file name="acpy3_configure.c"/>
+        <file name="acpy3_complete.c"/>
+        <file name="acpy3_completelinked.c"/>
+        <file name="acpy3_fastconfigure16b.c"/>
+        <file name="acpy3_fastconfigure32b.c"/>
+        <file name="acpy3_fastsetfinal.c"/>
+        <file name="acpy3_init.c"/>
+        <file name="acpy3_start_cpucopy.c"/>
+        <file name="acpy3_wait_cpucopy.c"/>
+        <file name="acpy3_setfinal.c"/>
+        <file name="acpy3_start.c"/>
+        <file name="acpy3_qdma.c"/>
+        <file name="acpy3.c"/>
+        <file name="acpy3_wait.c"/>
+        <file name="acpy3_waitlinked.c"/>
+        <file name="lib/release/acpy3.ae674"/>
+        <file name="lib/debug/acpy3cpu.ae674"/>
+        <file name="lib/release/acpy3cpu.ae674"/>
+        <file name="lib/debug/acpy3.av5T"/>
+        <file name="acpy3_start_arm.c"/>
+        <file name="acpy3_qdma_arm.c"/>
+        <file name="acpy3_arm.c"/>
+        <file name="acpy3_wait_arm.c"/>
+        <file name="acpy3_waitlinked_arm.c"/>
+        <file name="lib/release/acpy3.av5T"/>
+        <file name="lib/debug/acpy3cpu.av5T"/>
+        <file name="lib/release/acpy3cpu.av5T"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

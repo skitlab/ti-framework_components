@@ -1,0 +1,19 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.opencl"
+ProjectType=External
+CPUFamily=TMS470R4X
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.opencl.c"
+Source="../CLCommandQueue.c"
+Source="../CLContext.c"
+Source="../CLDevice.c"
+Source="../CLPlatform.c"
+Source="../CLProgram.c"
+Source="../CLMemObj.c"
+Source="../CLKernel.c"
+Source="../CLEvent.c"
+Source="../CLMemObj_syslink.c"
+Source="../ComputeDevice.c"

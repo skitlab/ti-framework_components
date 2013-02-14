@@ -1,0 +1,14 @@
+package/package.bld.xml
+package/package.ext.xml
+package/package.rel.dot
+package/build.cfg
+package/package.xdc.inc
+hdintc.h
+package.bld
+package/package.cfg.xdc.inc
+lib/debug/hdintc_fc.ae674
+package/package_ti.sdo.fc.hdintc.c
+hdintc.c
+lib/release/hdintc_fc.ae674
+lib/debug/hdintc_spinloop_fc.ae674
+lib/release/hdintc_spinloop_fc.ae674

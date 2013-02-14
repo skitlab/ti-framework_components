@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sdo.rcm" version="2, 0, 0" producerId="undefined">
+    <units>
+        <module name="RcmClient"/>
+        <module name="RcmServer"/>
+        <module name="Settings"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sdo.rcm.c"/>
+        <srcFile name="RcmClient.c"/>
+        <srcFile name="RcmServer.c"/>
+        <srcFile name="RcmUtils.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/debug/rcm.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/rcm/package/package_ti.sdo.rcm.oem3.dep" src="package/package_ti.sdo.rcm.c"/>
+        <srcFile name="package/lib/debug/rcm/RcmClient.oem3.dep" src="RcmClient.c"/>
+        <srcFile name="package/lib/debug/rcm/RcmServer.oem3.dep" src="RcmServer.c"/>
+        <srcFile name="package/lib/debug/rcm/RcmUtils.oem3.dep" src="RcmUtils.c"/>
+        <srcFile name="lib/release/rcm.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/rcm/package/package_ti.sdo.rcm.oem3.dep" src="package/package_ti.sdo.rcm.c"/>
+        <srcFile name="package/lib/release/rcm/RcmClient.oem3.dep" src="RcmClient.c"/>
+        <srcFile name="package/lib/release/rcm/RcmServer.oem3.dep" src="RcmServer.c"/>
+        <srcFile name="package/lib/release/rcm/RcmUtils.oem3.dep" src="RcmUtils.c"/>
+        <srcFile name="lib/debug/rcm.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/rcm/package/package_ti.sdo.rcm.oe674.dep" src="package/package_ti.sdo.rcm.c"/>
+        <srcFile name="package/lib/debug/rcm/RcmClient.oe674.dep" src="RcmClient.c"/>
+        <srcFile name="package/lib/debug/rcm/RcmServer.oe674.dep" src="RcmServer.c"/>
+        <srcFile name="package/lib/debug/rcm/RcmUtils.oe674.dep" src="RcmUtils.c"/>
+        <srcFile name="lib/release/rcm.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/rcm/package/package_ti.sdo.rcm.oe674.dep" src="package/package_ti.sdo.rcm.c"/>
+        <srcFile name="package/lib/release/rcm/RcmClient.oe674.dep" src="RcmClient.c"/>
+        <srcFile name="package/lib/release/rcm/RcmServer.oe674.dep" src="RcmServer.c"/>
+        <srcFile name="package/lib/release/rcm/RcmUtils.oe674.dep" src="RcmUtils.c"/>
+        <srcFile name="lib/debug/rcm_syslink.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/debug/rcm_syslink/package/package_ti.sdo.rcm.ov5T.dep" src="package/package_ti.sdo.rcm.c"/>
+        <srcFile name="package/lib/debug/rcm_syslink/RcmClient.ov5T.dep" src="RcmClient.c"/>
+        <srcFile name="package/lib/debug/rcm_syslink/RcmServer.ov5T.dep" src="RcmServer.c"/>
+        <srcFile name="package/lib/debug/rcm_syslink/RcmUtils.ov5T.dep" src="RcmUtils.c"/>
+        <srcFile name="lib/release/rcm_syslink.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/release/rcm_syslink/package/package_ti.sdo.rcm.ov5T.dep" src="package/package_ti.sdo.rcm.c"/>
+        <srcFile name="package/lib/release/rcm_syslink/RcmClient.ov5T.dep" src="RcmClient.c"/>
+        <srcFile name="package/lib/release/rcm_syslink/RcmServer.ov5T.dep" src="RcmServer.c"/>
+        <srcFile name="package/lib/release/rcm_syslink/RcmUtils.ov5T.dep" src="RcmUtils.c"/>
+        <srcFile name="package/rel/ti_sdo_rcm.tar.dep" src="package/rel/ti_sdo_rcm.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.arm.elf.M3"
+            version="ti.targets.arm.elf.M3{1,0,4.9,2"
+            platform="ti.platforms.simDM8168"
+            isa="v7M"
+            suffix="em3"
+            rootDir="/proj/productization/tools/cgt470/cgt470_4_9_2/"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.3,1"
+            platform="ti.platforms.evmDA830"
+            isa="674"
+            suffix="e674"
+            rootDir="/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.3,3"
+            platform="host.platforms.arm"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/codesourcery/arm-2009q1/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/debug/rcm"
+        pname="lib/debug/rcm.aem3"
+        profile="debug"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/release/rcm"
+        pname="lib/release/rcm.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/debug/rcm"
+        pname="lib/debug/rcm.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/rcm"
+        pname="lib/release/rcm.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/rcm_syslink"
+        pname="lib/debug/rcm_syslink.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/rcm_syslink"
+        pname="lib/release/rcm_syslink.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sdo_rcm"
+        pname="ti_sdo_rcm.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="doc-files"/>
+        <file name="package.bld"/>
+        <file name="RcmClient.h"/>
+        <file name="RcmServer.h"/>
+        <file name="RcmTypes.h"/>
+        <file name="simple_GCArmv5T.mak"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/debug/rcm.aem3"/>
+        <file name="lib/release/rcm.aem3"/>
+        <file name="lib/debug/rcm.ae674"/>
+        <file name="lib/release/rcm.ae674"/>
+        <file name="lib/debug/rcm_syslink.av5T"/>
+        <file name="lib/release/rcm_syslink.av5T"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

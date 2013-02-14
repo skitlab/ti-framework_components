@@ -1,0 +1,16 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.fc.ires.hdvicp"
+ProjectType=External
+CPUFamily=TMS470R4X
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.fc.ires.hdvicp.c"
+Source="../iresman_hdvicp2.c"
+Source="../ires_hdvicp2.c"
+Source="../iresman_hdvicp2_setup.c"
+Source="../hdvicp2cfg.c"
+Source="../iresman_hdvicp.c"
+Source="../ires_hdvicp.c"
+Source="../hdvicp_config.c"

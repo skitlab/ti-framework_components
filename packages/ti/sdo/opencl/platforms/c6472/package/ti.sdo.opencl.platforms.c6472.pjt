@@ -1,0 +1,11 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.opencl.platforms.c6472"
+ProjectType=External
+CPUFamily=TMS470R4X
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.opencl.platforms.c6472.c"
+Source="../Device.c"
+Source="../Platform.c"

@@ -1,0 +1,9 @@
+package/lib/release/opencl_api/CLDevice.oem3: CLDevice.c /proj/productization/tools/cgt470/cgt470_4_9_2/include/string.h /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/framework_components_3_22_01_07/packages/khronos/opencl/CL/cl.h ./TIDevice.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/linkage.h /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/framework_components_3_22_01_07/packages/khronos/opencl/CL/cl_platform.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stdint.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stddef.h 
+CLDevice.c:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/string.h:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/framework_components_3_22_01_07/packages/khronos/opencl/CL/cl.h:
+./TIDevice.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/linkage.h:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/framework_components_3_22_01_07/packages/khronos/opencl/CL/cl_platform.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stdint.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stddef.h:

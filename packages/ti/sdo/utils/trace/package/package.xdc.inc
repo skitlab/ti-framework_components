@@ -1,0 +1,14 @@
+package.xdc
+package.xs
+GT.xdc
+GT.xdt
+package/ti.sdo.utils.trace.sch
+package/.vers_g180
+package/.vers_r170
+package/.vers_b150
+package/.xdc-y25
+package/ti_sdo_utils_trace.java
+package/ti_sdo_utils_trace.class
+package/package_ti.sdo.utils.trace.c
+package/package.defs.h
+package/ti.sdo.utils.trace.ccs

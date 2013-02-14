@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$hdintc_8h.html" title="HDINTC Interface Definitions &#45; Application interface to the Interrupt Registry Manager. Registers non&#45;BIOS, non&#45;dispatched interrupt service handlers to register and synchronize with HDVICP interrupts." alt="" coords="8,84,72,108" />
+<area shape="rect" href="$ires__edma3_chan_8h.html" title="IRES EDMA3CHAN PROTOCOL Interface Definitions &#45; Allows algorithms to request and receive handles repr..." alt="" coords="96,84,216,108" />
+<area shape="rect" href="$ires__hdvicp2_8h.html" title="IRES PROTOCOL HDVICP2 Interface Definitions (Beta) &#45; Allows algorithms to request and receive handles..." alt="" coords="240,84,338,108" />
+<area shape="rect" href="$ires__tiledmemory_8h.html" title="IRES PROTOCOL TILEDMEMORY Interface Definitions (Beta) &#45; Allows algorithms to request and receive han..." alt="" coords="362,84,488,108" />
+<area shape="rect" href="$ecpy_8h.html" title="ECPY Definitions (C64P) &#45; Functional DMA Library for use with the EDMA3 DMA peripheral. Provides a comprehensive list of DMA operations an algorithm can perform on logical DMA channels it acquires through the IRES_EDMA3CHAN protocol." alt="" coords="128,158,184,182" />
+</map>

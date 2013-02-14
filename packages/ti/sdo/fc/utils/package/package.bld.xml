@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sdo.fc.utils" version="1, 0, 3" producerId="undefined">
+    <units>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="rmm.c"/>
+        <srcFile name="smgr.c"/>
+        <srcFile name="rmmp.c"/>
+        <srcFile name="shmmp.c"/>
+        <srcFile name="bios_rts.c"/>
+        <srcFile name="smgrmp.c"/>
+        <srcFile name="shm.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/debug/rmm.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/rmm/package/package_ti.sdo.fc.utils.oem3.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/rmm/rmm.oem3.dep" src="rmm.c"/>
+        <srcFile name="lib/release/rmm.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/rmm/package/package_ti.sdo.fc.utils.oem3.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/rmm/rmm.oem3.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/smgr.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/smgr/package/package_ti.sdo.fc.utils.oem3.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/smgr/smgr.oem3.dep" src="smgr.c"/>
+        <srcFile name="lib/release/smgr.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/smgr/package/package_ti.sdo.fc.utils.oem3.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/smgr/smgr.oem3.dep" src="smgr.c"/>
+        <srcFile name="lib/debug/rmmp.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/rmmp/package/package_ti.sdo.fc.utils.oem3.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/rmmp/rmmp.oem3.dep" src="rmmp.c"/>
+        <srcFile name="package/lib/lib/debug/rmmp/rmm.oem3.dep" src="rmm.c"/>
+        <srcFile name="lib/release/rmmp.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/rmmp/package/package_ti.sdo.fc.utils.oem3.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/rmmp/rmmp.oem3.dep" src="rmmp.c"/>
+        <srcFile name="package/lib/lib/release/rmmp/rmm.oem3.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/rmm.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/rmm/package/package_ti.sdo.fc.utils.oe674.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/rmm/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/release/rmm.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/rmm/package/package_ti.sdo.fc.utils.oe674.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/rmm/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/smgr.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/smgr/package/package_ti.sdo.fc.utils.oe674.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/smgr/smgr.oe674.dep" src="smgr.c"/>
+        <srcFile name="lib/release/smgr.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/smgr/package/package_ti.sdo.fc.utils.oe674.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/smgr/smgr.oe674.dep" src="smgr.c"/>
+        <srcFile name="lib/debug/rmmp.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/rmmp/package/package_ti.sdo.fc.utils.oe674.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/rmmp/rmmp.oe674.dep" src="rmmp.c"/>
+        <srcFile name="package/lib/lib/debug/rmmp/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/release/rmmp.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/rmmp/package/package_ti.sdo.fc.utils.oe674.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/rmmp/rmmp.oe674.dep" src="rmmp.c"/>
+        <srcFile name="package/lib/lib/release/rmmp/rmm.oe674.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/shmMp.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/shmMp/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/shmMp/shmmp.ov5T.dep" src="shmmp.c"/>
+        <srcFile name="lib/release/shmMp.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/shmMp/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/shmMp/shmmp.ov5T.dep" src="shmmp.c"/>
+        <srcFile name="lib/debug/rmm.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/rmm/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/rmm/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="package/lib/lib/debug/rmm/bios_rts.ov5T.dep" src="bios_rts.c"/>
+        <srcFile name="lib/release/rmm.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/rmm/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/rmm/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="package/lib/lib/release/rmm/bios_rts.ov5T.dep" src="bios_rts.c"/>
+        <srcFile name="lib/debug/rmmp.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/rmmp/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/rmmp/rmmp.ov5T.dep" src="rmmp.c"/>
+        <srcFile name="package/lib/lib/debug/rmmp/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="lib/release/rmmp.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/rmmp/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/rmmp/rmmp.ov5T.dep" src="rmmp.c"/>
+        <srcFile name="package/lib/lib/release/rmmp/rmm.ov5T.dep" src="rmm.c"/>
+        <srcFile name="lib/debug/smgrmp.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/smgrmp/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/smgrmp/smgrmp.ov5T.dep" src="smgrmp.c"/>
+        <srcFile name="package/lib/lib/debug/smgrmp/smgr.ov5T.dep" src="smgr.c"/>
+        <srcFile name="lib/release/smgrmp.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/smgrmp/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/smgrmp/smgrmp.ov5T.dep" src="smgrmp.c"/>
+        <srcFile name="package/lib/lib/release/smgrmp/smgr.ov5T.dep" src="smgr.c"/>
+        <srcFile name="lib/debug/smgr.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/smgr/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/smgr/smgr.ov5T.dep" src="smgr.c"/>
+        <srcFile name="lib/release/smgr.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/smgr/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/smgr/smgr.ov5T.dep" src="smgr.c"/>
+        <srcFile name="lib/debug/shmNonMp.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/debug/shmNonMp/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/debug/shmNonMp/shm.ov5T.dep" src="shm.c"/>
+        <srcFile name="lib/release/shmNonMp.av5T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/shmNonMp/package/package_ti.sdo.fc.utils.ov5T.dep" src="package/package_ti.sdo.fc.utils.c"/>
+        <srcFile name="package/lib/lib/release/shmNonMp/shm.ov5T.dep" src="shm.c"/>
+        <srcFile name="package/rel/ti_sdo_fc_utils.tar.dep" src="package/rel/ti_sdo_fc_utils.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.arm.elf.M3"
+            version="ti.targets.arm.elf.M3{1,0,4.9,2"
+            platform="ti.platforms.simDM8168"
+            isa="v7M"
+            suffix="em3"
+            rootDir="/proj/productization/tools/cgt470/cgt470_4_9_2/"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.3,1"
+            platform="ti.platforms.evmDA830"
+            isa="674"
+            suffix="e674"
+            rootDir="/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/dsp-devkit/cgt6x_7_3_1"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.3,3"
+            platform="host.platforms.arm"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/codesourcery/arm-2009q1/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/debug/rmm"
+        pname="lib/debug/rmm.aem3"
+        profile="debug"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/release/rmm"
+        pname="lib/release/rmm.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/debug/smgr"
+        pname="lib/debug/smgr.aem3"
+        profile="debug"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/release/smgr"
+        pname="lib/release/smgr.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/debug/rmmp"
+        pname="lib/debug/rmmp.aem3"
+        profile="debug"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/release/rmmp"
+        pname="lib/release/rmmp.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/debug/rmm"
+        pname="lib/debug/rmm.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/rmm"
+        pname="lib/release/rmm.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/smgr"
+        pname="lib/debug/smgr.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/smgr"
+        pname="lib/release/smgr.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/rmmp"
+        pname="lib/debug/rmmp.ae674"
+        profile="debug"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/rmmp"
+        pname="lib/release/rmmp.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/debug/shmMp"
+        pname="lib/debug/shmMp.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/shmMp"
+        pname="lib/release/shmMp.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/rmm"
+        pname="lib/debug/rmm.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/rmm"
+        pname="lib/release/rmm.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/rmmp"
+        pname="lib/debug/rmmp.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/rmmp"
+        pname="lib/release/rmmp.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/smgrmp"
+        pname="lib/debug/smgrmp.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/smgrmp"
+        pname="lib/release/smgrmp.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/smgr"
+        pname="lib/debug/smgr.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/smgr"
+        pname="lib/release/smgr.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/debug/shmNonMp"
+        pname="lib/debug/shmNonMp.av5T"
+        profile="debug"
+        target="gnu.targets.arm.GCArmv5T"/>
+    <library name="lib/release/shmNonMp"
+        pname="lib/release/shmNonMp.av5T"
+        profile="release"
+        target="gnu.targets.arm.GCArmv5T"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sdo_fc_utils"
+        pname="ti_sdo_fc_utils.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="shm.h"/>
+        <file name="_rmm.h"/>
+        <file name="_smgr.h"/>
+        <file name="dbc.h"/>
+        <file name="rmm.h"/>
+        <file name="smgr.h"/>
+        <file name="lock.h"/>
+        <file name="utils.xs"/>
+        <file name="rmmp.h"/>
+        <file name="smgrmp.h"/>
+        <file name="package.bld"/>
+        <file name="bios_rts.h"/>
+        <file name="memleakcheck.h"/>
+        <file name="_rmmScratch.h"/>
+        <file name="_rmmp.h"/>
+        <file name="_smgrmp.h"/>
+        <file name="simple_GCArmv5T.mak"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/debug/rmm.aem3"/>
+        <file name="package/package_ti.sdo.fc.utils.c"/>
+        <file name="rmm.c"/>
+        <file name="lib/release/rmm.aem3"/>
+        <file name="lib/debug/smgr.aem3"/>
+        <file name="smgr.c"/>
+        <file name="lib/release/smgr.aem3"/>
+        <file name="lib/debug/rmmp.aem3"/>
+        <file name="rmmp.c"/>
+        <file name="lib/release/rmmp.aem3"/>
+        <file name="lib/debug/rmm.ae674"/>
+        <file name="lib/release/rmm.ae674"/>
+        <file name="lib/debug/smgr.ae674"/>
+        <file name="lib/release/smgr.ae674"/>
+        <file name="lib/debug/rmmp.ae674"/>
+        <file name="lib/release/rmmp.ae674"/>
+        <file name="lib/debug/shmMp.av5T"/>
+        <file name="shmmp.c"/>
+        <file name="lib/release/shmMp.av5T"/>
+        <file name="lib/debug/rmm.av5T"/>
+        <file name="bios_rts.c"/>
+        <file name="lib/release/rmm.av5T"/>
+        <file name="lib/debug/rmmp.av5T"/>
+        <file name="lib/release/rmmp.av5T"/>
+        <file name="lib/debug/smgrmp.av5T"/>
+        <file name="smgrmp.c"/>
+        <file name="lib/release/smgrmp.av5T"/>
+        <file name="lib/debug/smgr.av5T"/>
+        <file name="lib/release/smgr.av5T"/>
+        <file name="lib/debug/shmNonMp.av5T"/>
+        <file name="shm.c"/>
+        <file name="lib/release/shmNonMp.av5T"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

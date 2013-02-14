@@ -1,0 +1,15 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.tiler"
+ProjectType=External
+CPUFamily=TMS470R4X
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.tiler.c"
+Source="../src/remote/MemMgr_stub.c"
+Source="../Settings.c"
+Source="../src/remote/MemMgr_skel.c"
+Source="../src/memmgr/memmgr.c"
+Source="../src/memmgr/tilermgr.c"
+Source="../src/rtos/memmgr.c"

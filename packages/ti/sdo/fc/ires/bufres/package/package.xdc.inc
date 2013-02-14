@@ -1,0 +1,15 @@
+package.xdc
+package.xs
+BUFRES.xdc
+BUFRES.xs
+BUFRES.xdt
+package/ti.sdo.fc.ires.bufres.sch
+package/.vers_g180
+package/.vers_r170
+package/.vers_b150
+package/.xdc-y25
+package/ti_sdo_fc_ires_bufres.java
+package/ti_sdo_fc_ires_bufres.class
+package/package_ti.sdo.fc.ires.bufres.c
+package/package.defs.h
+package/ti.sdo.fc.ires.bufres.ccs

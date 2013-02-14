@@ -1,0 +1,30 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.fc.acpy3"
+ProjectType=External
+CPUFamily=TMS320C67XX
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.fc.acpy3.c"
+Source="../acpy3_config.c"
+Source="../acpy3_configure.c"
+Source="../acpy3_complete.c"
+Source="../acpy3_completelinked.c"
+Source="../acpy3_fastconfigure16b.c"
+Source="../acpy3_fastconfigure32b.c"
+Source="../acpy3_fastsetfinal.c"
+Source="../acpy3_init.c"
+Source="../acpy3_start_cpucopy.c"
+Source="../acpy3_wait_cpucopy.c"
+Source="../acpy3_setfinal.c"
+Source="../acpy3_start.c"
+Source="../acpy3_qdma.c"
+Source="../acpy3.c"
+Source="../acpy3_wait.c"
+Source="../acpy3_waitlinked.c"
+Source="../acpy3_start_arm.c"
+Source="../acpy3_qdma_arm.c"
+Source="../acpy3_arm.c"
+Source="../acpy3_wait_arm.c"
+Source="../acpy3_waitlinked_arm.c"

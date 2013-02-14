@@ -1,0 +1,12 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.fc.memutils"
+ProjectType=External
+CPUFamily=TMS470R4X
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.fc.memutils.c"
+Source="../memutils_std.c"
+Source="../memutils_bios.c"
+Source="../memutils_cmem.c"

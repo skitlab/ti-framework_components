@@ -1,0 +1,22 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.fc.dskt2"
+ProjectType=External
+CPUFamily=TMS470R4X
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.fc.dskt2.c"
+Source="../dskt2_scratch.c"
+Source="../dskt2_seg.c"
+Source="../dskt2_qos.c"
+Source="../dskt2actv.c"
+Source="../dskt2crea.c"
+Source="../dskt2ctrl.c"
+Source="../dskt2dact.c"
+Source="../dskt2free.c"
+Source="../dskt2_permute.c"
+Source="../dskt2_lock.c"
+Source="../dskt2cfg.c"
+Source="../dskt2_yield.c"
+Source="../dskt2_cache.c"

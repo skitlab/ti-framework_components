@@ -1,0 +1,16 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.fc.ecpy"
+ProjectType=External
+CPUFamily=TMS320C67XX
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.fc.ecpy.c"
+Source="../ecpy_init.c"
+Source="../ecpy_impl.c"
+Source="../ecpy_configure16.c"
+Source="../ecpy_configure32.c"
+Source="../ecpycfg.c"
+Source="../ecpy_wait.c"
+Source="../ecpy_directwait.c"

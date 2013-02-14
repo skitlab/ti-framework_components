@@ -1,0 +1,198 @@
+/* --COPYRIGHT--,BSD
+ * Copyright (c) $(CPYYEAR), Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * --/COPYRIGHT--
+ */
+/*
+ *  ======== common.cfg ========
+ */
+utils.importFile("../../examples/buildutils/getMemoryMap.cfg");
+
+var chipType = Program.platformName;
+
+var internalMemorySection;
+var externalMemorySection; 
+
+var intHeapLen = 0x6000; 
+var extHeapLen = 0x20000; 
+
+var DSKT2 = xdc.useModule('ti.sdo.fc.dskt2.DSKT2');
+
+/* Set up to use stdio */
+var System = xdc.useModule('xdc.runtime.System');
+System.SupportProxy = xdc.useModule('xdc.runtime.SysStd');;
+
+if (Program.build.target.os == undefined) {
+
+    var intHeapSize = 0;
+    var internalMemoryObjs = getInternalMemoryDetails();
+    for (i in internalMemoryObjs) {
+        internalMemorySection = i;
+        intHeapSize = internalMemoryObjs[i];
+        if (intHeapSize >= intHeapLen) {
+            break;
+        }
+    } 
+
+    if (intHeapSize == 0) {
+        throw("Could not find a segment size big enough for creating a heap of size " + intHeapLen);
+    }
+
+    var extHeapSize = 0;
+    var externalMemoryObjs = getExternalMemoryDetails();
+    //externalMemorySection = Program.platform.dataMemory;
+    for (i in externalMemoryObjs) {
+        externalMemorySection = i;
+        extHeapSize = externalMemoryObjs[i];
+        if (extHeapSize >= extHeapLen) {
+            break;
+        }
+    } 
+
+    if (extHeapSize == 0) {
+        throw("Could not find a segment size big enough for creating a heap of size " + extHeapLen);
+    }
+
+    /* Assume this is a BIOS OS */
+    xdc.useModule('ti.sysbios.xdcruntime.Settings');
+
+    /* Name of internal memory in Platform.xdc file */
+
+    if (chipType.match(/DA830/)) {
+        // The Cache module must have the same configuration as the
+        // platform.
+        //print("Configuring cache for evmDA830...");
+        var Cache = xdc.useModule('ti.sysbios.family.c64p.Cache');
+        Cache.initSize.l1dSize = Cache.L1Size_8K;
+    }
+
+    /* Configure a couple of heaps */
+    print("Creating heap of size " + extHeapLen + " in " + 
+            externalMemorySection);  
+    var HeapMem = xdc.useModule('ti.sysbios.heaps.HeapMem');
+    var heapMemParams = new HeapMem.Params();
+    heapMemParams.size = extHeapLen;
+    heapMemParams.sectionName = ".EXTMEM_HEAP";
+    Program.global.EXTMEM_HEAP = HeapMem.create(heapMemParams);
+
+    /* Configure a couple of heaps */
+    print("Creating heap of size " + intHeapLen + " in " + 
+            internalMemorySection);  
+    var HeapMem = xdc.useModule('ti.sysbios.heaps.HeapMem');
+    var heapMemParams = new HeapMem.Params();
+    heapMemParams.size = intHeapLen;
+    heapMemParams.sectionName = ".INTMEM_HEAP";
+    Program.global.INTMEM_HEAP = HeapMem.create(heapMemParams);
+
+    Program.sectMap[".text"] = Program.platform.dataMemory;
+
+    Program.sectMap[".EXTMEM_HEAP"] = externalMemorySection;
+    
+    Program.sectMap[".INTMEM_HEAP"] = internalMemorySection;
+
+    /* Configure DSKT2 heaps and scratch */
+    DSKT2.ALLOW_EXTERNAL_SCRATCH = false;
+
+    DSKT2.DARAM0 = "INTMEM_HEAP";       //"EXTMEM_HEAP";
+    DSKT2.DARAM1 = "INTMEM_HEAP";       //"EXTMEM_HEAP";
+    DSKT2.DARAM2 = "INTMEM_HEAP";       //"EXTMEM_HEAP";
+
+    DSKT2.SARAM0 = "INTMEM_HEAP";       //"EXTMEM_HEAP";
+    DSKT2.SARAM1 = "INTMEM_HEAP";       //"EXTMEM_HEAP";
+    DSKT2.SARAM2 = "INTMEM_HEAP";       //"EXTMEM_HEAP";
+
+    DSKT2.ESDATA = "EXTMEM_HEAP";
+    DSKT2.IPROG = "EXTMEM_HEAP";
+    DSKT2.EPROG = "EXTMEM_HEAP";
+
+    DSKT2.DSKT2_HEAP = "EXTMEM_HEAP";
+}
+else {
+    // Assume Linux OS.
+    xdc.useModule('ti.sdo.xdcruntime.linux.Settings');
+
+    //  The sum of the sizes of all heaps must be less than or equal to the
+    //  value of Program.heap.
+    Program.heap = 0x20000;
+
+    /* Configure a heap. Create as global so it can be used in C code. */
+    var HeapStd = xdc.useModule('xdc.runtime.HeapStd');
+    Program.global.EXTMEM_HEAP = HeapStd.create(/* heapStdParams */);
+    Program.global.EXTMEM_HEAP.size = 0x8000;
+    
+    /*
+     *  Create a default heap. Don't really need to do this since memory
+     *  allocation for HeapStd uses malloc(), but this can be used as an
+     *  example.
+     */
+    var Memory = xdc.useModule('xdc.runtime.Memory');
+    Memory.defaultHeapInstance = HeapStd.create({size: 0x10000});
+
+    /* Configure DSKT2 heaps and scratch */
+    DSKT2.ALLOW_EXTERNAL_SCRATCH = false;
+    DSKT2.cacheWritebackInvalidateFxn = null;
+
+    DSKT2.DARAM0 = null;
+    DSKT2.DARAM1 = null;
+    DSKT2.DARAM2 = null;
+
+    DSKT2.SARAM0 = null;
+    DSKT2.SARAM1 = null;
+    DSKT2.SARAM2 = null;
+
+    DSKT2.ESDATA = null;
+    DSKT2.IPROG = null;
+    DSKT2.EPROG = null;
+
+    DSKT2.DSKT2_HEAP = null;
+}
+
+
+if (Program.build.target.os == undefined) {
+    /* Assume this is a BIOS OS */
+
+    /* ======== Using the Task Module ======== */
+    var Task = xdc.useModule('ti.sysbios.knl.Task');
+
+    // Set number of Task priority levels
+    Task.numPriorities = 16;
+    Task.idleTaskStackSize = 2048;
+
+    // Create a Task Instance and manipulate Instance parameters
+    var tskParams = new Task.Params();
+    //tskParams.arg0 = 1; // Not using args, but leave here for an example
+    //tskParams.arg1 = 2;
+    tskParams.priority = 15;
+    tskParams.stack = null;
+    tskParams.stackSize = 0x4000;
+
+    // Add instance of Task running smain().
+    task0 = Task.create('&smain', tskParams);
+}

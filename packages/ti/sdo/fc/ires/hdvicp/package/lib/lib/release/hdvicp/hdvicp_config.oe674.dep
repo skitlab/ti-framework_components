@@ -1,0 +1,2 @@
+package/lib/lib/release/hdvicp/hdvicp_config.oe674: hdvicp_config.c 
+hdvicp_config.c:

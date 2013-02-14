@@ -1,0 +1,18 @@
+%%{
+/*
+ *  Copyright 2012 by Texas Instruments Incorporated.
+ *
+ */
+
+%%}
+%var suffix = Program.build.target.findSuffix(this);
+SECTIONS {
+    rcm.noload: { rcm.a`suffix`(.const:.string) }, load > 0, type = COPY
+}
+%%{
+/*
+ * @(#) ti.sdo.rcm; 2, 0, 0,4; 2-22-2012 18:09:55; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+
+%%}

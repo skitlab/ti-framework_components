@@ -1,0 +1,12 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+[Project Settings]
+ProjectName="ti.sdo.fc.ires.tiledmemory"
+ProjectType=External
+CPUFamily=TMS470R4X
+Tool="CustomBuilder"
+Config="Package"
+[Source Files]
+Source="../package/package_ti.sdo.fc.ires.tiledmemory.c"
+Source="../iresman_tiledmemory.c"
+Source="../ires_tiledmemory.c"
+Source="../tiledmemory.c"

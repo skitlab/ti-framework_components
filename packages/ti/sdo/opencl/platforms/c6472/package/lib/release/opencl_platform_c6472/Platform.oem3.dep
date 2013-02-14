@@ -1,0 +1,8 @@
+package/lib/release/opencl_platform_c6472/Platform.oem3: Platform.c /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/framework_components_3_22_01_07/packages/khronos/opencl/CL/cl.h ../../../../../ti/sdo/opencl/TIPlatform.h ../../../../../ti/sdo/opencl/TIDevice.h /swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/framework_components_3_22_01_07/packages/khronos/opencl/CL/cl_platform.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stdint.h /proj/productization/tools/cgt470/cgt470_4_9_2/include/stddef.h 
+Platform.c:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/framework_components_3_22_01_07/packages/khronos/opencl/CL/cl.h:
+../../../../../ti/sdo/opencl/TIPlatform.h:
+../../../../../ti/sdo/opencl/TIDevice.h:
+/swcoe/sdk/cm/netra/ti-ezsdk_dm816x-evm_5_05_01_04/component-sources/framework_components_3_22_01_07/packages/khronos/opencl/CL/cl_platform.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stdint.h:
+/proj/productization/tools/cgt470/cgt470_4_9_2/include/stddef.h:

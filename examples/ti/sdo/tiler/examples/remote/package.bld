@@ -1,0 +1,247 @@
+/* 
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ */
+
+
+/*
+ *  ======== package.bld ========
+ *
+ */
+
+/* explicit references to global objects */
+var Build = xdc.useModule('xdc.bld.BuildEnvironment');
+var Pkg = xdc.useModule('xdc.bld.PackageContents');
+
+/*
+ * If DEVICE and PROGRAMS are set via XDCARGS, we respect that and
+ * only build what's requested. Else, we build everything we can.
+ */
+var programs = undefined;
+var devices = undefined;
+
+for (var x = 0; x < arguments.length; x++) {
+    if (arguments[x].match(/^DEVICE=/)) {
+        devices = arguments[x].split("=")[1];
+    }
+    if (arguments[x].match(/^PROGRAMS=/)) {
+        programs = arguments[x].split("=")[1];
+    }
+}
+
+/* use common package build support */
+var BuildHelp = xdc.useModule('ti.sdo.tools.build.PackageBuildHelp');
+
+/* don't build for UCArm9, no stropts.h file */
+BuildHelp.skipTarget = function(target)
+{
+    if (target.name.match(/UCArm9/)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+/* clean bin folder */
+Pkg.generatedFiles.$add("bin/");
+
+/* add custom files to all releases */
+Pkg.attrs.exportAll = true;
+Pkg.otherFiles = [
+    "package.bld"
+];
+
+
+/*  External Memory Map for ti.platforms.evmDM8148 (Centaurus)
+ *
+ *  8000_0000 - 8FFF_FFFF  1000_0000  ( 256 MB) External Memory
+ *  ------------------------------------------------------------------------
+ *  8000_0000 - 8AFF_FFFF   B00_0000  ( 176 MB) A8 (HLOS or SYS/BIOS)
+ *  8B00_0000 - 8CFF_FFFF   200_0000  (  32 MB) DSP (SYS/BIOS, App, etc)
+ *  8D00_0000 - 8DBF_FFFF    C0_0000  (  12 MB) SharedRegion 1
+ *  8DC0_0000 - 8DDF_FFFF    20_0000  (   2 MB) HDVPSS
+ *  8DE0_0000 - 8DFF_FFFF    20_0000  (   2 MB) V4L2
+ *  8E00_0000 - 8EFF_FFFF   100_0000  (  16 MB) SharedRegion 0
+ *  8F00_0000 - 8FFF_FFFF   100_0000  (  16 MB) M3 (SYS/BIOS, App, etc)
+ */
+
+var evmDM8148_ExtMemMap = {
+    DDR3_HOST: {
+        name: "DDR3_HOST", space: "code/data", access: "RWX",
+        base: 0x80000000, len: 0x0B000000,  /* 176 MB */
+        comment: "DDR3 Memory reserved for use by the A8"
+    },
+    DDR3_DSP: {
+        name: "DDR3_DSP", space: "code/data", access: "RWX",
+        base: 0x8B000000, len: 0x02000000,  /* 32 MB */
+        comment: "DDR3 Memory reserved for use by the C674"
+    },
+    DDR3_SR1: {
+        name: "DDR3_SR1", space: "data", access: "RW",
+        base: 0x8D000000, len:  0x00C00000,  /* 12 MB */
+        comment: "DDR3 Memory reserved for use by SharedRegion 1"
+    },
+    DDR3_HDVPSS: {
+        name: "DDR3_HDVPSS", space: "code/data", access: "RWX",
+        base: 0x8DC00000, len: 0x00200000,  /* 2 MB */
+        comment: "DDR3 Memory reserved for use by HDVPSS"
+    },
+    DDR3_V4L2: {
+        name: "DDR3_V4L2", space: "code/data", access: "RWX",
+        base: 0x8DE00000, len: 0x00200000,  /* 2 MB */
+        comment: "DDR3 Memory reserved for use by V4L2"
+    },
+    DDR3_SR0: {
+        name: "DDR3_SR0", space: "data", access: "RW",
+        base: 0x8E000000, len: 0x01000000,  /* 16 MB */
+        comment: "DDR3 Memory reserved for use by SharedRegion 0"
+    },
+    DDR3_M3: {
+        name: "DDR3_M3", space: "code/data", access: "RWX",
+        base: 0x8F000000, len: 0x01000000,  /* 16 MB */
+        comment: "DDR3 Memory reserved for use by the M3 core"
+    }
+};
+
+Build.platformTable["ti.platforms.evmDM8148:video"] = {
+    externalMemoryMap: [
+        [ "DDR3_SR0", evmDM8148_ExtMemMap.DDR3_SR0 ],
+        [ "DDR3_M3",  evmDM8148_ExtMemMap.DDR3_M3 ]
+    ],
+    codeMemory:  "DDR3_M3",
+    dataMemory:  "DDR3_M3",
+    stackMemory: "DDR3_M3"
+};
+
+if ((devices == undefined) ||
+    (devices.match(/DM8148/) && programs.match(/DSP_SERVER/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/ProgRemote",
+            platforms: [ "ti.platforms.evmDM8148:video" ],
+            isas: [ "v7M" ],
+            sources: [
+                "main_BIOS.c",
+                "SystemCfg_m3Video.c",
+                "ProgRemote.c"
+            ],
+            execAttrs: {
+                defs: "-DIPC_ti_sdo_ipc",
+                cfgScript: "ProgRemote.cfg",
+                cfgArgs: "{ procName: \"VIDEO-M3\", hostProcName: \"HOST\", " +
+                    "sr0Name: \"DDR3_SR0\" }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+
+if ((devices == undefined) ||
+    (devices.match(/DM8148/) && programs.match(/APP_CLIENT/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "Linux/AppTest",
+            platforms: [ "ti.platforms.evmDM8148" ],
+            isas: [ "v5T", "v6" ],
+            sources: [
+                "main_HLOS.c",
+                "SystemCfg_host.c",
+                "AppTest.c"
+            ],
+            execAttrs: { cfgScript: "AppTest.cfg" }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+
+
+/* ti.platforms.evmTI816X (Netra) */
+
+Build.platformTable["ti.platforms.evmTI816X:video"] = {
+    codeMemory:  "DDR3_M3",
+    dataMemory:  "DDR3_M3",
+    stackMemory: "DDR3_M3"
+};
+
+if ((devices == undefined) ||
+    (devices.match(/TI816X/) && programs.match(/DSP_SERVER/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "bios/ProgRemote",
+            platforms: [ "ti.platforms.evmTI816X:video" ],
+            isas: [ "v7M" ],
+            sources: [
+                "main_BIOS.c",
+                "SystemCfg_m3Video.c",
+                "ProgRemote.c"
+            ],
+            execAttrs: {
+                defs: "-DIPC_ti_sdo_ipc",
+                cfgScript: "ProgRemote.cfg",
+                cfgArgs: "{ procName: \"VIDEO-M3\", hostProcName: \"HOST\", " +
+                    "sr0Name: \"DDR3_SR0\" }"
+            }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+
+if ((devices == undefined) ||
+    (devices.match(/TI816X/) && programs.match(/APP_CLIENT/))) {
+
+    var progArray = [
+        new BuildHelp.ProgAttrs({
+            name: "Linux/AppTest",
+            platforms: [ "ti.platforms.evmTI816X" ],
+            isas: [ "v5T", "v6" ],
+            sources: [
+                "main_HLOS.c",
+                "SystemCfg_host.c",
+                "AppTest.c"
+            ],
+            execAttrs: { cfgScript: "AppTest.cfg" }
+        })
+    ];
+
+    BuildHelp.makeExecutables(progArray, arguments, ["debug"]);
+}
+/*
+ *  @(#) ti.sdo.tiler.examples.remote; 1, 0, 0,4; 2-22-2012 18:10:56; /db/atree/library/trees/fc/fc-q07/src/ xlibrary
+
+ */
+
