@@ -78,7 +78,7 @@ var ccOpts = {
 
     "ti.targets.elf.C674"             : c6xOpts,
     "ti.targets.arm.elf.M3"           : " -ms -g ",
-    "gnu.targets.arm.GCArmv5T"        : " -Wall -fno-strict-aliasing "
+    "gnu.targets.arm.GCArmv5T"        : " -Wall -fno-strict-aliasing -marm "
 };
 
 var lnkOpts = {
