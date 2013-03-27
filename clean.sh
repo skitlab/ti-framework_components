@@ -1,4 +1,4 @@
-. $HOME/j.skit/dm8168/ti-env.sh
+. $1
 
 make \
  XDC_INSTALL_DIR=$THIRD_PARTY_DIR/xdctools \

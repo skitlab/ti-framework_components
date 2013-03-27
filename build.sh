@@ -1,4 +1,4 @@
-. $HOME/j.skit/dm8168/ti-env.sh
+. $1
 
 make \
  XDAIS_INSTALL_DIR=$THIRD_PARTY_DIR/xdais \
@@ -9,11 +9,11 @@ make \
  EDMA3_LLD_INSTALL_DIR=$THIRD_PARTY_DIR/edma3lld \
  IPC_INSTALL_DIR=$THIRD_PARTY_DIR/ipc \
  LINK_INSTALL_DIR=$THIRD_PARTY_DIR/syslink \
- DESTDIR=$THIRD_PARTY_DIR/framework_components/tmp \
+ DESTDIR=$THIRD_PARTY_DIR/devkit \
  CGTOOLS_V5T=$CROSSCOMPILER_DIR/../ \
  CC_V5T=bin/${CROSS_COMPILE}gcc \
  -f framework_components.mak \
-all
+all install
 
 # ti.targets.C64P= \
 # ti.targets.C674= \
